@@ -25,18 +25,18 @@ export default function Home() {
 
     return (
         <main className="overflow-x-hidden px-6">
-            <div className="mt-10">
+            <div className="mt-[38px]">
                 {/* Header Line */}
                 <div className="flex items-center justify-center w-full">
                     <Image src="/images/Line_red.png" alt="line" width={16} height={2} />
-                    <h1 className="text-white text-[10px] px-2 whitespace-nowrap text-center leading-none">
+                    <h1 className="text-white text-[10px] px-2 whitespace-nowrap text-center font-semibold leading-none">
                         CONTACT WITH US
                     </h1>
                     <Image src="/images/Line_red.png" alt="line" width={16} height={2} />
                 </div>
 
-                <div className="text-center text-[#FFFFFF] text-[14px] mt-[32px]">
-                    <h1 className="text-[28px]">Let&apos;s Contact With Us</h1>
+                <div className="text-center text-[#FFFFFF] text-[14px] mt-[24px]">
+                    <h1 className="text-[28px] font-semibold">Let&apos;s Contact With Us</h1>
 
                     <div className="space-y-5 mt-[48px]">
                         {contactInfo.map((item, index) => (
@@ -74,43 +74,47 @@ export default function Home() {
                 </p>
 
                 {/* Form */}
-                <div className="h-[460px] bg-[#1B1B1C] w-full mt-8 rounded-xl flex items-center justify-center">
-                    <form className="w-full max-w-md p-6 space-y-4">
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Your Name"
-                            className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
-                        />
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Your Email"
-                            className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
-                        />
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Your Phone"
-                            className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
-                        />
-                        <textarea
-                            id="message"
-                            name="message"
-                            placeholder="Your Message"
-                            rows={4}
-                            className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
-                        />
-                        <button
-                            type="submit"
-                            className="w-full py-[20px] text-white font-medium text-[18px] rounded-[10px] bg-gradient-to-r from-[#9F1520] to-[#600C13] hover:opacity-90 transition-opacity"
-                        >
-                            Submit Now
-                        </button>
-                    </form>
+                <div className="min-h-[460px] bg-[#1B1B1C] w-full mt-8 rounded-xl overflow-hidden">
+                    <div className="px-4 py-4 h-full flex">
+                        <form className="w-full max-w-md mx-auto my-auto">
+                            <div className="space-y-[15px]">
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your Name"
+                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
+                                />
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Your Email"
+                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
+                                />
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Your Phone"
+                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
+                                />
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    placeholder="Your Message"
+                                    rows={4}
+                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
+                                />
+                                <button
+                                    type="submit"
+                                    className="w-full h-[60px] text-white font-medium text-[18px] rounded-[10px] bg-gradient-to-r from-[#9F1520] to-[#600C13] hover:opacity-90 transition-opacity"
+                                >
+                                    Submit Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 {/* Map Image */}

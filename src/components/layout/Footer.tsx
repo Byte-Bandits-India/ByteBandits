@@ -16,7 +16,7 @@ export default function Home() {
             {/* Logo */}
             <div>
                 <Image src="/Logo.png" alt="Logo" width={156} height={50} />
-                <p className="text-[#FFFFFF] text-[14px] text-left mt-[42px]">
+                <p className="text-[#FFFFFF] text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em] ">
                     We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.
                 </p>
             </div>
@@ -38,8 +38,8 @@ export default function Home() {
 
             {/* Our Services */}
             <div className="mt-8 text-[#FFFFFF]">
-                <h2 className="text-[18px] font-semibold mb-8">Our Services</h2>
-                <ul className="text-[12px] list-none space-y-2">
+                <h2 className="text-[18px] font-semibold mb-6">Our Services</h2>
+                <ul className="text-[12px] pl-2 list-none space-y-2">
                     <li><Link href="/services/website-design" className="hover:underline">Website and Application Designing</Link></li>
                     <li><Link href="/services/website-development" className="hover:underline">Website and Application Development</Link></li>
                     <li><Link href="/services/domain-hosting" className="hover:underline">Domain and Web Hosting</Link></li>
@@ -50,10 +50,10 @@ export default function Home() {
             </div>
 
             {/* Offices */}
-            <h2 className="text-[18px] font-semibold text-[#FFFFFF] mt-8">Office Locations</h2>
-            <div className="flex justify-end text-[#FFFFFF] mt-[25px]">
+            <h2 className="text-[16px] font-semibold text-[#FFFFFF] mb-6 mt-6">Office Locations</h2>
+            <div className="flex justify-end text-[#FFFFFF]">
                 <div className="w-1/2 pr-4">
-                    <h3 className="text-[12px] font-semibold mb-3">Main Office</h3>
+                    <h3 className="text-[12px] font-semibold mb-1">Main Office</h3>
                     <p className="text-[12px] pl-2 whitespace-pre-line">
                         Plot no.3a, door no.1/1033,
                         Kumudham Nagar Extension,
@@ -62,7 +62,7 @@ export default function Home() {
                     </p>
                 </div>
                 <div className="w-1/2 pl-4">
-                    <h3 className="text-[12px] font-semibold mb-3">Branch Office</h3>
+                    <h3 className="text-[12px] font-semibold mb-1">Branch Office</h3>
                     <p className="text-[12px] pl-2 whitespace-pre-line">
                         12b, 3, North Eda Street,
                         Bhima Nagar,
@@ -73,7 +73,7 @@ export default function Home() {
             </div>
 
             {/* Useful Links */}
-            <h2 className="text-[18px] font-semibold text-[#FFFFFF] mb-[25px] mt-8">Useful Links</h2>
+            <h2 className="text-[16px] font-semibold text-[#FFFFFF] mb-[25px] mt-8">Useful Links</h2>
             <div className="grid grid-cols-2 gap-x-20 gap-y-6 text-[#FFFFFF]">
                 <div className="flex flex-col space-y-2">
                     <Link href="/" className="text-[12px] hover:underline">Home</Link>
@@ -88,25 +88,25 @@ export default function Home() {
             </div>
 
             {/* Contact Cards */}
-            <div className="flex flex-col mt-10">
-                <div className="bg-[#A31621] w-full h-[100px] flex items-center px-5">
+            <div className="flex flex-col mt-8">
+                <div className="bg-[#A31621] w-full h-[71px] flex items-center px-5">
                     <Image src='/images/whatsapp.png' alt="WhatsApp icon" width={28} height={28} className="mr-4" />
                     <div className="flex flex-col justify-center">
                         <h1 className="text-white text-[20px]">+91 89400 11098</h1>
                         <p className="text-[10px] text-white">Message Us Now</p>
                     </div>
                 </div>
-                <div className="bg-[#161414] w-full h-[100px] flex items-center px-5">
+                <div className="bg-[#161414] w-full h-[71px] flex items-center px-5">
                     <Image src='/images/mail_white.png' alt="Mail icon" width={28} height={28} className="mr-4" />
                     <div className="flex flex-col justify-center">
-                        <h1 className="text-white text-[20px]">support@bytebandits.in</h1>
+                        <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
                         <p className="text-[10px] text-white">Drop Us a Line</p>
                     </div>
                 </div>
             </div>
 
             {/* Footer */}
-            <p className="text-[#FFFFFF] text-[12px] my-8 text-center">
+            <p className="text-[#FFFFFF] text-[12px] mt-[24px] text-center">
                 Copyright © Byte Bandits. All Rights Reserved.
             </p>
         </div>
