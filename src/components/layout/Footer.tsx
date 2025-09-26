@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
     const socialMedia = [
@@ -14,14 +15,14 @@ export default function Home() {
         <>
             <main className="overflow-x-hidden px-6 bg-[#252628]">
                 <div>
-                    <img src="/Logo.png" alt="" />
+                    <Image src="/Logo.png" alt="" />
                     <p className="text-[#FFFFFF] text-[14px] text-left mt-8 ">We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.</p>
                 </div>
 
                 <div className="flex gap-4 my-10">
                     {socialMedia.map((social) => (
                         <Link key={social.name} href={social.href} target="_blank" rel="noopener noreferrer">
-                            <img src={social.icon} alt={social.name} className="w-6 h-6 hover:scale-110 transition-transform" />
+                            <Image src={social.icon} alt={social.name} className="w-6 h-6 hover:scale-110 transition-transform" />
                         </Link>
                     ))}
                 </div>
@@ -108,7 +109,7 @@ export default function Home() {
 
                     {/* WhatsApp Card */}
                     <div className="bg-[#A31621] w-full h-[100px] flex items-center px-5">
-                        <img src='/images/whatsapp.png' className="w-7 h-7 mr-4" />
+                        <Image src='/images/whatsapp.png' alt="WhatsApp icon" className="w-7 h-7 mr-4" />
                         <div className="flex flex-col justify-center">
                             <h1 className="text-white text-[20px]">+91 89400 11098</h1>
                             <p className="text-[10px] text-white">Message Us Now</p>
@@ -117,7 +118,7 @@ export default function Home() {
 
                     {/* Email Card */}
                     <div className="bg-[#161414] w-full h-[100px] flex items-center px-5">
-                        <img src='/images/mail_white.png' className="w-7 h-7 mr-4" />
+                        <Image src='/images/mail_white.png' alt="Mail icon" className="w-7 h-7 mr-4" />
                         <div className="flex flex-col justify-center">
                             <h1 className="text-white text-[20px]">support@bytebandits.in</h1>
                             <p className="text-[10px] text-white">Drop Us a Line</p>
@@ -128,8 +129,6 @@ export default function Home() {
                 <div>
                     <p className="text-[#FFFFFF] text-[12px] my-8 text-center">Copyright © Byte Bandits. All Rights Reserved.</p>
                 </div>
-
-
             </main>
         </>
     );
