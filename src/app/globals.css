@@ -75,7 +75,7 @@ header[data-menu-open="true"] {
 
 /* Add padding to main content to account for header height */
 main {
-  padding-top: 80px; /* Adjust based on your header height */
+  padding-top: 68px; /* Adjust based on your header height */
 }
 
 /* When menu is open, prevent body scroll */

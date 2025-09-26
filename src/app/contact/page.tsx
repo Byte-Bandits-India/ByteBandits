@@ -38,11 +38,11 @@ export default function Home() {
                 <div className="text-center text-[#FFFFFF] text-[14px] mt-[32px]">
                     <h1 className="text-[28px]">Let&apos;s Contact With Us</h1>
 
-                    <div className="space-y-5 mt-[46px]">
+                    <div className="space-y-5 mt-[48px]">
                         {contactInfo.map((item, index) => (
                             <div
                                 key={index}
-                                className="bg-[#1B1B1C] w-full rounded-xl flex items-center px-5 py-4"
+                                className="bg-[#1B1B1C] w-full h-[100px] rounded-xl flex items-center px-5 py-4"
                             >
                                 <Image
                                     src={item.img}
@@ -114,7 +114,7 @@ export default function Home() {
                 </div>
 
                 {/* Map Image */}
-                <div className="relative mt-10 w-full h-[331px] md:w-[331px]">
+                <div className="relative mt-8 w-full h-[331px] md:w-[331px] mb-[48px]">
                     <Image src="/images/map.png" alt="map" fill className="object-cover" />
                 </div>
             </div>
