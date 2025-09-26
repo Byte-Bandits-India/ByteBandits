@@ -31,7 +31,7 @@ export const Header = () => {
 
     return (
         <div style={{
-            height: isMenuOpen ? '100vh' : 'auto',
+            height: isMenuOpen ? '100dvh;' : 'auto',
             background: '#1a1a1a',
             position: 'fixed',
             top: 0,
