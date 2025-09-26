@@ -52,7 +52,7 @@ header {
 
 /* When menu is open, header should take full viewport height */
 header[data-menu-open="true"] {
-  height: 100vh !important;
+  height: 100dvh !important;
 }
 
 /* Staggered menu wrapper */
@@ -70,7 +70,7 @@ header[data-menu-open="true"] {
 .staggered-menu-panel {
   position: fixed !important;
   top: 0 !important;
-  height: 100vh !important;
+  height: 100dvh !important;
 }
 
 /* Add padding to main content to account for header height */
