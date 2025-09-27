@@ -1,7 +1,24 @@
+"use client"
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+    const [form, setForm] = useState({ name: '', email: '', number: '', message: '' });
+    const [success, setSuccess] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+        });
+        setSuccess(true);
+        setForm({ name: "", email: "", number: "", message: "" });
+        setTimeout(() => setSuccess(false), 3000);
+    }
+
     const contactInfo = [
         {
             img: "/images/contact_red.png",
@@ -76,9 +93,11 @@ export default function Home() {
                 {/* Form */}
                 <div className="min-h-[460px] bg-[#1B1B1C] w-full mt-8 rounded-xl overflow-hidden">
                     <div className="px-4 py-4 h-full flex">
-                        <form className="w-full max-w-md mx-auto my-auto">
+                        <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto my-auto">
                             <div className="space-y-[15px]">
                                 <input
+                                    value={form.name}
+                                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                                     type="text"
                                     id="name"
                                     name="name"
@@ -86,6 +105,8 @@ export default function Home() {
                                     className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
                                 />
                                 <input
+                                    value={form.email}
+                                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                                     type="email"
                                     id="email"
                                     name="email"
@@ -93,6 +114,8 @@ export default function Home() {
                                     className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
                                 />
                                 <input
+                                    value={form.number}
+                                    onChange={(e) => setForm({ ...form, number: e.target.value })}
                                     type="tel"
                                     id="phone"
                                     name="phone"
@@ -100,6 +123,8 @@ export default function Home() {
                                     className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#222228] focus:outline-none focus:border-orange-500"
                                 />
                                 <textarea
+                                    value={form.message}
+                                    onChange={(e) => setForm({ ...form, message: (e.target as HTMLTextAreaElement).value })}
                                     id="message"
                                     name="message"
                                     placeholder="Your Message"
@@ -112,6 +137,7 @@ export default function Home() {
                                 >
                                     Submit Now
                                 </button>
+                                {success && <div className="text-green-500">Message sent successfully!</div>}
                             </div>
                         </form>
                     </div>
