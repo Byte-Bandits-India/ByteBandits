@@ -15,7 +15,7 @@ export default function Home() {
         <div className="overflow-x-hidden px-6 bg-[#252628] py-8">
             {/* Logo */}
             <div>
-                <Image src="/Logo.png" alt="Logo" width={156} height={50} />
+                <Image src="/Logo.png" alt="Logo" width={156} height={61} />
                 <p className="text-[#FFFFFF] text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em] ">
                     We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.
                 </p>

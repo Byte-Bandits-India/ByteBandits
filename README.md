@@ -34,3 +34,77 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+.
+├── src
+│   ├── app
+│   │   ├── (main)/                   # <-- NEW: Route group for your main pages
+│   │   │   ├── about/
+│   │   │   │   └── page.tsx
+│   │   │   ├── blog/
+│   │   │   │   ├── [slug]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── contact/
+│   │   │   │   └── page.tsx
+│   │   │   ├── services/
+│   │   │   │   └── page.tsx
+│   │   │   ├── layout.tsx            # <-- NEW: Shared layout for main pages (with Header/Footer)
+│   │   │   └── page.tsx              # Homepage
+│   │   ├── api/
+│   │   │   └── contact/
+│   │   │       └── route.ts
+│   │   ├── globals.css               # Keep this one
+│   │   └── layout.tsx                # Root layout (html, body)
+│   │
+│   ├── components
+│   │   ├── layout/                   # <-- MOVED: Header, Footer, StaggeredMenu
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Header.tsx
+│   │   │   └── StaggeredMenu.tsx
+│   │   ├── sections/                 # <-- NEW: Page-specific large components
+│   │   │   ├── home/
+│   │   │   │   ├── HeroSection.tsx
+│   │   │   │   ├── AboutSummary.tsx
+│   │   │   │   └── ServicesHighlight.tsx
+│   │   │   ├── contact/
+│   │   │   │   ├── ContactForm.tsx
+│   │   │   │   └── MapEmbed.tsx
+│   │   │   └── shared/               # <-- NEW: Sections used on multiple pages
+│   │   │       ├── ClientLogos.tsx
+│   │   │       ├── BlogList.tsx      # (e.g. on About page and Blog page)
+│   │   │       └── Testimonials.tsx
+│   │   └── ui/                       # <-- NEW: Your reusable design system
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx              # Your BlogCard and TestimonialCard could be variants of this
+│   │       └── Heading.tsx
+│   │
+│   ├── constants/                    # <-- NEW: For constants from your old utils
+│   │   ├── index.ts                  # (e.g. NAV_LINKS, SITE_METADATA)
+│   │
+│   ├── hooks/                        # (This was already good)
+│   │   └── ...
+│   │
+│   ├── lib/                          # <-- CONSOLIDATED: Your single source of truth
+│   │   ├── actions.ts                # For server actions (like handling form submission)
+│   │   ├── seo.config.ts
+│   │   └── utils.ts                  # formatDate, stringHelpers etc. go here
+│   │
+│   ├── styles/                       # <-- REMOVED: Delete this folder, use `src/app/globals.css`
+│   │
+│   └── types/                        # (This was already good)
+│       ├── index.ts
+│       └── ...
+│
+├── public
+│   ├── icons/                        # <-- NEW: For UI icons
+│   │   ├── social/                   # <-- NEW: fb.png, git.png, etc.
+│   │   └── ui/                       # <-- NEW: mail_red.png, location_red.png, etc.
+│   ├── images/                       # <-- For content imagery
+│   │   ├── map.png
+│   │   └── women.webp
+│   ├── Logo.png
+│   └── ...
+│
+└── ... (configs: next.config.ts, tailwind.config.js, etc.)

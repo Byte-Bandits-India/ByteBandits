@@ -1,5 +1,5 @@
 "use client"
-import StaggeredMenu from '../StaggeredMenu';
+import StaggeredMenu from '../layout/StaggeredMenu';
 import { useState } from 'react';
 
 export const Header = () => {
@@ -31,8 +31,7 @@ export const Header = () => {
 
     return (
         <div style={{
-            height: isMenuOpen ? '100dvh;' : 'auto',
-            background: '#1a1a1a',
+            height: isMenuOpen ? '100dvh' : 'auto',
             position: 'fixed',
             top: 0,
             left: 0,
@@ -49,7 +48,7 @@ export const Header = () => {
                 openMenuButtonColor="#000"
                 changeMenuColorOnOpen={true}
                 colors={['#B19EEF', '#5227FF']}
-                logoUrl="/Logo.png"
+                logoUrl="/header.png"
                 accentColor="#ff6b6b"
                 onMenuOpen={handleMenuOpen}
                 onMenuClose={handleMenuClose}
