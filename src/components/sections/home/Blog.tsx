@@ -51,7 +51,9 @@ export default function BlogSection() {
                                     <Image
                                         src={card.img}
                                         alt={card.title}
-                                        className="h-auto w-auto object-cover"
+                                        width={131}
+                                        height={170}
+                                        className="h-full w-auto object-cover"
                                     />
                                 </div>
 

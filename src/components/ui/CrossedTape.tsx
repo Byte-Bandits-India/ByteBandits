@@ -75,6 +75,8 @@ export default function CrossedBanner() {
                 <Image
                     src="/images/white.webp"
                     alt="Center Shape"
+                    width={112}
+                    height={112}
                     className="w-20 h-20 sm:w-28 sm:h-28 floating"
                 />
             </div>

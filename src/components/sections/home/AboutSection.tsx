@@ -51,6 +51,8 @@ const AboutSection = () => {
               <Image
                 src={service.image}
                 alt={service.title}
+                width={30}
+                height={30}
                 className="w-[30px] h-[30px] object-cover"
               />
             </div>
@@ -93,6 +95,8 @@ const AboutSection = () => {
             <Image
               src={item.img}
               alt={item.title}
+              width={i === 0 ? 142 : 108}
+              height={i === 0 ? 142 : 108}
               className={`${i === 0 ? "w-[142px]" : "w-[108px]"} mx-auto`}
             />
             <p className={`${i === 0 ? "mt-2" : "mt-10.5"} triangle-title text-[24px] font-[anton] " `} data-aos="fade-up"

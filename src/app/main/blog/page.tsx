@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Image from "next/image";
 const BlogSection = () => {
     const blogData = [
@@ -31,7 +31,7 @@ const BlogSection = () => {
                         data-aos-delay="10">
                         Latest From <span className="highlight text-[#50BD8A]">Blog</span>
                     </h2>
-                    <Link to="/blogs">
+                    <Link href="/blogs">
                         <div className="blog-view-all flex items-center gap-2 cursor-pointer mr-70">
                             <span className="uppercase text-[9px] sm:text-[12px] md:text-[14px] lg:text-[14px] font-semibold">View All Publications</span>
                             <ArrowRight size={17} />
@@ -41,7 +41,7 @@ const BlogSection = () => {
             </div>
 
             {/* Horizontal Container for Cards */}
-            <Link to='/blogs'>
+            <Link href='/blogs'>
                 <div className="blog-card-container flex flex-row gap-8 overflow-x-auto md:mx-50 scrollbar-hide" data-aos="fade-up"
                     data-aos-delay="10">
                     {blogData.map((blog, index) => (
@@ -59,6 +59,8 @@ const BlogSection = () => {
                                 <Image
                                     src={blog.image}
                                     alt={blog.title}
+                                    width={1200}
+                                    height={800}
                                     className="w-full h-full object-cover"
                                 />
                             </div>

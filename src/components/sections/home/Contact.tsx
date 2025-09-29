@@ -24,7 +24,14 @@ export default function ContactSection() {
                     <Button />
                 </div>
                 <div className="mt-8">
-                    <Image src="/images/home_2.webp" alt="contact" className="w-full h-auto" />
+                    <Image
+                        src="/images/home_2.webp"
+                        alt="contact"
+                        width={1920}
+                        height={1080}
+                        sizes="100vw"
+                        className="w-full h-auto"
+                    />
                 </div>
             </section >
         </>

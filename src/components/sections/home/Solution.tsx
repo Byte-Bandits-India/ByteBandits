@@ -111,7 +111,7 @@ export default function ServicesSection() {
                         <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
                     </div>
 
-                    <h1 className="text-[#333333] text-[26px] font-semibold text-center mt-8">
+                    <h1 className="text-[#333333] text-[26px] font-semibold text-center my-8">
                         My Awesome Clients
                     </h1>
 
