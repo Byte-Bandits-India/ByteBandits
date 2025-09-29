@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Image from "next/image";
 const BlogSection = () => {
     const blogData = [
         {
@@ -55,7 +56,7 @@ const BlogSection = () => {
 
                             {/* Image */}
                             <div className="blog-image h-[200px] sm:h-[220px] md:h-[240px] lg:h-[400px]  ">
-                                <img
+                                <Image
                                     src={blog.image}
                                     alt={blog.title}
                                     className="w-full h-full object-cover"

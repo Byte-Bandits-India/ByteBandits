@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const AboutSection = () => {
   // Data for the items
   const services = [
@@ -46,7 +48,7 @@ const AboutSection = () => {
           <div key={index} className="flex items-center gap-4">
             {/* Image with red background */}
             <div className="bg-[#F9373A] h-[60px] w-[60px] rounded-[5px] flex items-center justify-center overflow-hidden">
-              <img
+              <Image
                 src={service.image}
                 alt={service.title}
                 className="w-[30px] h-[30px] object-cover"
@@ -88,7 +90,7 @@ const AboutSection = () => {
         ].map((item, i) => (
           <div key={i} className="triangle-card text-center max-w-[300px]" data-aos="fade-up"
             data-aos-delay="5">
-            <img
+            <Image
               src={item.img}
               alt={item.title}
               className={`${i === 0 ? "w-[142px]" : "w-[108px]"} mx-auto`}

@@ -1,6 +1,5 @@
-import { useRef } from "react";
-import Image from "next/image";
 import Button from "@/components/ui/button"
+import Image from "next/image";
 
 export default function ContactSection() {
     return (
@@ -25,7 +24,7 @@ export default function ContactSection() {
                     <Button />
                 </div>
                 <div className="mt-8">
-                    <img src="/images/home_2.webp" alt="contact" className="w-full h-auto" />
+                    <Image src="/images/home_2.webp" alt="contact" className="w-full h-auto" />
                 </div>
             </section >
         </>

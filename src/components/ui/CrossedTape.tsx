@@ -1,6 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function CrossedBanner() {
     const containerRef = useRef(null);
@@ -71,7 +72,7 @@ export default function CrossedBanner() {
 
             {/* Center Image */}
             <div className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <img
+                <Image
                     src="/images/white.webp"
                     alt="Center Shape"
                     className="w-20 h-20 sm:w-28 sm:h-28 floating"

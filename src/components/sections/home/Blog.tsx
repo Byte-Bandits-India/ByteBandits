@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image";
 export default function BlogSection() {
     const cardData = [
         {
@@ -47,7 +48,7 @@ export default function BlogSection() {
                             >
                                 {/* Left: Image */}
                                 <div className="h-full flex-shrink-0">
-                                    <img
+                                    <Image
                                         src={card.img}
                                         alt={card.title}
                                         className="h-auto w-auto object-cover"

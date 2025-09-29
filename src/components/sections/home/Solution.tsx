@@ -76,11 +76,6 @@ export default function ServicesSection() {
         src: string;
     }
 
-    interface Props {
-        topRow: ClientLogo[];
-        bottomRow: ClientLogo[];
-    }
-
     // Define your client logos here
     const topRow: ClientLogo[] = [
         { src: "/icons/clients/Group 115 2.png" },
@@ -135,7 +130,7 @@ export default function ServicesSection() {
                                                 width={135}
                                                 className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
                                             />
-                                            
+
                                         </div>
                                     ))}
                                 </div>
@@ -150,7 +145,7 @@ export default function ServicesSection() {
                                                 height={30}
                                                 className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
                                             />
-                                            
+
                                         </div>
                                     ))}
                                 </div>
