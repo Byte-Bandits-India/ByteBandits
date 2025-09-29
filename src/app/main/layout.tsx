@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Anton } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,11 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${anton.variable}`}>
       <body className="font-sans">
-        <Header />
         <div style={{ minHeight: '100vh' }}>
           {children}
         </div>
-        <Footer />
       </body>
     </html>
   );
