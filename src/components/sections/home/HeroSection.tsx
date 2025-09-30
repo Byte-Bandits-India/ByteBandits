@@ -57,31 +57,33 @@ const HeroSection = () => {
                 {/* Animated Title */}
                 <div className="w-full mx-auto text-center">
                     <motion.div className="animated-title px-4">
-                        {["WHERE IDEAS BECOME DIGITAL REALITIES"].map(
-                            (line: string, lineIndex: number) => (
-                                <div
-                                    key={lineIndex}
-                                    className="title-line flex flex-wrap justify-center items-center text-center text-[60px] sm:text-[40px] md:text-[90px] lg:text-[130px] sm:leading-[50px] md:leading-[110px] lg:leading-[140px] font-[anton] text-[#353639]"
-                                >
-                                    {line.split(" ").map((word: string, wIndex: number) => (
-                                        <div key={wIndex} className="flex space-x-[2px]">
-                                            {word.split("").map((char: string, i: number) => (
-                                                <motion.span
-                                                    key={i}
-                                                    style={{ scale }}
-                                                    className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES"
+                        {[
+                            "WHERE IDEAS",
+                            "BECOME DIGITAL",
+                            "REALITIES"
+                        ].map((line: string, lineIndex: number) => (
+                            <div
+                                key={lineIndex}
+                                className="title-line flex flex-wrap justify-center items-center text-center text-[60px] sm:text-[40px] md:text-[90px] lg:text-[130px] sm:leading-[50px] md:leading-[110px] lg:leading-[140px] font-[anton] text-[#353639]"
+                            >
+                                {line.split(" ").map((word: string, wIndex: number) => (
+                                    <div key={wIndex} className="flex space-x-[2px]">
+                                        {word.split("").map((char: string, i: number) => (
+                                            <motion.span
+                                                key={i}
+                                                style={{ scale }}
+                                                className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES"
                                                         ? "text-[#F9373A]"
                                                         : "text-[#333333]"
-                                                        }`}
-                                                >
-                                                    {char}
-                                                </motion.span>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        )}
+                                                    }`}
+                                            >
+                                                {char}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
 
                         <p className="mt-8 text-[14px] text-[#818181] font-bold year years">
                             SINCE 2024
@@ -95,6 +97,7 @@ const HeroSection = () => {
                         </div>
                     </motion.div>
                 </div>
+
             </div>
         </section>
     );

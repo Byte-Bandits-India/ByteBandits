@@ -2,12 +2,25 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useRef } from "react";
 
 
 export default function Home() {
     const [form, setForm] = useState({ name: '', email: '', number: '', message: '' });
     const [success, setSuccess] = useState(false);
+
+    // Reference to section (so animations trigger when hero enters/leaves viewport)
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+
+    // Track scroll progress relative to the hero section
+    const { scrollYProgress } = useScroll({
+        target: scrollRef,
+        offset: ["start end", "end start"],
+    });
+
+    // Scale motion value (larger → smaller while scrolling)
+    const scale = useTransform(scrollYProgress, [0, 0], [1.5, 1.1]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -43,8 +56,28 @@ export default function Home() {
     ];
 
     return (
-        <div className="overflow-x-hidden px-6 bg-[#FFFFFF]">
-            <div className="mt-[38px]">
+        <div ref={scrollRef} className="relative overflow-x-hidden bg-[#FFFFFF] pt-[80px] md:pt-[100px]">
+            <div className="shapes px-6">
+                {/* Scroll-animated shapes */}
+                <motion.img
+                    src="/images/gold.webp"
+                    alt="Gold Shape"
+                    style={{ scale, rotate: -90 }}
+                    animate={{ y: [0, -30, 0] }}
+                    transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
+                    className="absolute -left-[100px] top-[10px] w-[200px] sm:w-[200px] md:w-[400px] z-10"
+                />
+
+                <motion.img
+                    src="/images/red.webp"
+                    alt="Green Shape"
+                    style={{ scale, rotate: -60 }}
+                    animate={{ y: [0, -36, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
+                    className="absolute -right-[80px] top-[8%] w-[160px] sm:w-[150px] md:w-[300px] z-10"
+                />
+            </div>
+            <div className="mt-[80px] w-full max-w-6xl mx-auto px-6">
                 {/* Header Line */}
                 <div className="flex items-center justify-center w-full">
                     <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
@@ -54,7 +87,7 @@ export default function Home() {
                     <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
                 </div>
 
-                <div className="text-center text-[#FFFFFF] text-[14px] mt-[24px]">
+                <div className="text-center text-[#333333] text-[14px] mt-[24px]">
                     {/* Title */}
                     <motion.div className="contact-title mt-[45px] font-anton">
                         {["LETS CONTACT", "WITH US"].map((line, lineIndex) => (
@@ -106,7 +139,10 @@ export default function Home() {
                 </div>
 
                 {/* Women Image */}
-                <div className="mt-8 relative w-full md:w-[354px] h-[530px]">
+                <div
+                    className="mt-8 relative w-full md:w-[354px] h-[530px] rounded-xl"
+                    style={{ boxShadow: '5px 5px 21px rgba(0,0,0,0.25)' }}
+                >
                     <Image src="/images/contact.webp" alt="women" fill className="rounded-xl object-cover" />
                 </div>
 
@@ -126,7 +162,7 @@ export default function Home() {
                 <div className="min-h-[460px] w-full mt-8 rounded-xl overflow-hidden">
                     <div className="py-4 h-full flex">
                         <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto my-auto">
-                            <div className="space-y-[15px]">
+                            <div>
                                 {/* First Name */}
                                 <label htmlFor="name" className="block text-[16px] font-medium text-[#353639]">
                                     First Name <span className="text-red-500">*</span>
@@ -138,11 +174,11 @@ export default function Home() {
                                     id="name"
                                     name="name"
                                     placeholder="Your Name"
-                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
+                                    className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
                                 {/* Email */}
-                                <label htmlFor="email" className="block text-[16px] font-medium text-[#353639]">
+                                <label htmlFor="email" className="block text-[16px] font-medium text-[#353639] mt-[10px]">
                                     Email <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -152,11 +188,11 @@ export default function Home() {
                                     id="email"
                                     name="email"
                                     placeholder="Your Email"
-                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
+                                    className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
                                 {/* Phone Number */}
-                                <label htmlFor="phone" className="block text-[16px] font-medium text-[#353639]">
+                                <label htmlFor="phone" className="block text-[16px] font-medium text-[#353639] mt-[10px]">
                                     Phone Number <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -166,11 +202,11 @@ export default function Home() {
                                     id="phone"
                                     name="phone"
                                     placeholder="Your Phone"
-                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
+                                    className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
                                 {/* Message */}
-                                <label htmlFor="message" className="block text-[16px] font-medium text-[#353639]">
+                                <label htmlFor="message" className="block text-[16px] font-medium text-[#353639] mt-[10px]">
                                     Message <span className="text-red-500">*</span>
                                 </label>
                                 <textarea
@@ -182,13 +218,13 @@ export default function Home() {
                                     name="message"
                                     placeholder="Your Message"
                                     rows={4}
-                                    className="w-full p-4 rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
+                                    className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
                                 {/* Submit Button */}
                                 <button
                                     type="submit"
-                                    className="w-full h-[60px] text-white font-medium text-[18px] rounded-[10px] bg-gradient-to-r from-[#9F1520] to-[#600C13] hover:opacity-90 transition-opacity"
+                                    className="w-full h-[60px] text-white font-medium text-[18px] rounded-[10px] bg-gradient-to-r from-[#9F1520] to-[#600C13] hover:opacity-90 transition-opacity mt-[10px]"
                                 >
                                     Submit Now
                                 </button>
@@ -200,11 +236,10 @@ export default function Home() {
                         </form>
                     </div>
                 </div>
-
-                {/* Map Image */}
-                <div className="relative mt-8 w-full h-[331px] md:w-[331px] mb-[48px]">
-                    <Image src="/images/map.png" alt="map" fill className="object-cover" />
-                </div>
+            </div>
+            {/* Map Image */}
+            <div className="relative mt-8 w-full h-[331px] md:w-[331px] mb-[48px]">
+                <Image src="/images/map.png" alt="map" fill className="object-cover" />
             </div>
         </div>
     );
