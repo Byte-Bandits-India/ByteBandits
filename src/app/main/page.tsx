@@ -26,7 +26,7 @@ export default function Home() {
 
         <section
           ref={scrollRef}
-          className="w-full md:h-[55vh] md:mb-20 relative"
+          className="w-full   md:h-[55vh] relative "
         >
           {/* Background Image with Zoom */}
           <motion.img
@@ -41,11 +41,11 @@ export default function Home() {
             src="/images/scroll-down.png"
             alt="Scroll Down"
             style={{
-              transform: 'translate3d(0px, 10px, 0px)',
-              rotate
+              transform: 'translate3d(0px, 10px, 0px)', rotate
             }}
             className="absolute -top-65 right-60 w-55 h-55 z-30 scroll-icon"
           />
+
         </section>
 
         <AboutSection />

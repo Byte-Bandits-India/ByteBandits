@@ -103,7 +103,7 @@ export default function ServicesSection() {
         <>
             <section>
                 <div>
-                    <div className="flex items-center justify-center w-full mt-[70px]">
+                    <div className="flex items-center justify-center w-full mt-[70px] md:mt-[110px]">
                         <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
                         <h1 className="text-[#8C8C8C] text-[12px] uppercase px-2 whitespace-nowrap text-center leading-none">
                             Clients we worked
@@ -155,7 +155,7 @@ export default function ServicesSection() {
                 </div>
             </section>
 
-            <section className="solutions-section mx-45 py-16 px-5 sm:px-10 md:px-20 text-[#333] " id="service-section">
+            <section className="solutions-section mx-45 py-16 px-6 w-full max-w-[1420px] mx-auto text-[#333] " id="service-section">
                 <div className="mt-[42px] solutions-header">
                     <p
                         className="section-label text-xs sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"

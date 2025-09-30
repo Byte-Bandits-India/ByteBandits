@@ -40,8 +40,14 @@ const HeroSection = () => {
                         alt="White Shape"
                         style={{ scale }}
                         animate={{ y: [0, -24, 0] }}
-                        transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
-                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] z-10"
+                        transition={{
+                            duration: 4.5,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                            delay: 0.2
+                        }}
+                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] z-0"
                     />
 
                     <motion.img
@@ -73,8 +79,8 @@ const HeroSection = () => {
                                                 key={i}
                                                 style={{ scale }}
                                                 className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES"
-                                                        ? "text-[#F9373A]"
-                                                        : "text-[#333333]"
+                                                    ? "text-[#F9373A]"
+                                                    : "text-[#333333]"
                                                     }`}
                                             >
                                                 {char}
