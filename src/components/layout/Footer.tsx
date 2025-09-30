@@ -101,30 +101,24 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
+
+                {/* Footer Bottom - Mobile */}
+                <div className="mt-8 border-t border-[#FFFFFF] pt-4">
+                    <p className="text-[12px] text-center">
+                        Copyright © Byte Bandits. All Rights Reserved.
+                    </p>
+                </div>
             </div>
 
             {/* Desktop View */}
             <div className="hidden md:block max-w-[1420px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <Image src="/logo_white.png" alt="Logo" width={156} height={61} />
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     {/* 1 - Logo + About + Social Media */}
                     <div>
-                        <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
                         <p className="mt-4 text-[14px]">
                             We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.
                         </p>
-                        <div className="flex gap-4 mt-4">
-                            {socialMedia.map((social) => (
-                                <Link key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
-                                    <Image
-                                        src={social.icon}
-                                        alt={social.name}
-                                        width={24}
-                                        height={24}
-                                        className="md:w-[30px] md:h-[30px] lg:w-[40px] lg:h-[40px]"
-                                    />
-                                </Link>
-                            ))}
-                        </div>
                     </div>
 
                     {/* 2 - Our Services */}
@@ -192,31 +186,53 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-            </div>
+                {/* Social Media */}
+                <div className="flex gap-4 my-8">
+                    {socialMedia.map((social) => (
+                        <Link key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform">
+                            <Image
+                                src={social.icon}
+                                alt={social.name}
+                                width={24}
+                                height={24}
+                            />
+                        </Link>
+                    ))}
+                </div>
 
-            {/* Contact Cards */}
-            <div className="flex flex-col mt-8 gap-4">
-                <div className="bg-[#A31621] w-full h-[71px] flex items-center px-5">
-                    <Image src='/icons/Whatsapp.png' alt="WhatsApp icon" width={28} height={28} className="mr-4" />
-                    <div>
-                        <h1 className="text-white text-[20px]">+91 89400 11098</h1>
-                        <p className="text-[10px]">Message Us Now</p>
+                {/* Contact Cards */}
+                <div className="flex flex-col md:flex-row md:gap-4 mt-8 justify-center items-center">
+                    <div className="bg-[#A31621] w-full md:w-[363px] h-[71px] flex items-center px-5">
+                        <Image src='/icons/Whatsapp.png' alt="WhatsApp icon" width={28} height={28} className="mr-4" />
+                        <div>
+                            <h1 className="text-white text-[20px]">+91 89400 11098</h1>
+                            <p className="text-[10px]">Message Us Now</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-[#161414] w-full md:w-[363px] h-[71px] flex items-center px-5">
+                        <Image src='/icons/White_mail.png' alt="Mail icon" width={28} height={28} className="mr-4" />
+                        <div>
+                            <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
+                            <p className="text-[10px]">Drop Us a Line</p>
+                        </div>
                     </div>
                 </div>
-                <div className="bg-[#161414] w-full h-[71px] flex items-center px-5">
-                    <Image src='/icons/White_mail.png' alt="Mail icon" width={28} height={28} className="mr-4" />
-                    <div>
-                        <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
-                        <p className="text-[10px]">Drop Us a Line</p>
+                {/* Footer Bottom */}
+                <div className="mt-8 border-t border-[#FFFFFF] pt-4">
+                    {/* Desktop: Copyright left, Privacy/Terms right */}
+                    <div className="hidden md:flex justify-between items-center">
+                        <p className="text-[12px]">
+                            Copyright © Byte Bandits. All Rights Reserved.
+                        </p>
+                        <div className="text-[12px] space-x-4">
+                            <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+                            <span>|</span>
+                            <Link href="/terms-conditions" className="hover:underline">Terms & Conditions</Link>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {/* Footer Bottom */}
-            <hr className="w-full border-t border-[#FFFFFF] mt-8" />
-            <p className="text-[12px] mt-6 text-center">
-                Copyright © Byte Bandits. All Rights Reserved.
-            </p>
         </footer>
     );
 }

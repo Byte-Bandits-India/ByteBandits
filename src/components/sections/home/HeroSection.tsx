@@ -32,7 +32,7 @@ const HeroSection = () => {
                         style={{ scale }}
                         animate={{ y: [0, -30, 0] }}
                         transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
-                        className="absolute -left-[100px] -top-[150px] w-[300px] sm:w-[200px] md:w-[400px] z-10"
+                        className="absolute -left-[100px] -top-[150px] w-[300px] sm:w-[200px] md:w-[400px] xl:w-[500px] z-10"
                     />
 
                     <motion.img
@@ -47,7 +47,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.2
                         }}
-                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] z-0"
+                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] xl:w-[500px z-0"
                     />
 
                     <motion.img
@@ -56,7 +56,7 @@ const HeroSection = () => {
                         style={{ scale }}
                         animate={{ y: [0, -36, 0] }}
                         transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
-                        className="absolute -right-[40px] top-[0%] w-[200px] sm:w-[150px] md:w-[300px] z-10"
+                        className="absolute -right-[40px] top-[0%] w-[200px] sm:w-[150px] md:w-[300px] xl:w-[500px z-10"
                     />
                 </div>
 
@@ -70,27 +70,23 @@ const HeroSection = () => {
                         ].map((line: string, lineIndex: number) => (
                             <div
                                 key={lineIndex}
-                                className="title-line flex flex-wrap justify-center items-center text-center text-[60px] sm:text-[40px] md:text-[90px] lg:text-[130px] sm:leading-[50px] md:leading-[110px] lg:leading-[140px] font-[anton] text-[#353639]"
+                                className="title-line flex flex-wrap justify-center items-center text-center 
+               text-[60px] sm:text-[40px] md:text-[90px] lg:text-[130px] 
+               sm:leading-[50px] md:leading-[110px] lg:leading-[140px] 
+               font-[anton] text-[#353639] gap-x-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16"
                             >
                                 {line.split(" ").map((word: string, wIndex: number) => (
-                                    <div key={wIndex} className="flex space-x-[2px]">
-                                        {word.split("").map((char: string, i: number) => (
-                                            <motion.span
-                                                key={i}
-                                                style={{ scale }}
-                                                className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES"
-                                                    ? "text-[#F9373A]"
-                                                    : "text-[#333333]"
-                                                    }`}
-                                            >
-                                                {char}
-                                            </motion.span>
-                                        ))}
-                                    </div>
+                                    <motion.span
+                                        key={wIndex}
+                                        style={{ scale }}
+                                        className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES" ? "text-[#F9373A]" : "text-[#333333]"
+                                            }`}
+                                    >
+                                        {word}
+                                    </motion.span>
                                 ))}
                             </div>
                         ))}
-
                         <p className="mt-8 text-[14px] text-[#818181] font-bold year years">
                             SINCE 2024
                         </p>

@@ -1,10 +1,13 @@
 import { useRef } from "react";
 import Image from "next/image";
+import { FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 interface ServiceCard {
     title: string;
     desc: string;
     tags: string[];
+    link: string;
 }
 
 export default function ServicesSection() {
@@ -15,28 +18,34 @@ export default function ServicesSection() {
             title: "Data Security",
             desc: "Secure your data with our end-to-end data protection services — encryption, monitoring, and compliance all in one place. Our solutions are designed to safeguard your business against breaches, data loss, and evolving cyber threats.",
             tags: ["MFA", "Auth0", "DLP"],
+            link: "/services/data-security",
         },
         {
             title: "SEO & Optimization",
             desc: "Get higher rankings, more visibility, and organic traffic that actually converts. Your site gets fully optimized—keywords, structure, speed, and more. Show up when your audience is searching. This is how you grow without paying for every click.",
             tags: ["ONPAGE", "LOCAL", "OFF PAGE"],
+            link: "/services/seo-optimization",
         },
         {
             title: "Web Development",
             desc: "Get a fast, modern, and mobile-friendly website built to impress and perform. Clean design, smooth user experience, and everything tailored to your brand. Your site won't just look great—it'll work hard to support your business. Everything is built to scale with you.",
             tags: ["REACT", "SQL", "NODE"],
+            link: "/services/web-development",
         },
         {
             title: "Mobile Development",
             desc: "Launch a custom mobile app that looks amazing and runs flawlessly on iOS and Android. Whether it's for customers or internal use, everything is designed for usability and performance. Your idea turns into a powerful app. Built smart, built to last.",
             tags: ["UI/UX", "NATIVE", "STUDIO"],
+            link: "/services/mobile-development",
         },
         {
             title: "Cloud Scaling",
             desc: "Scale your app with serverless architecture and intelligent cost optimization strategies tailored for modern businesses.",
             tags: ["AWS", "AZURE", "GCP"],
+            link: "/services/cloud-scaling",
         },
     ];
+
 
     const cardWidth = 370;
     const gap = 30; // 1.5rem (Tailwind's `mr-6`)
@@ -118,7 +127,6 @@ export default function ServicesSection() {
                     {/* Logo Marquee */}
                     <div className="w-screen bg-[#A31621] relative mb-[48px]">
                         <div className="max-w-5xl overflow-hidden py-6 mx-auto relative">
-
                             <div className="flex flex-col gap-6">
                                 <div className="flex animate-scrollLeft w-max flex-shrink-0">
                                     {[...topRow, ...topRow].map((logo, i) => (
@@ -198,7 +206,7 @@ export default function ServicesSection() {
                             {cards.map((item, i) => (
                                 <div
                                     key={i}
-                                    className=" solution-card box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl"
+                                    className="solution-card box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl"
                                     style={{ scrollSnapAlign: "start" }}
                                 >
                                     {/* Title & Description */}
@@ -212,10 +220,10 @@ export default function ServicesSection() {
                                     </div>
 
                                     {/* Tags */}
-                                    <div className="card-tags flex flex-col justify-end gap-6">
+                                    <div className="card-tags flex-1 flex flex-col justify-end gap-6">
                                         <div className="tags flex gap-3 text-[13px] justify-center font-bold text-black tracking-[1px]">
                                             {item.tags.map((tag, idx) => (
-                                                <span key={idx} className="tag relative">
+                                                <span key={idx} className="tag relative flex items-center gap-1">
                                                     {tag}
                                                     {idx < item.tags.length - 1 && (
                                                         <span className="dot mx-1 text-[#BA4D4D] text-[20px] leading-[2px]">•</span>
@@ -224,13 +232,26 @@ export default function ServicesSection() {
                                             ))}
                                         </div>
 
+                                        {/* Footer lines and Learn More */}
                                         <div className="pt-1">
-                                            <div className="card-footer flex items-center mb-18">
+                                            <div className="card-footer flex items-center mb-2">
                                                 {/* Red + Gray Line */}
                                                 <div className="kine-wrapper flex w-full items-center">
                                                     <div className="red-line h-[2px] w-[20px] bg-[#BA4D4D] mr-1"></div>
                                                     <div className="gray-line h-[2px] flex-1 bg-[#D3D3D3]"></div>
                                                 </div>
+                                            </div>
+
+                                            {/* Learn More link */}
+                                            <div className="learn-more mt-[45px] flex items-center gap-3">
+                                                <span className="text-[#BA4D4D] font-bold text-[14px] truncate">
+                                                    Learn More
+                                                </span>
+                                                <Link href={item.link} className="flex-shrink-0">
+                                                    <div className="bg-[#BA4D4D] w-8 h-8 flex items-center justify-center rounded-full">
+                                                        <FaArrowRight className="text-white" />
+                                                    </div>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
