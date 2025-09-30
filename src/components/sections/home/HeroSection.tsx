@@ -32,7 +32,7 @@ const HeroSection = () => {
                         style={{ scale }}
                         animate={{ y: [0, -30, 0] }}
                         transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
-                        className="absolute -left-[100px] -top-[150px] w-[300px] sm:w-[200px] md:w-[400px] xl:w-[500px] z-10"
+                        className="absolute -left-[100px] -top-[150px] w-[300px] sm:w-[200px] md:w-[400px] lg:w-[500px] lg:-top-[300px] lg:-left-[200px] xl:w-[800px] xl:-top-[500px] xl:-left-[300px] z-10"
                     />
 
                     <motion.img
@@ -47,7 +47,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.2
                         }}
-                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] xl:w-[500px z-0"
+                        className="absolute -left-[100px] bottom-[0%] w-[250px] sm:w-[180px] md:w-[350px] lg:w-[500px] lg:-bottom-[6%] lg:-left-[300px] xl:w-[800px] xl:-bottom-[10%] xl:-left-[500px] z-0"
                     />
 
                     <motion.img
@@ -56,7 +56,7 @@ const HeroSection = () => {
                         style={{ scale }}
                         animate={{ y: [0, -36, 0] }}
                         transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
-                        className="absolute -right-[40px] top-[0%] w-[200px] sm:w-[150px] md:w-[300px] xl:w-[500px z-10"
+                        className="absolute -right-[40px] top-[0%] w-[200px] sm:w-[150px] md:w-[300px] lg:w-[500px] lg:-right-[300px] xl:w-[800px] xl:-right-[500px] z-10 "
                     />
                 </div>
 
@@ -87,7 +87,7 @@ const HeroSection = () => {
                                 ))}
                             </div>
                         ))}
-                        <p className="mt-8 text-[14px] text-[#818181] font-bold year years">
+                        <p className="mt-8 text-[14px] lg:text-[25px] text-[#818181] font-bold year years">
                             SINCE 2024
                         </p>
 

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
@@ -12,6 +12,7 @@ interface ServiceCard {
 
 export default function ServicesSection() {
     const carouselRef = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
 
     const cards: ServiceCard[] = [
         {
@@ -46,9 +47,8 @@ export default function ServicesSection() {
         },
     ];
 
-
     const cardWidth = 370;
-    const gap = 30; // 1.5rem (Tailwind's `mr-6`)
+    const gap = 30;
 
     const handleNext = () => {
         const container = carouselRef.current;
@@ -85,22 +85,18 @@ export default function ServicesSection() {
         src: string;
     }
 
-    // Define your client logos here
     const topRow: ClientLogo[] = [
         { src: "/icons/clients/Group 115 2.png" },
         { src: "/icons/clients/image 90.png" },
-        { src: "/icons/clients/Mask group-7.png", },
-        // Add more as needed
+        { src: "/icons/clients/Mask group-7.png" },
     ];
 
     const bottomRow: ClientLogo[] = [
         { src: "/icons/clients/Mask group-8.png" },
         { src: "/icons/clients/Mask group-9.png" },
         { src: "/icons/clients/Mask group-10.png" },
-        // Add more as needed
     ];
 
-    // Derive a human-readable alt/label from the file name
     const getAltFromSrc = (src: string) => {
         const file = src.split('/').pop() || '';
         const base = file.replace(/\.[^/.]+$/, '');
@@ -108,54 +104,94 @@ export default function ServicesSection() {
         return cleaned || 'Client logo';
     };
 
+    // Add CSS animation for infinite marquee
+    useEffect(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scrollLeft {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            @keyframes scrollRight {
+                0% { transform: translateX(-50%); }
+                100% { transform: translateX(0); }
+            }
+            .animate-scrollLeft {
+                animation: scrollLeft 30s linear infinite;
+                animation-play-state: ${isPaused ? 'paused' : 'running'};
+            }
+            .animate-scrollRight {
+                animation: scrollRight 30s linear infinite;
+                animation-play-state: ${isPaused ? 'paused' : 'running'};
+            }
+            .animate-scrollLeft:hover, .animate-scrollRight:hover {
+                animation-play-state: paused;
+            }
+        `;
+        document.head.appendChild(style);
+        return () => {
+            document.head.removeChild(style);
+        };
+    }, [isPaused]);
+
     return (
         <>
             <section>
                 <div>
                     <div className="flex items-center justify-center w-full mt-[70px] md:mt-[110px]">
                         <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
-                        <h1 className="text-[#8C8C8C] text-[12px] uppercase px-2 whitespace-nowrap text-center leading-none">
+                        <h1 className="text-[#8C8C8C] text-[12px] lg:text-[24px] uppercase px-2 whitespace-nowrap text-center leading-none">
                             Clients we worked
                         </h1>
                         <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
                     </div>
 
-                    <h1 className="text-[#333333] text-[26px] font-semibold text-center my-8">
+                    <h1 className="text-[#333333] text-[26px] lg:text-[56px] font-semibold text-center my-8">
                         My Awesome Clients
                     </h1>
 
                     {/* Logo Marquee */}
-                    <div className="w-screen bg-[#A31621] relative mb-[48px]">
-                        <div className="max-w-5xl overflow-hidden py-6 mx-auto relative">
-                            <div className="flex flex-col gap-6">
-                                <div className="flex animate-scrollLeft w-max flex-shrink-0">
-                                    {[...topRow, ...topRow].map((logo, i) => (
-                                        <div key={`top-${i}`} className="flex flex-col items-center mx-4">
-                                            <Image
-                                                src={logo.src}
-                                                alt={getAltFromSrc(logo.src)}
-                                                height={30}
-                                                width={135}
-                                                className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                            />
-
-                                        </div>
-                                    ))}
+                    <div
+                        className="w-screen relative mb-[48px] bg-[#A31621] lg:h-[406px] lg:flex lg:items-center"
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                    >
+                        <div className="max-w-[1500px] w-full overflow-hidden py-6 lg:py-0 mx-auto relative">
+                            <div className="flex flex-col gap-[64px]">
+                                {/* Top Row - Infinite Scroll */}
+                                <div className="flex overflow-hidden">
+                                    <div className="flex animate-scrollLeft w-max flex-shrink-0 whitespace-nowrap will-change-transform">
+                                        {[...topRow, ...topRow, ...topRow, ...topRow].map((logo, i) => (
+                                            <div key={`top-${i}`} className="flex flex-col items-center mx-4">
+                                                <Image
+                                                    src={logo.src}
+                                                    alt={getAltFromSrc(logo.src)}
+                                                    height={30}
+                                                    width={135}
+                                                    className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
+                                                    priority={i < 6} // Only prioritize first few images
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
-                                <div className="flex animate-scrollRight w-max flex-shrink-0">
-                                    {[...bottomRow, ...bottomRow].map((logo, i) => (
-                                        <div key={`bottom-${i}`} className="flex flex-col items-center mx-4">
-                                            <Image
-                                                src={logo.src}
-                                                alt={getAltFromSrc(logo.src)}
-                                                width={135}
-                                                height={30}
-                                                className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                            />
-
-                                        </div>
-                                    ))}
+                                {/* Bottom Row - Infinite Scroll */}
+                                <div className="flex overflow-hidden">
+                                    <div className="flex animate-scrollRight w-max flex-shrink-0 whitespace-nowrap will-change-transform">
+                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, i) => (
+                                            <div key={`bottom-${i}`} className="flex flex-col items-center mx-4">
+                                                <Image
+                                                    src={logo.src}
+                                                    alt={getAltFromSrc(logo.src)}
+                                                    width={135}
+                                                    height={30}
+                                                    className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
+                                                    priority={i < 6} // Only prioritize first few images
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,44 +199,55 @@ export default function ServicesSection() {
                 </div>
             </section>
 
-            <section className="solutions-section mx-45 py-16 px-6 w-full max-w-[1420px] mx-auto text-[#333] " id="service-section">
-                <div className="mt-[42px] solutions-header">
-                    <p
-                        className="section-label text-xs sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
-                        data-aos="fade-up"
-                        data-aos-delay="5"
-                    >
-                        Services
-                    </p>
-                    <h2
-                        className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-4 text-[#333] font-[anton]"
-                        data-aos="fade-up"
-                        data-aos-delay="5"
-                    >EXPLORE OUR <span className="text-[#F9373A] ">EXPERTISE</span>
-                    </h2>
-                </div>
+            <section
+                className="w-full max-w-[1420px] mx-auto py-16 px-5 sm:px-10 lg:px-0 text-[#333]"
+                id="service-section"
+            >
+                {/* Header + Controls */}
+                <div>
+                    <div className="mt-[42px] solutions-header">
+                        <p
+                            className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
+                            data-aos="fade-up"
+                            data-aos-delay="5"
+                        >
+                            Services
+                        </p>
+                        <h2
+                            className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-4 text-[#333] font-[anton]"
+                            data-aos="fade-up"
+                            data-aos-delay="5"
+                        >
+                            EXPLORE OUR <span className="text-[#F9373A]">EXPERTISE</span>
+                        </h2>
+                    </div>
 
-                <div className="solutions-nav flex justify-end items-center mb-8">
-                    <div className="nav-controls flex items-center  gap-4 text-xs sm:text-sm text-gray-500 uppercase font-semibold cursor-pointer select-none">
-                        <span
-                            onClick={handlePrev}
-                            className="flex items-center gap-1 hover:text-black transition-colors duration-200 "
-                        >
-                            ← Prev
-                        </span>
-                        <span
-                            onClick={handleNext}
-                            className="flex items-center gap-1 hover:text-black transition-colors duration-200 "
-                        >
-                            Next →
-                        </span>
+                    <div className="solutions-nav flex justify-end items-center mb-8">
+                        <div className="nav-controls flex items-center gap-4 text-xs sm:text-sm text-gray-500 uppercase font-semibold cursor-pointer select-none">
+                            <span
+                                onClick={handlePrev}
+                                className="flex items-center gap-1 hover:text-black transition-colors duration-200"
+                            >
+                                ← Prev
+                            </span>
+                            <span
+                                onClick={handleNext}
+                                className="flex items-center gap-1 hover:text-black transition-colors duration-200"
+                            >
+                                Next →
+                            </span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="solutions-carousel relative md:mx-25 w-full px-4 py-6  ">
-                    <div ref={carouselRef} className="carousel-wrapper overflow-x-auto scrollbar-hide   ">
+                {/* Carousel */}
+                <div className="solutions-carousel relative">
+                    <div
+                        ref={carouselRef}
+                        className="carousel-wrapper overflow-x-auto scrollbar-hide"
+                    >
                         <div
-                            className=" carousel-track h-[500px] flex transition-transform duration-500 ease-in-out gap-8  "
+                            className="carousel-track h-[500px] flex transition-transform duration-500 ease-in-out gap-8"
                             style={{ scrollSnapType: "x mandatory" }}
                         >
                             {cards.map((item, i) => (
@@ -226,23 +273,23 @@ export default function ServicesSection() {
                                                 <span key={idx} className="tag relative flex items-center gap-1">
                                                     {tag}
                                                     {idx < item.tags.length - 1 && (
-                                                        <span className="dot mx-1 text-[#BA4D4D] text-[20px] leading-[2px]">•</span>
+                                                        <span className="dot mx-1 text-[#BA4D4D] text-[20px] leading-[2px]">
+                                                            •
+                                                        </span>
                                                     )}
                                                 </span>
                                             ))}
                                         </div>
 
-                                        {/* Footer lines and Learn More */}
+                                        {/* Footer */}
                                         <div className="pt-1">
                                             <div className="card-footer flex items-center mb-2">
-                                                {/* Red + Gray Line */}
                                                 <div className="kine-wrapper flex w-full items-center">
                                                     <div className="red-line h-[2px] w-[20px] bg-[#BA4D4D] mr-1"></div>
                                                     <div className="gray-line h-[2px] flex-1 bg-[#D3D3D3]"></div>
                                                 </div>
                                             </div>
 
-                                            {/* Learn More link */}
                                             <div className="learn-more mt-[45px] flex items-center gap-3">
                                                 <span className="text-[#BA4D4D] font-bold text-[14px] truncate">
                                                     Learn More
@@ -257,14 +304,12 @@ export default function ServicesSection() {
                                     </div>
                                 </div>
                             ))}
-                            <div
-                                className="w-[370px] min-w-[370px] flex-shrink-0"
-                                aria-hidden="true"
-                            />
+                            <div className="w-[370px] min-w-[370px] flex-shrink-0" aria-hidden="true" />
                         </div>
                     </div>
                 </div>
             </section>
+
         </>
     );
 }

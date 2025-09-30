@@ -25,10 +25,10 @@ export default function BlogSection() {
 
     return (
         <div>
-            <div className="py-16 px-5 sm:px-10 md:px-20 lg:px-6 text-[#333333] w-full max-w-[1420px] mx-auto">
+            <div className="py-16 px-5 sm:px-10 md:px-20 lg:px-0 text-[#333333] w-full max-w-[1420px] mx-auto">
                 {/* Section Heading */}
                 <p
-                    className="section-label text-xs sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
+                    className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
                     data-aos="fade-up"
                     data-aos-delay="5"
                 >
@@ -43,11 +43,11 @@ export default function BlogSection() {
                 </h2>
 
                 {/* Blog Cards */}
-                <div className="flex flex-wrap gap-6 justify-center">
+                <div className="flex flex-col md:flex-col lg:flex-row gap-6 justify-between">
                     {cardData.map((card, index) => (
                         <div
                             key={index}
-                            className="bg-[#1B1B1C] w-full md:w-[400px] h-[170px] lg:h-[234px] rounded-[5px] flex items-start gap-4 md:gap-6"
+                            className="bg-[#1B1B1C] w-full h-[170px] lg:h-[234px] rounded-[5px] flex items-start gap-4 md:gap-6 overflow-hidden"
                         >
                             {/* Left: Image */}
                             <div className="h-full flex-shrink-0">
@@ -61,13 +61,15 @@ export default function BlogSection() {
                             </div>
 
                             {/* Right: Text */}
-                            <div className="flex flex-col justify-between text-left py-3 pr-4 lg:py-5 lg:pr-6 space-y-2">
-                                <h1 className="text-[18px] md:text-[20px] font-medium text-white leading-snug">
-                                    {card.title}
-                                </h1>
-                                <p className="text-[#989898] text-[12px] md:text-[14px] mt-1">
-                                    {card.desc}
-                                </p>
+                            <div className="flex flex-col justify-between text-left py-3 pr-4 lg:py-5 lg:pr-6 flex-1 min-w-0">
+                                <div className="space-y-2">
+                                    <h1 className="text-[18px] md:text-[20px] font-medium text-white leading-snug line-clamp-2">
+                                        {card.title}
+                                    </h1>
+                                    <p className="text-[#989898] text-[12px] md:text-[14px] line-clamp-2">
+                                        {card.desc}
+                                    </p>
+                                </div>
                                 <Link
                                     href={card.link}
                                     className="text-[12px] md:text-[14px] font-medium underline text-white mt-2"

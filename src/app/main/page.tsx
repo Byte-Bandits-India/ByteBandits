@@ -43,7 +43,7 @@ export default function Home() {
             style={{
               transform: 'translate3d(0px, 10px, 0px)', rotate
             }}
-            className="absolute -top-65 right-60 w-55 h-55 z-30 scroll-icon"
+            className="absolute -top-65 right-60 w-55 h-55 z-30 lg:-top-[170px] lg:right-20 xl:-top-[190px] xl:right-10 scroll-icon"
           />
 
         </section>
@@ -58,10 +58,7 @@ export default function Home() {
 
         <section>
           {/* Our Agency Section */}
-          <div className="agency-section bg-[#FFFFF] text-center py-20 px-6">
-            <p className="uppercase text-[#818181] font-semibold year mb-4 tracking-wide agency" data-aos="fade-up"
-              data-aos-delay="10">Our Agency</p>
-
+          <div className="agency-section bg-[#FFFFF] text-center py-20 px-6 lg:px-0 w-full max-w-[1306px] mx-auto ">
             <h2 className="agency-heading-mobile text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[60px] font-[anton] leading-tight max-w-8xl mx-auto  mt-10 text-[#312F2F]">
 
               <div>WHERE BOLD IDEAS BECOME <span className="text-[#F9373A]">POWERFUL</span> DIGITAL <span className="text-[#F9373A]">REALITIES</span>. WE ENGINEER SMART SOLUTIONS, DESIGN WITH PURPOSE, AND BRING <span className="text-[#F9373A]">BRANDS TO LIFE</span>. CHOOSE <span className="text-[#F9373A]">BYTEBANDITS</span> BECAUSE WE ARE WORTH IT.</div>

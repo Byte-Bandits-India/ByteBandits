@@ -22,9 +22,9 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="about-section px-6 mt-[25lvh] md:mt-2 lg:mt-[10lvh] max-w-[1420px] mx-auto w-full" id="about-section">
+    <section className="about-section px-6 lg:px-0 mt-[25lvh] md:mt-2 lg:mt-[10lvh] max-w-[1420px] mx-auto w-full" id="about-section">
       <p className="section-label text-left mb-10 md:text-[14px] text-[12px] text-[#818181] font-normal year pt-10">ABOUT US</p>
-      <div className="about-content flex flex-col lg:flex-row items-start gap-10 lg:gap-20">
+      <div className="about-content flex flex-col lg:flex-row items-start gap-10 lg:gap-[242px] ">
         {/* Left Column: Title and Description */}
         <div className="flex-1" data-aos="fade-up" data-aos-delay="10">
           <h1 className="about-title text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] font-[anton]">
@@ -59,7 +59,7 @@ const AboutSection = () => {
                 />
               </div>
               {/* Service title */}
-              <h2 className="text-black text-[16px] font-semibold">{service.title}</h2>
+              <h2 className="text-black text-[16px] lg:text-[30px] font-semibold">{service.title}</h2>
             </div>
           ))}
 
@@ -75,7 +75,7 @@ const AboutSection = () => {
       </div>
 
 
-      <div className="triangle-section flex w-full max-w-[1420px] mx-auto flex-col md:flex-row justify-center items-start gap-10 md:gap-10 mt-[150px]">
+      <div className="triangle-section flex w-full max-w-[1420px] mx-auto flex-col md:flex-row justify-center items-start gap-10 md:gap-10 lg:gap-[63px] mt-[150px]">
         {[
           {
             img: "/images/Expert team.png",
@@ -104,10 +104,10 @@ const AboutSection = () => {
               alt={item.title}
               width={120}
               height={120}
-              className="w-[120px] h-[120px] object-contain mb-4"
+              className="w-[120px] h-[120px] lg:h-[150px] lg:w-[150px] object-contain mb-4"
             />
-            <p className="triangle-title text-[24px] font-[anton] mb-2">{item.title}</p>
-            <p className="triangle-desc text-[16px] text-[#333333]">{item.desc}</p>
+            <p className="triangle-title text-[24px] lg:text-[36px] font-[anton] mb-2">{item.title}</p>
+            <p className="triangle-desc text-[16px] lg:text-[20px] text-[#333333]">{item.desc}</p>
           </div>
         ))}
       </div>
