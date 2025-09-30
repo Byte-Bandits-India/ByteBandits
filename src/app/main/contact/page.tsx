@@ -172,8 +172,8 @@ export default function Home() {
                                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                                     type="text"
                                     id="name"
-                                    name="name"
-                                    placeholder="Your Name"
+                                    name="First Name"
+                                    placeholder="First Name"
                                     className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
@@ -187,7 +187,7 @@ export default function Home() {
                                     type="email"
                                     id="email"
                                     name="email"
-                                    placeholder="Your Email"
+                                    placeholder="example@gmail.com"
                                     className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
@@ -201,7 +201,7 @@ export default function Home() {
                                     type="tel"
                                     id="phone"
                                     name="phone"
-                                    placeholder="Your Phone"
+                                    placeholder="0000000000"
                                     className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
 
@@ -216,7 +216,7 @@ export default function Home() {
                                     }
                                     id="message"
                                     name="message"
-                                    placeholder="Your Message"
+                                    placeholder="Hi there i would like about .."
                                     rows={4}
                                     className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
                                 />
