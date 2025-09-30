@@ -32,6 +32,7 @@ export interface StaggeredMenuProps {
   openMenuButtonColor?: string;
   accentColor?: string;
   changeMenuColorOnOpen?: boolean;
+  defaultOpen?: boolean;
   onMenuOpen?: () => void;
   onMenuClose?: () => void;
   onNavigation?: (item: StaggeredMenuItem) => void; // Added for navigation handling
@@ -50,12 +51,13 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   openMenuButtonColor = '#fff',
   changeMenuColorOnOpen = true,
   accentColor = '#5227FF',
+  defaultOpen = false,
   onMenuOpen,
   onMenuClose,
   onNavigation
 }: StaggeredMenuProps) => {
-  const [open, setOpen] = useState(false);
-  const openRef = useRef(false);
+  const [open, setOpen] = useState<boolean>(defaultOpen);
+  const openRef = useRef<boolean>(defaultOpen);
   const router = useRouter();
 
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -174,6 +176,24 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     });
     return () => ctx.revert();
   }, [menuButtonColor, position]);
+
+  // Open by default on mount if defaultOpen is true
+  React.useEffect(() => {
+    if (!defaultOpen) return;
+    // ensure we reflect open state and run opening sequence
+    openRef.current = true;
+    setOpen(true);
+    onMenuOpen?.();
+    if (typeof window !== 'undefined' && 'requestAnimationFrame' in window) {
+      requestAnimationFrame(() => playOpen());
+    } else {
+      setTimeout(() => playOpen(), 0);
+    }
+    animateIcon(true);
+    animateColor(true);
+    animateText(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const buildOpenTimeline = useCallback(() => {
     // ... (keep your existing buildOpenTimeline function exactly as is)

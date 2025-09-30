@@ -50,6 +50,7 @@ export const Header = () => {
                 colors={['#B19EEF', '#5227FF']}
                 logoUrl="/header.png"
                 accentColor="#ff6b6b"
+                defaultOpen={true}
                 onMenuOpen={handleMenuOpen}
                 onMenuClose={handleMenuClose}
             />
