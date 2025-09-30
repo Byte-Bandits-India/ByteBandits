@@ -443,7 +443,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }, [onMenuOpen, onMenuClose, playOpen, playClose, animateIcon, animateColor, animateText]);
 
   return (
-    <div className="sm-scope w-full h-full">
+    <div className="sm-scope w-full max-w-[1767px] mx-auto h-full">
       <div
         className={(className ? className + ' ' : '') + 'staggered-menu-wrapper relative w-full h-full z-40'}
         style={accentColor ? ({ '--sm-accent': accentColor } as React.CSSProperties) : undefined}
@@ -482,14 +482,14 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             <Image
               src={logoUrl || '/header.png'}
               alt="Logo"
-              className="sm-logo-img block h-8 w-auto object-contain"
+              className="sm-logo-img block h-[61px] w-auto lg:h-[112px] object-contain"
               width={150}
               height={24}
               priority
             />
           </div>
 
-          <div className="navbar-icons flex bg-[#d8d8d8] px-3 py-3 rounded-full cursor-pointer gap-2 pointer-events-auto">
+          <div className="navbar-icons flex bg-[#d8d8d8] px-6 py-4 rounded-full cursor-pointer gap-2 pointer-events-auto">
             <Link href="/contact" aria-label="Go to contact">
               <div
                 className="navbar-icon text-[20px] sm:text-[24px] md:text-[30px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
@@ -586,7 +586,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         .sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between;  background: transparent; pointer-events: none; z-index: 20; }
         .sm-scope .staggered-menu-header > * { pointer-events: auto; }
         .sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
-        .sm-scope .sm-logo-img { display: block; height: 61px; width: auto; object-fit: contain; }
+        .sm-scope .sm-logo-img { display: block; width: auto; object-fit: contain; }
         .sm-scope .sm-toggle { position: relative; display: inline-flex; align-items: center; gap: 0.3rem; background: transparent; border: none; cursor: pointer; color: #e9e9ef; font-weight: 500; line-height: 1; overflow: visible; }
         .sm-scope .sm-toggle:focus-visible { outline: 2px solid #ffffffaa; outline-offset: 4px; border-radius: 4px; }
         .sm-scope .sm-line:last-of-type { margin-top: 6px; }

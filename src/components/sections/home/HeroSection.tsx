@@ -61,8 +61,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Animated Title */}
-                <div className="w-full mx-auto text-center">
-                    <motion.div className="animated-title px-4">
+                <div className="w-full max-w-[942px] mx-auto text-center">
+                    <motion.div className="animated-title">
                         {[
                             "WHERE IDEAS",
                             "BECOME DIGITAL",
@@ -71,20 +71,24 @@ const HeroSection = () => {
                             <div
                                 key={lineIndex}
                                 className="title-line flex flex-wrap justify-center items-center text-center 
-               text-[60px] sm:text-[40px] md:text-[90px] lg:text-[130px] 
-               sm:leading-[50px] md:leading-[110px] lg:leading-[140px] 
+               text-[60px] sm:text-[40px] md:text-[90px] lg:text-[134px] 
+               sm:leading-[50px] md:leading-[110px] lg:leading-[143px] 
                font-[anton] text-[#353639] gap-x-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16"
                             >
                                 {line.split(" ").map((word: string, wIndex: number) => (
                                     <motion.span
                                         key={wIndex}
                                         style={{ scale }}
-                                        className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES" ? "text-[#F9373A]" : "text-[#333333]"
-                                            }`}
+                                        className={`inline-block transition-transform hover:scale-y-110 origin-bottom ${word === "IDEAS" || word === "REALITIES"
+                                            ? "text-[#F9373A]"
+                                            : "text-[#333333]"
+                                            } 
+    mr-2 sm:mr-4 md:mr-6 lg:mr-0`} // Add right margin on mobile & md, reset on lg+
                                     >
                                         {word}
                                     </motion.span>
                                 ))}
+
                             </div>
                         ))}
                         <p className="mt-8 text-[14px] lg:text-[25px] text-[#818181] font-bold year years">
