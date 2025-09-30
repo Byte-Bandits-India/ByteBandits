@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Anton } from "next/font/google";
+import Scroll from "@/utils/Scroll";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${anton.variable}`}>
       <body className="font-sans">
+        <Scroll />
         <div style={{ minHeight: '100vh' }}>
           {children}
         </div>

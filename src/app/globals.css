@@ -3,120 +3,6 @@
 @tailwind utilities;
 
 
-:root {
-  --background-start-rgb: 255, 255, 255; /* pure white instead of grey */
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-/* Header container */
-header {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  z-index: 1000 !important;
-  height: auto !important;
-}
-
-/* When menu is open, header should take full viewport height */
-header[data-menu-open="true"] {
-  height: 100dvh !important;
-}
-
-/* Staggered menu wrapper */
-.staggered-menu-wrapper {
-  position: relative !important;
-  width: 100% !important;
-}
-
-/* Prelayers positioning */
-.sm-prelayers {
-  position: absolute !important;
-}
-
-/* Menu panel - always fixed and full height when open */
-.staggered-menu-panel {
-  position: fixed !important;
-  top: 0 !important;
-  height: 100dvh !important;
-}
-
-/* Add padding to main content to account for header height */
-main {
-  padding-top: 68px; /* Adjust based on your header height */
-}
-
-/* When menu is open, prevent body scroll */
-body.menu-open {
-  overflow: hidden;
-}
-
-/* Normalize About section spacing removed to allow component-level padding (e.g., px-4) */
-/* === Hero default shape positions (ensure visibility) === */
-.shape-1 { /* gold: top-left */
-  top: 2rem;
-  left: 2rem;
-  width: 18rem;
-}
-.shape-3 { /* green: top-right */
-  top: 2rem;
-  right: 2rem;
-  width: 16rem;
-}
-.shape-2 { /* white: bottom-left */
-  bottom: 2rem;
-  left: 2rem;
-  width: 16rem;
-  height: auto;
-}
-
-/* Push shapes 40% outside the viewport edges */
-.shape-wrapper.shape-1 { /* gold top-left */
-  top: -40%;
-  left: -40%;
-}
-.shape-wrapper.shape-3 { /* green top-right */
-  top: -40%;
-  right: -40%;
-}
-.shape-wrapper.shape-2 { /* white bottom-left */
-  bottom: -40%;
-  left: -40%;
-}
-
-
-
 .inter,.year{
   font-family: 'Outfit',sans-serif;
  
@@ -261,23 +147,23 @@ padding: 0px;
 
 
   /* 3d shapes positions and title */
-  .shape-1 { /* gold top-left */
-    top: 2rem;
-    left: 2rem;
+  .shape-1 {
+    top: -450px;
+    left: -700px;
     width: 500px;
   }
 
-  .shape-3 { /* green top-right */
-    top: 2rem;
-    right: 2rem;
-    width: 450px;
-  }
-
-  .shape-2 { /* white bottom-left */
-    bottom: 2rem;
-    left: 2rem;
+  .shape-2 {
+  
+    right: -860px;
     width: 600px;
     height: 600px;
+  }
+
+  .shape-3 {
+    top: 200px;
+    right: 900px;
+    width: 450px;
   }
 
   .shape-4 {
@@ -322,6 +208,12 @@ padding: 0px;
   }
 
 /*About section adjustments */
+  .about-section {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    padding-left: 10px;
+  
+  }
 
   .about-section , .title {
     font-size: 60px;
@@ -465,7 +357,7 @@ font-size: 12px;
 margin-left: 15px;
 }
 .contact-section p.about {
-font-size: 16px;
+font-size: 13px;
 margin-left: 10.5rem;
 padding-left: 1.25rem;
 width: 370px;
@@ -700,23 +592,23 @@ padding: 20px 40px;
 
 
   /* 3d shapes positions and title */
-  .shape-1 { /* gold top-left */
-    top: 1.25rem;
-    left: 1rem;
-    width: 12rem;
+  .shape-1 {
+    top: -32lvh;
+    left: -15lvh;
+    width: 200px;
   }
 
-  .shape-3 { /* green top-right */
-    top: 1.25rem;
-    right: 1rem;
-    width: 12rem;
+  .shape-2 {
+     top: -31lvh;
+    right: -15lvh;
+    width: 200px;
+    height: 200px;
   }
 
-  .shape-2 { /* white bottom-left */
-    bottom: 1.25rem;
-    left: 1rem;
-    width: 12rem;
-    height: auto;
+  .shape-3 {
+    top: 38lvh;
+    right: 30lvh;
+    width: 200px;
   }
 
   .shape-4 {
@@ -754,11 +646,13 @@ height: 90px;
 
 /*About section adjustments */
 .about-section {
-  margin-top: 25lvh;
+margin: 20px;
+padding: 40px 20px;
+margin-top: 25lvh;
 }
 
 .about-title {
-  font-size: 40px;
+font-size: 40px;
 }
 
 .triangle-section {
@@ -1006,35 +900,35 @@ font-size: 12px;
 
 /* Tape section image adjustments */
 .tape-container {
-  height: 30vh;
-  }
-  
-  .orange-tape {
-  width: 950%;
-  font-size: 15px;
-  padding: 13px 0;
-  transform: translate(50%, -50%) rotate(-15deg);
-  letter-spacing: 2px;
-  }
-  
-  .orange-tape-inner {
-  gap: 120px;
-  }
-  
-  .white-tape {
-  width: 950%;
-  transform: translate(-50%, -50%) rotate(-15deg);
-  gap: 48px;
-  }
-  
-  .white-pill {
-  font-size: 15px;
-  padding: 12px 15px;
-  }
-  
-  .center-img {
-  width: 90px;
-  }
+height: 30vh;
+}
+
+.orange-tape {
+width: 950%;
+font-size: 15px;
+padding: 13px 0;
+transform: translate(50%, -50%) rotate(-15deg);
+letter-spacing: 2px;
+}
+
+.orange-tape-inner {
+gap: 120px;
+}
+
+.white-tape {
+width: 950%;
+transform: translate(-50%, -50%) rotate(-15deg);
+gap: 48px;
+}
+
+.white-pill {
+font-size: 15px;
+padding: 12px 15px;
+}
+
+.center-img {
+width: 90px;
+}
 
 /* Blog section image adjustments */
 .blog-section-custom {
@@ -1422,14 +1316,33 @@ font-size: 0.625rem !important;       /* 10px */
 font-size: 0.5rem !important;         /* 8px */
 }
 
-.feed h3 {
+  .feed h3 {
   width: 100%;                      
 }
 
 
 }
 
-/* ====== Logo Marquee Animations ====== */
+/* === Hero floating shape animations (CSS-based) === */
+@keyframes floatY {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-24px); }
+  100% { transform: translateY(0); }
+}
+
+.float-slow {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: floatY 4.5s ease-in-out infinite;
+}
+
+.float-fast {
+  animation: floatY 5.5s ease-in-out infinite;
+}
+
+/* ====== Logo Marquee Animations (restored) ====== */
 @keyframes marquee-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

@@ -5,7 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import AboutSection from "@/components/sections/home/AboutSection";
 import Solution from "@/components/sections/home/Solution"
 import ContactSection from "@/components/sections/home/Contact";
-import CrossedTape from "@/components/ui/CrossedTape";
+import CrossedBanner from "@/components/ui/CrossedTape"
 import BlogSection from "@/components/sections/home/Blog";
 
 export default function Home() {
@@ -74,7 +74,7 @@ export default function Home() {
 
         {/* Tapes X Section */}
         <section className="tape-section">
-          <CrossedTape />
+          <CrossedBanner />
         </section>
 
         <BlogSection />

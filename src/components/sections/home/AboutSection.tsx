@@ -22,8 +22,8 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="about-section mt-12 sm:py-20 px-6" id="about-section">
-      <p className="section-label text-left mb-10 md:text-[14px] text-[12px] text-[#818181] font-normal year">ABOUT US</p>
+    <section className="about-section sm:py-20 px-6" id="about-section">
+      <p className="section-label text-left mb-10 md:text-[14px] text-[12px] text-[#818181] font-normal year pt-10">ABOUT US</p>
       <div className="about-content flex flex-col lg:flex-row  items-start">
         <div className="about-title flex-1 text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] font-[anton] title
                  " data-aos="fade-up"
