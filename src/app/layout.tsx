@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description:
     "At Byte Bandits, we turn bold ideas into powerful digital products. Web development, mobile apps, SEO, cloud scaling, branding & more. Let’s build success together.",
   icons: {
-    icon: "/fav1.png", // path to your favicon
+    icon: "/fav1.ico", // path to your favicon
   },
   openGraph: {
     title: "Byte Bandits | Custom Software, Web, Mobile & Cloud Solutions",
