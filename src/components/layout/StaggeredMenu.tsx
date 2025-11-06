@@ -478,18 +478,18 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between px-6 py-6 bg-transparent pointer-events-none z-20"
           aria-label="Main navigation header"
         >
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+          <div className="flex items-center select-none pointer-events-auto">
             <Image
               src={logoUrl || '/header.png'}
               alt="Logo"
-              className="sm-logo-img block h-[61px] w-auto lg:h-[112px] object-contain"
+              className=" block h-[61px] w-auto lg:h-[90px] object-contain"
               width={150}
               height={24}
               priority
             />
           </div>
 
-          <div className="navbar-icons flex bg-[#d8d8d8] px-6 py-4 rounded-full cursor-pointer gap-2 pointer-events-auto">
+          <div className="flex bg-[#d8d8d8] px-6 py-4 rounded-full cursor-pointer gap-2 pointer-events-auto">
             <Link href="/contact" aria-label="Go to contact">
               <div
                 className="navbar-icon text-[20px] sm:text-[24px] md:text-[30px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
@@ -581,7 +581,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       </div>
 
       <style>{`
-        /* Your existing CSS styles remain exactly the same */
         .sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 20; }
         .sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between;  background: transparent; pointer-events: none; z-index: 20; }
         .sm-scope .staggered-menu-header > * { pointer-events: auto; }

@@ -3,6 +3,8 @@ import { Inter, Anton } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollButton from "@/components/ui/ScrollButton";
+import LenisScroll from "@/components/ui/LenisScroll";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,7 +31,9 @@ export default function RootLayout({
       <body className="font-sans">
         <Header />
         <div style={{ minHeight: '100vh' }}>
+          <LenisScroll />
           {children}
+          <ScrollButton />
         </div>
         <Footer />
       </body>

@@ -16,28 +16,11 @@ export const Header = () => {
         { label: 'Twitter', link: 'https://twitter.com' },
         { label: 'GitHub', link: 'https://github.com' },
         { label: 'LinkedIn', link: 'https://linkedin.com' },
-        { label: 'FaceBook', link: 'https://FaceBook.com' }
+        { label: 'Facebook', link: 'https://facebook.com' }
     ];
 
-    const handleMenuOpen = () => {
-        setIsMenuOpen(true);
-        console.log('Menu opened');
-    };
-
-    const handleMenuClose = () => {
-        setIsMenuOpen(false);
-        console.log('Menu closed');
-    };
-
     return (
-        <div style={{
-            height: isMenuOpen ? '100dvh' : 'auto',
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            zIndex: 1000
-        }}>
+        <div className={`fixed top-0 left-0 w-full z-50 ${isMenuOpen ? 'h-screen' : 'h-auto'}`}>
             <StaggeredMenu
                 position="right"
                 items={menuItems}
@@ -50,9 +33,8 @@ export const Header = () => {
                 colors={['#B19EEF', '#5227FF']}
                 logoUrl="/header.png"
                 accentColor="#ff6b6b"
-                defaultOpen={false}
-                onMenuOpen={handleMenuOpen}
-                onMenuClose={handleMenuClose}
+                onMenuOpen={() => setIsMenuOpen(true)}
+                onMenuClose={() => setIsMenuOpen(false)}
             />
         </div>
     )

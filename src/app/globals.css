@@ -7,6 +7,18 @@
   font-family: 'Outfit',sans-serif;
  
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .details{
 color: #818181;
 font-family: 'Outfit',sans-serif;
@@ -626,9 +638,7 @@ padding: 20px 40px;
 height: 90vh; 
 
 }
-.hero{
-height: 20lvh;
-}
+
 
 .scroll-icon {
 top: -9.5lvh;

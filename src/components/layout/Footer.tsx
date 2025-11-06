@@ -19,7 +19,7 @@ export default function Footer() {
                 {/* Logo */}
                 <div>
                     <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
-                    <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
+                    <p className="text-[14px] lg:text-[18px] text-left mt-[38px] font-normal tracking-[-0.02em]">
                         We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.
                     </p>
                 </div>
@@ -112,19 +112,19 @@ export default function Footer() {
 
             {/* Desktop View */}
             <div className="hidden md:block max-w-[1420px] mx-auto">
-                <Image src="/logo_white.png" alt="Logo" width={156} height={61} />
+                <Image src="/logo_white.png" alt="Logo" width={156} height={61} className="xl:h-[61px] xl:w-[220px]" />
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     {/* 1 - Logo + About + Social Media */}
                     <div>
-                        <p className="mt-4 text-[14px]">
+                        <p className="mt-4 text-[14px] xl:text-[18px]">
                             We are a passionate team of tech innovators dedicated to crafting smart, scalable, and user-centric digital solutions. From custom software and mobile apps to eCommerce platforms, digital marketing, branding, and cloud services.
                         </p>
                     </div>
 
                     {/* 2 - Our Services */}
                     <div>
-                        <h2 className="text-[18px] font-semibold mb-4 md:mb-6">Our Services</h2>
-                        <ul className="space-y-2 text-[12px]">
+                        <h2 className="text-[18px] xl:text-[20px] font-semibold mb-4 md:mb-6">Our Services</h2>
+                        <ul className="space-y-2 text-[12px] xl:text-[18px]">
                             {[
                                 { name: "Website and Application Designing", href: "/services/website-design" },
                                 { name: "Website and Application Development", href: "/services/website-development" },
@@ -143,8 +143,8 @@ export default function Footer() {
 
                     {/* 3 - Useful Links */}
                     <div>
-                        <h2 className="text-[16px] font-semibold mb-4 md:mb-6">Useful Links</h2>
-                        <ul className="space-y-2 text-[12px]">
+                        <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">Useful Links</h2>
+                        <ul className="space-y-2 text-[12px] xl:text-[18px]">
                             {[
                                 { name: "Home", href: "/" },
                                 { name: "Contact Us", href: "/contact" },
@@ -163,11 +163,11 @@ export default function Footer() {
 
                     {/* 4 - Office Locations */}
                     <div>
-                        <h2 className="text-[16px] font-semibold mb-4 md:mb-6">Office Locations</h2>
+                        <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">Office Locations</h2>
                         <div className="text-[12px] space-y-4">
                             <div>
-                                <h3 className="font-semibold">Main Office</h3>
-                                <p className="whitespace-pre-line">
+                                <h3 className="font-semibold xl:text-[18px]">Main Office</h3>
+                                <p className="whitespace-pre-line xl:text-[16px]">
                                     Plot no.3a, door no.1/1033,
                                     Kumudham Nagar Extension,
                                     Mugalivakkam,
@@ -175,8 +175,8 @@ export default function Footer() {
                                 </p>
                             </div>
                             <div>
-                                <h3 className="font-semibold">Branch Office</h3>
-                                <p className="whitespace-pre-line">
+                                <h3 className="font-semibold xl:text-[18px]">Branch Office</h3>
+                                <p className="whitespace-pre-line xl:text-[16px]">
                                     12b, 3, North Eda Street,
                                     Bhima Nagar,
                                     Sangillyandapuram,
@@ -195,6 +195,7 @@ export default function Footer() {
                                 alt={social.name}
                                 width={24}
                                 height={24}
+                                className="xl:h-[40px] xl:w-[40px]"
                             />
                         </Link>
                     ))}

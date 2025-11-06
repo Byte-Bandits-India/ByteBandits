@@ -67,17 +67,17 @@ export default function CrossedBanner() {
                 </div>
             </motion.div>
 
-            {/* Center Image */}
-            <motion.img
-                src="/images/white.webp"
-                alt="Center Shape"
-                width={90}
-                height={90}
-                style={{ width: 90, height: 90, transform: 'translate(-50%, -50%) translateZ(0)' }}
-                className="absolute z-30 top-1/2 left-1/2 object-contain pointer-events-none"
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Center Image - Positioned at tape intersection */}
+            <div className="absolute z-30 top-[40%] md:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                <motion.img
+                    src="/images/white.webp"
+                    alt="Center Shape"
+                    className="object-contain w-[160px] h-[160px] md:h-[200px] md:w-[200px] lg:w-[248px] lg:h-[248px]"
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+            </div>
         </div>
     );
 }
