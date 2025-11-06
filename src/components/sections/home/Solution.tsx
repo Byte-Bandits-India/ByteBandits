@@ -1,9 +1,16 @@
 "use client";
- 
+
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ServiceCard {
     title: string;
@@ -14,6 +21,8 @@ interface ServiceCard {
 
 export default function ServicesSection() {
     const carouselRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const carouselTrackRef = useRef<HTMLDivElement>(null);
     const [isPaused, setIsPaused] = useState(false);
 
     const cards: ServiceCard[] = [
@@ -49,12 +58,80 @@ export default function ServicesSection() {
         },
     ];
 
-    const cardWidth = 370;
-    const gap = 30;
+    // Initialize GSAP ScrollTrigger for horizontal scrolling
+    useEffect(() => {
+        if (!sectionRef.current || !carouselTrackRef.current) return;
+
+        const sectionPin = carouselTrackRef.current;
+        const triggerElement = sectionRef.current;
+
+        // Calculate the total horizontal scroll distance
+        const cardWidth = 370;
+        const gap = 30;
+        const totalCardsWidth = cards.length * (cardWidth + gap) - gap;
+        const viewportWidth = window.innerWidth;
+
+        // Calculate distance to center the last card
+        const lastCardCenterPosition = totalCardsWidth - viewportWidth + (viewportWidth - cardWidth) / 2;
+        const horizontalScrollDistance = lastCardCenterPosition;
+
+        // Create the horizontal scroll animation
+        const containerAnimation = gsap.to(sectionPin, {
+            x: () => -horizontalScrollDistance + "px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: triggerElement,
+                start: "top top",
+                end: () => `+=${horizontalScrollDistance}`,
+                pin: true,
+                scrub: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                markers: false, // Set to true for debugging
+            }
+        });
+
+        // Add active classes to cards as they come into view
+        const cardElements = sectionPin.querySelectorAll('.solution-card');
+
+        cardElements.forEach((card, index) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "left center",
+                    end: "right center",
+                    containerAnimation: containerAnimation,
+                    toggleClass: {
+                        targets: card,
+                        className: 'active'
+                    },
+                    onEnter: () => {
+                        card.classList.add('active');
+                    },
+                    onLeave: () => {
+                        card.classList.remove('active');
+                    },
+                    onEnterBack: () => {
+                        card.classList.add('active');
+                    },
+                    onLeaveBack: () => {
+                        card.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Cleanup function
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, []);
 
     const handleNext = () => {
         const container = carouselRef.current;
         if (container) {
+            const cardWidth = 370;
+            const gap = 30;
             const maxScrollLeft = container.scrollWidth - container.clientWidth;
             const newScrollLeft = Math.min(
                 container.scrollLeft + cardWidth + gap,
@@ -71,6 +148,8 @@ export default function ServicesSection() {
     const handlePrev = () => {
         const container = carouselRef.current;
         if (container) {
+            const cardWidth = 370;
+            const gap = 30;
             const newScrollLeft = Math.max(
                 container.scrollLeft - cardWidth - gap,
                 0
@@ -129,6 +208,32 @@ export default function ServicesSection() {
             .animate-scrollLeft:hover, .animate-scrollRight:hover {
                 animation-play-state: paused;
             }
+            
+            .carousel-wrapper::-webkit-scrollbar {
+                display: none;
+            }
+            .carousel-wrapper {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            
+            /* Active card styles */
+            .solution-card {
+                transition: all 0.3s ease;
+            }
+            .solution-card.active {
+                transform: scale(1.05);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            }
+
+            /* Ensure proper horizontal scrolling */
+            .solutions-carousel {
+                overflow: hidden;
+            }
+            
+            .carousel-track {
+                will-change: transform;
+            }
         `;
         document.head.appendChild(style);
         return () => {
@@ -171,7 +276,7 @@ export default function ServicesSection() {
                                                     height={30}
                                                     width={135}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={i < 6} // Only prioritize first few images
+                                                    priority={i < 6}
                                                 />
                                             </div>
                                         ))}
@@ -189,7 +294,7 @@ export default function ServicesSection() {
                                                     width={135}
                                                     height={30}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={i < 6} // Only prioritize first few images
+                                                    priority={i < 6}
                                                 />
                                             </div>
                                         ))}
@@ -202,23 +307,20 @@ export default function ServicesSection() {
             </section>
 
             <section
-                className="w-full max-w-[1420px] mx-auto py-16 px-5 sm:px-10 lg:px-0 text-[#333]"
+                ref={sectionRef}
+                className="w-full py-16 px-5 sm:px-10 lg:px-0 text-[#333]"
                 id="service-section"
             >
                 {/* Header + Controls */}
-                <div>
+                <div className="max-w-[1420px] mx-auto">
                     <div className="mt-[42px] solutions-header">
                         <p
                             className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
-                            data-aos="fade-up"
-                            data-aos-delay="5"
                         >
                             Services
                         </p>
                         <h2
                             className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-4 text-[#333] font-[anton]"
-                            data-aos="fade-up"
-                            data-aos-delay="5"
                         >
                             EXPLORE OUR <span className="text-[#F9373A]">EXPERTISE</span>
                         </h2>
@@ -246,17 +348,16 @@ export default function ServicesSection() {
                 <div className="solutions-carousel relative">
                     <div
                         ref={carouselRef}
-                        className="carousel-wrapper overflow-x-auto scrollbar-hide"
+                        className="carousel-wrapper overflow-x-hidden"
                     >
                         <div
-                            className="carousel-track h-[500px] flex transition-transform duration-500 ease-in-out gap-8"
-                            style={{ scrollSnapType: "x mandatory" }}
+                            ref={carouselTrackRef}
+                            className="carousel-track h-[500px] xl:pl-72 flex gap-8"
                         >
                             {cards.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="solution-card box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl"
-                                    style={{ scrollSnapAlign: "start" }}
+                                    className="solution-card box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl transition-all duration-300"
                                 >
                                     {/* Title & Description */}
                                     <div>
@@ -306,12 +407,10 @@ export default function ServicesSection() {
                                     </div>
                                 </div>
                             ))}
-                            <div className="w-[370px] min-w-[370px] flex-shrink-0" aria-hidden="true" />
                         </div>
                     </div>
                 </div>
             </section>
-
         </>
     );
 }
