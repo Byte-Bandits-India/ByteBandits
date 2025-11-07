@@ -47,10 +47,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   openMenuButtonColor = '#fff',
   changeMenuColorOnOpen = true,
   accentColor = '#5227FF',
-  isFixed = false,
   onMenuOpen,
-  onMenuClose
-}: StaggeredMenuProps) => {
+  onMenuClose,
+}) => {
   const [open, setOpen] = useState(false);
 
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -260,12 +259,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }
 
   return (
-    <div
-      className={`sm-scope fixed inset-0 z-[99999] pointer-events-none`}
-    >
+    <div className="sm-scope fixed inset-0 z-[99999] pointer-events-none">
       <div
-        className={(className ? className + ' ' : '') + 'staggered-menu-wrapper relative w-full h-full pointer-events-auto'}
-        style={accentColor ? ({ ['--sm-accent' as any]: accentColor } as React.CSSProperties) : undefined}
+        className={
+          (className ? className + ' ' : '') +
+          'staggered-menu-wrapper relative w-full h-full pointer-events-auto'
+        }
+        style={
+          accentColor
+            ? ({ '--sm-accent': accentColor } as CustomCSSProperties)
+            : undefined
+        }
         data-position={position}
         data-open={open || undefined}
       >
@@ -307,15 +311,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
             {/* Desktop Logo — flush with top */}
             <div className='bg-[#353639] h-[120px] w-[270px] xl:h-[140px] xl:w-[299px] lg:flex items-center justify-center rounded-b-xl hidden'>
-              <Image
-                src={'/images/logo1.png'}
-                alt="Logo"
-                className="h-[68px] xl:h-[74px] w-auto object-contain"
-                draggable={false}
-                width={110}
-                height={24}
-                priority
-              />
+              <Link href={'/'}>
+                <Image
+                  src={'/images/logo1.png'}
+                  alt="Logo"
+                  className="h-[68px] xl:h-[74px] w-auto object-contain"
+                  draggable={false}
+                  width={110}
+                  height={24}
+                  priority
+                /></Link>
             </div>
           </div>
 

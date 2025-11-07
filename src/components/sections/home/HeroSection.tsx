@@ -99,7 +99,7 @@ const HeroSection = () => {
                 {/* Title + Shapes */}
                 <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8 z-[10]">
                     {/* Shape 1 Above Text */}
-                    <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] -top-16 left-44 xl:left-36 pointer-events-none">
+                    <div className="absolute block w-[3rem] -top-8 left-16 md:w-[4rem] md:left-44 lg:w-[6rem] lg:-top-16 lg:left-44 xl:left-36 pointer-events-none">
                         <Image
                             src="/images/shape-1.png"
                             alt="Top Shape"
@@ -110,7 +110,7 @@ const HeroSection = () => {
                     </div>
 
                     {/* Title */}
-                    <motion.div className="relative z-[50]">
+                    <motion.div className="relative z-[9999]">
                         {["WHERE IDEAS", "BECOME DIGITAL", "REALITIES"].map(
                             (line, lineIndex) => (
                                 <div
@@ -175,7 +175,7 @@ const HeroSection = () => {
                         )}
 
                         {/* Shape 2 Below Text */}
-                        <div className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute lg:left-[600px] xl:left-[650px] bottom-[160px] pointer-events-none">
+                        <div className="mt-6 w-[3rem] left-[260px] md:w-[4rem] md:left-[500px] md:top-[120px] lg:w-[6.5rem] block absolute lg:left-[600px] xl:left-[650px] bottom-[160px] xl:top-[300px] pointer-events-none">
                             <Image
                                 src="/images/shape-2.png"
                                 alt="Bottom Shape"
