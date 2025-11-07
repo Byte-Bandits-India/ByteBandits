@@ -60,7 +60,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.2,
                         }}
-                        className="absolute pointer-events-none left-[-34vw] -bottom-[34vh] w-[70vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
+                        className="absolute pointer-events-none left-[-36vw] -bottom-[34vh] w-[70vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
                     >
                         <Image
                             src="/images/white.webp"
