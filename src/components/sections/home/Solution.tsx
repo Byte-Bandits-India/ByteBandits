@@ -23,7 +23,6 @@ export default function ServicesSection() {
     const carouselRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const carouselTrackRef = useRef<HTMLDivElement>(null);
-    const [isPaused, setIsPaused] = useState(false);
 
     const cards: ServiceCard[] = [
         {
@@ -163,15 +162,10 @@ export default function ServicesSection() {
                 100% { transform: translateX(0); }
             }
             .animate-scrollLeft {
-                animation: scrollLeft 30s linear infinite;
-                animation-play-state: ${isPaused ? 'paused' : 'running'};
+                animation: scrollLeft 20s linear infinite;
             }
             .animate-scrollRight {
                 animation: scrollRight 30s linear infinite;
-                animation-play-state: ${isPaused ? 'paused' : 'running'};
-            }
-            .animate-scrollLeft:hover, .animate-scrollRight:hover {
-                animation-play-state: paused;
             }
             
             .carousel-wrapper::-webkit-scrollbar {
@@ -182,7 +176,6 @@ export default function ServicesSection() {
                 scrollbar-width: none;
             }
             
-            /* Active card styles */
             .solution-card {
                 transition: all 0.3s ease;
             }
@@ -191,7 +184,6 @@ export default function ServicesSection() {
                 box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             }
 
-            /* Ensure proper horizontal scrolling */
             .solutions-carousel {
                 overflow: hidden;
             }
@@ -204,7 +196,7 @@ export default function ServicesSection() {
         return () => {
             document.head.removeChild(style);
         };
-    }, [isPaused]);
+    }, []);
 
     return (
         <>
@@ -225,15 +217,13 @@ export default function ServicesSection() {
                     {/* Logo Marquee */}
                     <div
                         className="w-screen relative mb-[48px] bg-[#A31621] lg:h-[406px] lg:flex lg:items-center"
-                        onMouseEnter={() => setIsPaused(true)}
-                        onMouseLeave={() => setIsPaused(false)}
                     >
                         <div className="max-w-[1500px] w-full overflow-hidden py-6 lg:py-0 mx-auto relative">
-                            <div className="flex flex-col gap-[64px]">
+                            <div className="flex flex-col gap-[74px]">
                                 {/* Top Row - Infinite Scroll */}
                                 <div className="flex overflow-hidden">
                                     <div className="flex animate-scrollLeft w-max flex-shrink-0 whitespace-nowrap will-change-transform">
-                                        {[...topRow, ...topRow, ...topRow, ...topRow].map((logo, index) => (
+                                        {[...topRow, ...topRow, ...topRow, ...topRow, ...topRow, ...topRow].map((logo, index) => (
                                             <div key={`top-${index}`} className="flex flex-col items-center mx-4">
                                                 <Image
                                                     src={logo.src}
@@ -251,7 +241,7 @@ export default function ServicesSection() {
                                 {/* Bottom Row - Infinite Scroll */}
                                 <div className="flex overflow-hidden">
                                     <div className="flex animate-scrollRight w-max flex-shrink-0 whitespace-nowrap will-change-transform">
-                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, index) => (
+                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, index) => (
                                             <div key={`bottom-${index}`} className="flex flex-col items-center mx-4">
                                                 <Image
                                                     src={logo.src}
