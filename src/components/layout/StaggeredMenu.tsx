@@ -304,15 +304,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             />
 
             {/* Desktop Logo — flush with top */}
-            <Image
-              src={'/images/header.png'}
-              alt="Logo"
-              className="hidden lg:block h-[100px] xl:h-[140px] w-auto object-contain"
-              draggable={false}
-              width={110}
-              height={24}
-              priority
-            />
+            <div className='bg-[#353639] h-[120px] w-[270px] xl:h-[140px] xl:w-[299px] lg:flex items-center justify-center rounded-b-xl hidden'>
+              <Image
+                src={'/images/logo1.png'}
+                alt="Logo"
+                className="h-[68px] xl:h-[74px] w-auto object-contain"
+                draggable={false}
+                width={110}
+                height={24}
+                priority
+              />
+            </div>
           </div>
 
           <div className="flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 pointer-events-auto mt-4">

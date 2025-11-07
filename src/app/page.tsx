@@ -43,7 +43,7 @@ export default function Home() {
             style={{
               transform: 'translate3d(0px, 10px, 0px)', rotate
             }}
-            className="absolute -top-65 right-10 w-55 h-55 z-30 md:-top-[120px] lg:-top-[170px] lg:right-20 xl:-top-[210px] xl:right-10 scroll-icon"
+            className="absolute -top-65 right-10 w-55 h-55 z-30 md:-top-[120px] lg:-top-[170px] lg:right-20 xl:-top-[250px] xl:right-30 scroll-icon"
           />
 
         </section>
@@ -62,17 +62,12 @@ export default function Home() {
           {/* Our Agency Section */}
           <div className="agency-section bg-[#FFFFF] text-center py-20 px-6 lg:px-0 w-full max-w-[1306px] mx-auto ">
             <h2 className="text-[20px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[60px] font-[anton] leading-[40px] md:leading-tight max-w-[90rem] mx-auto mt-10 text-[#312F2F] text-center">
-              WHERE BOLD IDEAS BECOME
-              <span className="text-[#F9373A] lg:text-[#FAAC61]"> POWERFUL </span>
-              DIGITAL
-              <span className="text-[#F9373A] lg:text-[#FAAC61]"> REALITIES</span>.
-              WE ENGINEER SMART SOLUTIONS, DESIGN WITH PURPOSE, AND BRING
-              <span className="text-[#F9373A] lg:text-[#FAAC61]"> BRANDS TO LIFE</span>.
-              CHOOSE
-              <span className="text-[#F9373A] lg:text-[#FAAC61]"> BYTEBANDITS</span>
-              BECAUSE WE ARE WORTH IT.
+              <span className="text-[#F9373A] lg:text-[#FAAC61]">BYTEBANDITS</span> IS WHERE BOLD IDEAS BECOME <span className="text-[#F9373A] lg:text-[#FAAC61]">POWERFUL </span>
+              DIGITAL <span className="text-[#F9373A] lg:text-[#FAAC61]">REALITIES</span>. WE ENGINEER SMART SOLUTIONS, DESIGN
+              WITH PURPOSE, AND BRING <span className="text-[#F9373A] lg:text-[#FAAC61]">BRANDS TO LIFE</span>. CHOOSE
+              <span className="text-[#F9373A] lg:text-[#FAAC61]"> BYTEBANDITS</span> BECAUSE WE ARE WORTH IT.
             </h2>
-            <div>
+            <div className="hidden">
               <div className="mt-8 flex justify-center items-center gap-6">
                 <div>
                   <p className="text-[14px] text-[#828282] max-w-[338px] text-right">We may be new, but we’re already building a portfolio we’re proud of</p>

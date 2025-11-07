@@ -37,7 +37,7 @@ const HeroSection = () => {
                             repeatType: "mirror",
                             ease: "easeInOut",
                         }}
-                        className="absolute pointer-events-none left-[-24vw] top-[-46vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[49vw] xl:-left-[30vw] xl:-top-[34vw] z-10"
+                        className="absolute pointer-events-none left-[-24vw] top-[-46vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
                     >
                         <Image
                             src="/images/gold.webp"
@@ -83,7 +83,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.4,
                         }}
-                        className="absolute pointer-events-none right-[-26vw] -top-[38vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[40vw] xl:right-[-18vw] z-10"
+                        className="absolute pointer-events-none right-[-26vw] -top-[38vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
                     >
                         <Image
                             src="/images/green.webp"
@@ -192,10 +192,20 @@ const HeroSection = () => {
 
                         {/* Button */}
                         <div className="relative z-30 flex items-center justify-center mt-[80px] xl:mt-[40px]">
-                            <button className="bg-[#F9373A] h-[54px] w-[218px] rounded-xl text-white flex items-center justify-center gap-2 px-4">
+                            <button
+                                className="bg-[#F9373A] h-[54px] w-[218px] rounded-xl text-white flex items-center justify-center gap-2 px-4
+  shadow-[0_18px_30px_rgba(0,0,0,0.35)]
+  hover:shadow-[0_25px_40px_rgba(0,0,0,0.25)]
+  hover:-translate-y-1
+  transition-all duration-300 ease-out"
+                            >
                                 Let&apos;s get started
                                 <IoIosArrowForward className="text-[20px]" />
                             </button>
+
+
+
+
                         </div>
                     </motion.div>
                 </div>
