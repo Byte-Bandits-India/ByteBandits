@@ -3,6 +3,7 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import Image from "next/image";
 
 const HeroSection = () => {
     const scrollRef = useRef<HTMLElement | null>(null);
@@ -17,52 +18,75 @@ const HeroSection = () => {
     return (
         <section
             ref={scrollRef}
-            // Add pt-16 or pt-20 to push content down below the header
             className="relative h-[117vh] flex flex-col justify-center items-center text-center hero-section md:pt-20 lg:pt-16"
         >
             <div className="">
                 {/* Floating 3D shapes */}
                 <div className="">
                     {/* Gold Shape */}
-                    <motion.img
-                        src="/images/gold.webp"
-                        alt="Gold Shape"
-                        style={{ scale, rotate: -71 }} // 👈 static 71° rotation
+                    <motion.div
+                        style={{ scale, rotate: -71 }}
                         animate={{ y: ["0%", "-10%", "0%"] }}
                         transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
                         className="absolute left-[-24vw] top-[-4vh] md:left-[-26vw] md:top-[-14vw] lg:left-[-36vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[50vw] xl:-left-[30vw] xl:-top-[20vw] z-10"
-                    />
+                    >
+                        <Image
+                            src="/images/gold.webp"
+                            alt="Gold Shape"
+                            width={800}
+                            height={600}
+                            className="w-full h-auto"
+                            priority
+                        />
+                    </motion.div>
 
                     {/* White Shape */}
-                    <motion.img
-                        src="/images/white.webp"
-                        alt="White Shape"
+                    <motion.div
                         style={{ scale }}
                         animate={{ y: ["0%", "-8%", "0%"] }}
                         transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
                         className="absolute left-[-34vw] -bottom-[10vh] w-[80vw] md:w-[54vw] lg:w-[50vw] xl:w-[50vw] xl:left-[-30vw] xl:-bottom-[20vw] z-0"
-                    />
+                    >
+                        <Image
+                            src="/images/white.webp"
+                            alt="White Shape"
+                            width={800}
+                            height={600}
+                            className="w-full h-auto"
+                            priority
+                        />
+                    </motion.div>
 
                     {/* Green Shape */}
-                    <motion.img
-                        src="/images/green.webp"
-                        alt="Green Shape"
+                    <motion.div
                         style={{ scale }}
                         animate={{ y: ["0%", "-12%", "0%"] }}
                         transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
                         className="absolute right-[-26vw] -top-[4vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[40vw] xl:right-[-18vw] z-10"
-                    />
+                    >
+                        <Image
+                            src="/images/green.webp"
+                            alt="Green Shape"
+                            width={700}
+                            height={600}
+                            className="w-full h-auto"
+                            priority
+                        />
+                    </motion.div>
                 </div>
-
 
                 {/* Title + Shapes */}
                 <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8">
                     {/* Shape 1 above text */}
-                    <img
-                        src="/images/shapes1.png"
-                        alt="Top Shape"
-                        className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] z-[50] -top-16 -left-10"
-                    />
+                    <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] z-[50] -top-16 -left-10">
+                        <Image
+                            src="/images/shapes1.png"
+                            alt="Top Shape"
+                            width={120}
+                            height={120}
+                            className="w-full h-auto"
+                        />
+                    </div>
 
                     <motion.div className="relative">
                         {[
@@ -101,11 +125,15 @@ const HeroSection = () => {
                         ))}
 
                         {/* Shape 2 below text */}
-                        <img
-                            src="/images/shapes2.png"
-                            alt="Bottom Shape"
-                            className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute z-[50] left-[470px] bottom-[200px]"
-                        />
+                        <div className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute z-[50] left-[470px] bottom-[200px]">
+                            <Image
+                                src="/images/shapes2.png"
+                                alt="Bottom Shape"
+                                width={128}
+                                height={128}
+                                className="w-full h-auto"
+                            />
+                        </div>
 
                         <p className="mt-8 text-[14px] lg:text-[25px] text-[#818181] font-bold year years">
                             SINCE 2024
@@ -119,8 +147,6 @@ const HeroSection = () => {
                         </div>
                     </motion.div>
                 </div>
-
-
             </div>
         </section>
     );

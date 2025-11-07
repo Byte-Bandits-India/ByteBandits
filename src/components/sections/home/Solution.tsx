@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
@@ -87,14 +87,14 @@ export default function ServicesSection() {
                 scrub: true,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
-                markers: false, // Set to true for debugging
+                markers: false,
             }
         });
 
         // Add active classes to cards as they come into view
         const cardElements = sectionPin.querySelectorAll('.solution-card');
 
-        cardElements.forEach((card, index) => {
+        cardElements.forEach((card) => {
             gsap.to(card, {
                 scrollTrigger: {
                     trigger: card,
@@ -125,42 +125,7 @@ export default function ServicesSection() {
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
-    }, []);
-
-    const handleNext = () => {
-        const container = carouselRef.current;
-        if (container) {
-            const cardWidth = 370;
-            const gap = 30;
-            const maxScrollLeft = container.scrollWidth - container.clientWidth;
-            const newScrollLeft = Math.min(
-                container.scrollLeft + cardWidth + gap,
-                maxScrollLeft
-            );
-
-            container.scrollTo({
-                left: newScrollLeft,
-                behavior: 'smooth',
-            });
-        }
-    };
-
-    const handlePrev = () => {
-        const container = carouselRef.current;
-        if (container) {
-            const cardWidth = 370;
-            const gap = 30;
-            const newScrollLeft = Math.max(
-                container.scrollLeft - cardWidth - gap,
-                0
-            );
-
-            container.scrollTo({
-                left: newScrollLeft,
-                behavior: 'smooth',
-            });
-        }
-    };
+    }, [cards.length]); // ✅ Added cards.length dependency
 
     interface ClientLogo {
         src: string;
@@ -178,12 +143,12 @@ export default function ServicesSection() {
         { src: "/icons/clients/Mask group-10.png" },
     ];
 
-    const getAltFromSrc = (src: string) => {
+    const getAltFromSrc = useCallback((src: string) => {
         const file = src.split('/').pop() || '';
         const base = file.replace(/\.[^/.]+$/, '');
         const cleaned = base.replace(/[\-_]+/g, ' ').replace(/\s+/g, ' ').trim();
         return cleaned || 'Client logo';
-    };
+    }, []);
 
     // Add CSS animation for infinite marquee
     useEffect(() => {
@@ -268,15 +233,15 @@ export default function ServicesSection() {
                                 {/* Top Row - Infinite Scroll */}
                                 <div className="flex overflow-hidden">
                                     <div className="flex animate-scrollLeft w-max flex-shrink-0 whitespace-nowrap will-change-transform">
-                                        {[...topRow, ...topRow, ...topRow, ...topRow].map((logo, i) => (
-                                            <div key={`top-${i}`} className="flex flex-col items-center mx-4">
+                                        {[...topRow, ...topRow, ...topRow, ...topRow].map((logo, index) => (
+                                            <div key={`top-${index}`} className="flex flex-col items-center mx-4">
                                                 <Image
                                                     src={logo.src}
                                                     alt={getAltFromSrc(logo.src)}
                                                     height={30}
                                                     width={135}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={i < 6}
+                                                    priority={index < 6}
                                                 />
                                             </div>
                                         ))}
@@ -286,15 +251,15 @@ export default function ServicesSection() {
                                 {/* Bottom Row - Infinite Scroll */}
                                 <div className="flex overflow-hidden">
                                     <div className="flex animate-scrollRight w-max flex-shrink-0 whitespace-nowrap will-change-transform">
-                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, i) => (
-                                            <div key={`bottom-${i}`} className="flex flex-col items-center mx-4">
+                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, index) => (
+                                            <div key={`bottom-${index}`} className="flex flex-col items-center mx-4">
                                                 <Image
                                                     src={logo.src}
                                                     alt={getAltFromSrc(logo.src)}
                                                     width={135}
                                                     height={30}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={i < 6}
+                                                    priority={index < 6}
                                                 />
                                             </div>
                                         ))}
@@ -325,23 +290,6 @@ export default function ServicesSection() {
                             EXPLORE OUR <span className="text-[#F9373A]">EXPERTISE</span>
                         </h2>
                     </div>
-
-                    <div className="solutions-nav flex justify-end items-center mb-8">
-                        <div className="nav-controls flex items-center gap-4 text-xs sm:text-sm text-gray-500 uppercase font-semibold cursor-pointer select-none">
-                            <span
-                                onClick={handlePrev}
-                                className="flex items-center gap-1 hover:text-black transition-colors duration-200"
-                            >
-                                ← Prev
-                            </span>
-                            <span
-                                onClick={handleNext}
-                                className="flex items-center gap-1 hover:text-black transition-colors duration-200"
-                            >
-                                Next →
-                            </span>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Carousel */}
@@ -354,14 +302,14 @@ export default function ServicesSection() {
                             ref={carouselTrackRef}
                             className="carousel-track h-[500px] xl:pl-72 flex gap-8"
                         >
-                            {cards.map((item, i) => (
+                            {cards.map((item, index) => (
                                 <div
-                                    key={i}
+                                    key={index}
                                     className="solution-card relative box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl transition-all duration-300"
                                 >
                                     {/* Top-right number */}
                                     <span className="absolute top-5 right-6 font-anonymous text-[38px] font-bold text-[#E6E6E6] leading-none select-none">
-                                        {String(i + 1).padStart(2, '0')}
+                                        {String(index + 1).padStart(2, '0')}
                                     </span>
 
                                     {/* Title & Description */}
@@ -407,7 +355,6 @@ export default function ServicesSection() {
                                         </div>
                                     </div>
                                 </div>
-
                             ))}
                         </div>
                     </div>

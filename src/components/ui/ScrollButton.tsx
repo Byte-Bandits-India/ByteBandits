@@ -1,43 +1,53 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import Lenis from "@studio-freight/lenis";
 
 const ScrollButton = () => {
     const [visible, setVisible] = useState(false);
-    const [lenis, setLenis] = useState<Lenis | null>(null);
+    const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Initialize Lenis
-        const lenisInstance = new Lenis({
+        //  Initialize Lenis with correct options for latest version
+        const lenis = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             wheelMultiplier: 1,
             touchMultiplier: 1.5,
             lerp: 0.1,
         });
-        setLenis(lenisInstance);
 
-        // Start RAF loop
-        function raf(time: number) {
-            lenisInstance.raf(time);
+        lenisRef.current = lenis;
+
+        //  Scroll listener
+        const handleScroll = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            setVisible(scrollY > 300);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        //  Animation frame loop
+        const raf = (time: number) => {
+            lenis.raf(time);
             requestAnimationFrame(raf);
-        }
+        };
         requestAnimationFrame(raf);
 
-        // Visibility handler
-        const toggleVisibility = () => setVisible(window.scrollY > 300);
-        window.addEventListener("scroll", toggleVisibility);
-
         return () => {
-            lenisInstance.destroy();
-            window.removeEventListener("scroll", toggleVisibility);
+            lenis.destroy();
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
+    //  Smooth scroll to top
     const scrollToTop = () => {
-        lenis?.scrollTo(0);
+        if (lenisRef.current) {
+            lenisRef.current.scrollTo(0);
+        } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
     };
 
     return (
@@ -48,7 +58,8 @@ const ScrollButton = () => {
                     aria-label="Scroll to top"
                     className="fixed bottom-6 right-6 p-3 rounded-full 
                      bg-[#353639] text-white hover:bg-[#F9373A]
-                     transition-all duration-300 shadow-lg hover:scale-110"
+                     transition-all duration-300 shadow-lg hover:scale-110 
+                     z-[999]"
                 >
                     <FaArrowUp size={20} />
                 </button>

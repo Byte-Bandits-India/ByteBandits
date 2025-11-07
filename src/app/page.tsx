@@ -7,7 +7,6 @@ import Solution from "@/components/sections/home/Solution"
 import ContactSection from "@/components/sections/home/Contact";
 import CrossedBanner from "@/components/ui/CrossedTape"
 import BlogSection from "@/components/sections/home/Blog";
-import Button from "@/components/ui/button";
 
 export default function Home() {
   const scrollRef = useRef<HTMLDivElement>(null);

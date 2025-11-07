@@ -1,10 +1,7 @@
-"use client"
+"use client";
 import StaggeredMenu from '../layout/StaggeredMenu';
-import { useState } from 'react';
 
 export const Header = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     const menuItems = [
         { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
         { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
@@ -16,7 +13,7 @@ export const Header = () => {
         { label: 'Twitter', link: 'https://twitter.com' },
         { label: 'GitHub', link: 'https://github.com' },
         { label: 'LinkedIn', link: 'https://linkedin.com' },
-        { label: 'Facebook', link: 'https://facebook.com' }
+        { label: 'Facebook', link: 'https://facebook.com' },
     ];
 
     return (
@@ -34,9 +31,7 @@ export const Header = () => {
                 logoUrl="/header.png"
                 accentColor="#ff6b6b"
                 isFixed={true}
-                onMenuOpen={() => setIsMenuOpen(true)}
-                onMenuClose={() => setIsMenuOpen(false)}
             />
         </div>
-    )
-}
+    );
+};
