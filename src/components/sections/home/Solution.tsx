@@ -357,8 +357,13 @@ export default function ServicesSection() {
                             {cards.map((item, i) => (
                                 <div
                                     key={i}
-                                    className="solution-card box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl transition-all duration-300"
+                                    className="solution-card relative box bg-white px-10 py-5 rounded-lg w-[370px] h-[400px] min-w-[340px] flex-shrink-0 flex flex-col justify-between shadow-xl transition-all duration-300"
                                 >
+                                    {/* Top-right number */}
+                                    <span className="absolute top-5 right-6 font-anonymous text-[38px] font-bold text-[#E6E6E6] leading-none select-none">
+                                        {String(i + 1).padStart(2, '0')}
+                                    </span>
+
                                     {/* Title & Description */}
                                     <div>
                                         <h3 className="card-title text-[18px] sm:text-[25px] font-[anton] text-black uppercase">
@@ -376,9 +381,7 @@ export default function ServicesSection() {
                                                 <span key={idx} className="tag relative flex items-center gap-1">
                                                     {tag}
                                                     {idx < item.tags.length - 1 && (
-                                                        <span className="dot mx-1 text-[#BA4D4D] text-[20px] leading-[2px]">
-                                                            •
-                                                        </span>
+                                                        <span className="dot mx-1 text-[#BA4D4D] text-[20px] leading-[2px]">•</span>
                                                     )}
                                                 </span>
                                             ))}
@@ -394,9 +397,7 @@ export default function ServicesSection() {
                                             </div>
 
                                             <div className="learn-more mt-[45px] flex items-center gap-3">
-                                                <span className="text-[#BA4D4D] font-bold text-[14px] truncate">
-                                                    Learn More
-                                                </span>
+                                                <span className="text-[#BA4D4D] font-bold text-[14px] truncate">Learn More</span>
                                                 <Link href={item.link} className="flex-shrink-0">
                                                     <div className="bg-[#BA4D4D] w-8 h-8 flex items-center justify-center rounded-full">
                                                         <FaArrowRight className="text-white" />
@@ -406,6 +407,7 @@ export default function ServicesSection() {
                                         </div>
                                     </div>
                                 </div>
+
                             ))}
                         </div>
                     </div>

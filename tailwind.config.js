@@ -13,17 +13,17 @@ module.exports = {
     extend: {
       keyframes: {
         marqueeLeft: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
         marqueeRight: {
-          '0%': { transform: 'translateX(-50%)' },
-          '100%': { transform: 'translateX(0)' },
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
         },
       },
       animation: {
-        scrollLeft: 'marqueeLeft 20s linear infinite',
-        scrollRight: 'marqueeRight 20s linear infinite',
+        scrollLeft: "marqueeLeft 20s linear infinite",
+        scrollRight: "marqueeRight 20s linear infinite",
       },
       fontFamily: {
         anton: ["var(--font-anton)", "sans-serif"],
@@ -43,6 +43,7 @@ module.exports = {
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
         ],
+        anonymous: ['"Anonymous Pro"', "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -20,7 +20,7 @@ export const Header = () => {
     ];
 
     return (
-        <div className={`fixed top-0 left-0 w-full z-50 ${isMenuOpen ? 'h-screen' : 'h-auto'}`}>
+        <div className="fixed top-0 left-0 w-full bg-transparent z-50 h-auto">
             <StaggeredMenu
                 position="right"
                 items={menuItems}
@@ -33,6 +33,7 @@ export const Header = () => {
                 colors={['#B19EEF', '#5227FF']}
                 logoUrl="/header.png"
                 accentColor="#ff6b6b"
+                isFixed={true}
                 onMenuOpen={() => setIsMenuOpen(true)}
                 onMenuClose={() => setIsMenuOpen(false)}
             />
