@@ -37,7 +37,7 @@ const HeroSection = () => {
                             repeatType: "mirror",
                             ease: "easeInOut",
                         }}
-                        className="absolute pointer-events-none left-[-24vw] top-[-30vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
+                        className="absolute pointer-events-none left-[-24vw] top-[-30vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[54vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
                     >
                         <Image
                             src="/images/gold.webp"
@@ -60,7 +60,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.2,
                         }}
-                        className="absolute pointer-events-none left-[-34vw] -bottom-[34vh] w-[80vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
+                        className="absolute pointer-events-none left-[-34vw] -bottom-[34vh] w-[70vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
                     >
                         <Image
                             src="/images/white.webp"
@@ -83,7 +83,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.4,
                         }}
-                        className="absolute pointer-events-none right-[-24vw] -top-[30vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
+                        className="absolute pointer-events-none right-[-24vw] -top-[30vh] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
                     >
                         <Image
                             src="/images/green.webp"
