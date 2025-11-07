@@ -101,7 +101,7 @@ const HeroSection = () => {
                     {/* Shape 1 Above Text */}
                     <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] -top-16 left-44 xl:left-36 pointer-events-none">
                         <Image
-                            src="/images/shapes1.png"
+                            src="/images/shape-1.png"
                             alt="Top Shape"
                             width={120}
                             height={120}
@@ -177,7 +177,7 @@ const HeroSection = () => {
                         {/* Shape 2 Below Text */}
                         <div className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute lg:left-[600px] xl:left-[650px] bottom-[160px] pointer-events-none">
                             <Image
-                                src="/images/shapes2.png"
+                                src="/images/shape-2.png"
                                 alt="Bottom Shape"
                                 width={128}
                                 height={128}
