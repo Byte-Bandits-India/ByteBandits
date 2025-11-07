@@ -33,7 +33,7 @@ export default function Home() {
             src="/images/home_1.webp"
             alt="Hero"
             style={{ scale }}
-            className="absolute w-full object-cover z-0 h-[20lvh] md:h-[40lvh] lg:h-[50lvh] xl:h-[600px]"
+            className="absolute w-full object-cover z-0 h-[20lvh] md:h-[30lvh] lg:h-[50lvh] xl:h-[600px]"
           />
 
           {/* Scroll Down Icon with Rotation */}
@@ -61,7 +61,7 @@ export default function Home() {
         <section>
           {/* Our Agency Section */}
           <div className="agency-section bg-[#FFFFF] text-center py-20 px-6 lg:px-0 w-full max-w-[1306px] mx-auto ">
-            <h2 className="text-[20px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[60px] font-[anton] leading-[40px] md:leading-tight max-w-[90rem] mx-auto mt-10 text-[#312F2F] text-center">
+            <h2 className="text-[20px] md:text-[clamp(40px,6vw,60px)] md:leading-[1.2] leading-[32px] font-[anton] max-w-[90rem] mx-auto mt-10 text-[#312F2F] text-center">
               <span className="text-[#F9373A] lg:text-[#FAAC61]">BYTEBANDITS</span> IS WHERE BOLD IDEAS BECOME <span className="text-[#F9373A] lg:text-[#FAAC61]">POWERFUL </span>
               DIGITAL <span className="text-[#F9373A] lg:text-[#FAAC61]">REALITIES</span>. WE ENGINEER SMART SOLUTIONS, DESIGN
               WITH PURPOSE, AND BRING <span className="text-[#F9373A] lg:text-[#FAAC61]">BRANDS TO LIFE</span>. CHOOSE
