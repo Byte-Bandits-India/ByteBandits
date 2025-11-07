@@ -43,7 +43,7 @@ export default function Home() {
             style={{
               transform: 'translate3d(0px, 10px, 0px)', rotate
             }}
-            className="absolute -top-65 right-60 w-55 h-55 z-30 md:-top-[120px] lg:-top-[170px] lg:right-20 xl:-top-[210px] xl:right-10 scroll-icon"
+            className="absolute -top-65 right-10 w-55 h-55 z-30 md:-top-[120px] lg:-top-[170px] lg:right-20 xl:-top-[210px] xl:right-10 scroll-icon"
           />
 
         </section>
