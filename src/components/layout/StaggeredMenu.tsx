@@ -259,11 +259,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   }
 
   return (
-    <div className="sm-scope fixed inset-0 z-[99999] pointer-events-none">
+    <div className="sm-scope fixed inset-0 z-50 pointer-events-none">
       <div
         className={
           (className ? className + ' ' : '') +
-          'staggered-menu-wrapper relative w-full h-full pointer-events-auto'
+          'staggered-menu-wrapper relative w-full h-full pointer-events-none'
         }
         style={
           accentColor
@@ -296,38 +296,29 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           })()}
         </div>
 
-        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between px-[1em] lg:px-[3em] bg-transparent pointer-events-none z-20">
-          <div className="sm-logo flex items-start select-none pointer-events-auto" aria-label="Logo">
-            {/* Mobile / Tablet Logo */}
-            <Image
-              src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
-              alt="Logo"
-              className="block h-[62px] xl:h-[78px] w-auto object-contain lg:hidden mt-6"
-              draggable={false}
-              width={110}
-              height={24}
-              priority
-            />
-
+        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-start justify-between px-[1em] lg:px-[3em] bg-transparent pointer-events-none z-20">
+          <div className="sm-logo flex items-start select-none pointer-events-auto relative" aria-label="Logo">
             {/* Desktop Logo — flush with top */}
-            <div className='bg-[#353639] h-[120px] w-[270px] xl:h-[140px] xl:w-[299px] lg:flex items-center justify-center rounded-b-xl hidden'>
-              <Link href={'/'}>
+            <div className="relative bg-[#353639] h-[63px] w-[138px] md:h-[70px] md:w-[158px] lg:h-[120px] lg:w-[210px] flex items-center justify-center rounded-b-xl m-0 p-0 -top-2">
+              <Link href="/" className="block m-0 p-0">
                 <Image
-                  src={'/images/logo1.png'}
+                  src="/images/logo1.png"
                   alt="Logo"
-                  className="h-[68px] xl:h-[74px] w-auto object-contain"
+                  className="h-[34px] md:h-[46px] lg:h-[62px] w-auto object-contain m-0 p-0"
                   draggable={false}
                   width={110}
                   height={24}
                   priority
-                /></Link>
+                />
+              </Link>
             </div>
           </div>
 
-          <div className="flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 pointer-events-auto mt-4">
+          {/* Button Group */}
+          <div className="relative flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 mt-2 pointer-events-auto">
             <Link href="/contact" aria-label="Go to contact">
               <div
-                className="navbar-icon text-[14px] sm:text-[24px] md:text-[30px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
+                className="navbar-icon text-[14px] sm:text-[24px] md:text-[26px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
                 onClick={scrollToContact}
               >
                 <TfiEmail />
@@ -336,9 +327,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             <button
               ref={toggleBtnRef}
               type="button"
-              className="navbar-icon text-[14px] sm:text-[24px] md:text-[30px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
+              className="navbar-icon text-[14px] sm:text-[24px] md:text-[26px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
               onClick={toggleMenu}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               aria-controls="staggered-menu-panel"
             >
@@ -351,7 +342,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         <aside
           id="staggered-menu-panel"
           ref={panelRef}
-          className="staggered-menu-panel fixed top-0 right-0 h-full bg-white flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-[99998] backdrop-blur-[12px]"
+          className="staggered-menu-panel fixed top-0 right-0 h-full bg-white flex flex-col p-[6em_2em_2em_2em] overflow-y-auto backdrop-blur-[12px] pointer-events-auto"
           style={{ WebkitBackdropFilter: 'blur(12px)' }}
           aria-hidden={!open}
         >

@@ -1379,3 +1379,15 @@ font-size: 0.5rem !important;         /* 8px */
     animation: none;
   }
 }
+
+.sm-scope .staggered-menu-wrapper[data-open] {
+  pointer-events: auto;
+}
+
+.sm-scope .staggered-menu-wrapper:not([data-open]) {
+  pointer-events: none;
+}
+
+.sm-scope .staggered-menu-wrapper:not([data-open]) .staggered-menu-header {
+  pointer-events: auto;
+}
