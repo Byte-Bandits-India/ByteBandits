@@ -170,7 +170,7 @@ export default function Home() {
                         <div className="flex items-center justify-center w-full mt-8 lg:hidden">
                             <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
                             <h1 className="text-[#8C8C8C] text-[12px] uppercase px-2 whitespace-nowrap text-center leading-none">
-                                Let's Talk
+                                {"Let's Talk"}
                             </h1>
                             <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
                         </div>
@@ -184,7 +184,7 @@ export default function Home() {
                         <div className="hidden lg:flex items-center justify-center w-full mt-8">
                             <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
                             <h1 className="text-[#8C8C8C] lg:text-[20px] uppercase px-2 whitespace-nowrap text-center leading-none">
-                                Let's Talk
+                                {"Let's Talk"}
                             </h1>
                             <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
                         </div>

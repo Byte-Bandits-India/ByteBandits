@@ -16,9 +16,6 @@ const HeroSection = () => {
 
     const scale = useTransform(scrollYProgress, [0, 0], [1.5, 1.1]);
 
-    const getCharId = (lineIndex: number, wordIndex: number, charIndex: number) =>
-        `${lineIndex}-${wordIndex}-${charIndex}`;
-
     return (
         <section
             ref={scrollRef}
