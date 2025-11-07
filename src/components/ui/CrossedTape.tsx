@@ -70,7 +70,7 @@ export default function CrossedBanner() {
             {/* Center Image - Positioned at tape intersection */}
             <div className="absolute z-30 top-[40%] md:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                 <motion.img
-                    src="/images/white.webp"
+                    src="/images/shapes1.png"
                     alt="Center Shape"
                     className="object-contain w-[160px] h-[160px] md:h-[200px] md:w-[200px] lg:w-[248px] lg:h-[248px]"
                     animate={{ y: [0, -20, 0] }}

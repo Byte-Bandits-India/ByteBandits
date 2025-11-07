@@ -290,19 +290,32 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           })()}
         </div>
 
-        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[1em] lg:p-[3em] bg-transparent pointer-events-none z-20">
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between px-[1em] lg:px-[3em] bg-transparent pointer-events-none z-20">
+          <div className="sm-logo flex items-start select-none pointer-events-auto" aria-label="Logo">
+            {/* Mobile / Tablet Logo */}
             <Image
               src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
               alt="Logo"
-              className="sm-logo-img block h-[62px] xl:h-[78px] w-auto object-contain"
+              className="block h-[62px] xl:h-[78px] w-auto object-contain lg:hidden mt-6"
+              draggable={false}
+              width={110}
+              height={24}
+              priority
+            />
+
+            {/* Desktop Logo — flush with top */}
+            <Image
+              src={'/images/header.png'}
+              alt="Logo"
+              className="hidden lg:block h-[100px] xl:h-[140px] w-auto object-contain"
               draggable={false}
               width={110}
               height={24}
               priority
             />
           </div>
-          <div className="flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 pointer-events-auto">
+
+          <div className="flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 pointer-events-auto mt-4">
             <Link href="/contact" aria-label="Go to contact">
               <div
                 className="navbar-icon text-[14px] sm:text-[24px] md:text-[30px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
@@ -324,6 +337,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             </button>
           </div>
         </header>
+
 
         <aside
           id="staggered-menu-panel"

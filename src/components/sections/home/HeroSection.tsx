@@ -1,12 +1,13 @@
 "use client";
 
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 
 const HeroSection = () => {
     const scrollRef = useRef<HTMLElement | null>(null);
+    const [hoveredChar, setHoveredChar] = useState<string | null>(null);
 
     const { scrollYProgress } = useScroll({
         target: scrollRef,
@@ -15,20 +16,28 @@ const HeroSection = () => {
 
     const scale = useTransform(scrollYProgress, [0, 0], [1.5, 1.1]);
 
+    const getCharId = (lineIndex: number, wordIndex: number, charIndex: number) =>
+        `${lineIndex}-${wordIndex}-${charIndex}`;
+
     return (
         <section
             ref={scrollRef}
-            className="relative h-[117vh] flex flex-col justify-center items-center text-center hero-section md:pt-20 lg:pt-16"
+            className="relative h-[117vh] bg-[#F2F2F0] flex flex-col justify-center items-center text-center hero-section md:pt-20 lg:pt-16 overflow-hidden"
         >
-            <div className="">
-                {/* Floating 3D shapes */}
-                <div className="">
+            <div className="relative w-full">
+                {/* Floating 3D Shapes */}
+                <div className="pointer-events-none">
                     {/* Gold Shape */}
                     <motion.div
                         style={{ scale, rotate: -71 }}
                         animate={{ y: ["0%", "-10%", "0%"] }}
-                        transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-                        className="absolute left-[-24vw] top-[-4vh] md:left-[-26vw] md:top-[-14vw] lg:left-[-36vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[50vw] xl:-left-[30vw] xl:-top-[20vw] z-10"
+                        transition={{
+                            duration: 4.5,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                        }}
+                        className="absolute pointer-events-none left-[-24vw] top-[-46vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[49vw] xl:-left-[30vw] xl:-top-[34vw] z-10"
                     >
                         <Image
                             src="/images/gold.webp"
@@ -44,8 +53,14 @@ const HeroSection = () => {
                     <motion.div
                         style={{ scale }}
                         animate={{ y: ["0%", "-8%", "0%"] }}
-                        transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
-                        className="absolute left-[-34vw] -bottom-[10vh] w-[80vw] md:w-[54vw] lg:w-[50vw] xl:w-[50vw] xl:left-[-30vw] xl:-bottom-[20vw] z-0"
+                        transition={{
+                            duration: 4.5,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                            delay: 0.2,
+                        }}
+                        className="absolute pointer-events-none left-[-34vw] -bottom-[34vh] w-[80vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
                     >
                         <Image
                             src="/images/white.webp"
@@ -61,8 +76,14 @@ const HeroSection = () => {
                     <motion.div
                         style={{ scale }}
                         animate={{ y: ["0%", "-12%", "0%"] }}
-                        transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
-                        className="absolute right-[-26vw] -top-[4vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[40vw] xl:right-[-18vw] z-10"
+                        transition={{
+                            duration: 5.5,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                            delay: 0.4,
+                        }}
+                        className="absolute pointer-events-none right-[-26vw] -top-[38vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[40vw] xl:right-[-18vw] z-10"
                     >
                         <Image
                             src="/images/green.webp"
@@ -76,9 +97,9 @@ const HeroSection = () => {
                 </div>
 
                 {/* Title + Shapes */}
-                <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8">
-                    {/* Shape 1 above text */}
-                    <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] z-[50] -top-16 -left-10">
+                <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8 z-[50]">
+                    {/* Shape 1 Above Text */}
+                    <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] -top-16 left-44 xl:left-36 pointer-events-none">
                         <Image
                             src="/images/shapes1.png"
                             alt="Top Shape"
@@ -88,44 +109,73 @@ const HeroSection = () => {
                         />
                     </div>
 
-                    <motion.div className="relative">
-                        {[
-                            "WHERE IDEAS",
-                            "BECOME DIGITAL",
-                            "REALITIES"
-                        ].map((line, lineIndex) => (
-                            <div
-                                key={lineIndex}
-                                className="title-line flex justify-center items-center text-center
-                text-[42px] sm:text-[2.5rem] md:text-[4.625rem] lg:text-[6rem] xl:text-[7.5rem]
-                sm:leading-[3.125rem] md:leading-[4.875rem] lg:leading-[6.5rem] xl:leading-[8.125rem]
-                font-[anton] tracking-tight"
-                            >
-                                <div className="flex flex-wrap justify-center gap-x-2 sm:gap-x-4 md:gap-x-2 lg:gap-x-8">
-                                    {line.split(" ").map((word, wIndex) => (
-                                        <div
-                                            key={wIndex}
-                                            className="inline-flex"
-                                            style={{
-                                                color: word === "IDEAS" || word === "REALITIES" ? "#F9373A" : "#353639",
-                                            }}
-                                        >
-                                            {word.split("").map((char, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="inline-block transition-transform duration-200 hover:scale-y-110 origin-bottom"
-                                                >
-                                                    {char}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    ))}
+                    {/* Title */}
+                    <motion.div className="relative z-[50]">
+                        {["WHERE IDEAS", "BECOME DIGITAL", "REALITIES"].map(
+                            (line, lineIndex) => (
+                                <div
+                                    key={lineIndex}
+                                    className="title-line flex justify-center items-center text-center
+                    text-[42px] sm:text-[2.5rem] md:text-[4.625rem] lg:text-[6rem] xl:text-[7.9rem]
+                    sm:leading-[3.125rem] md:leading-[4.875rem] lg:leading-[6.5rem] xl:leading-[8.900rem]
+                    font-[anton] tracking-tight"
+                                >
+                                    <div className="flex flex-wrap justify-center gap-x-2 sm:gap-x-4 md:gap-x-2 lg:gap-x-8">
+                                        {line.split(" ").map((word, wIndex) => (
+                                            <div
+                                                key={wIndex}
+                                                className="inline-flex"
+                                                style={{
+                                                    color:
+                                                        word === "IDEAS" ||
+                                                            word === "REALITIES"
+                                                            ? "#DE2D40"
+                                                            : "#333333",
+                                                }}
+                                            >
+                                                {word
+                                                    .split("")
+                                                    .map((char, i) => {
+                                                        const charId = getCharId(
+                                                            lineIndex,
+                                                            wIndex,
+                                                            i
+                                                        );
+                                                        return (
+                                                            <span
+                                                                key={i}
+                                                                className="inline-block transition-transform duration-150 origin-bottom cursor-default"
+                                                                style={{
+                                                                    transform:
+                                                                        hoveredChar ===
+                                                                            charId
+                                                                            ? "scaleY(1.1)"
+                                                                            : "scaleY(1)",
+                                                                }}
+                                                                onMouseEnter={() =>
+                                                                    setHoveredChar(
+                                                                        charId
+                                                                    )
+                                                                }
+                                                                onMouseLeave={() =>
+                                                                    setHoveredChar(
+                                                                        null
+                                                                    )
+                                                                }
+                                                            >
+                                                                {char}
+                                                            </span>
+                                                        );
+                                                    })}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            )
+                        )}
 
-                        {/* Shape 2 below text */}
-                        <div className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute z-[50] left-[470px] bottom-[200px]">
+                        {/* Shape 2 Below Text */}
+                        <div className="mt-6 w-[6.5rem] md:w-[8rem] hidden lg:block absolute lg:left-[600px] xl:left-[650px] bottom-[160px] pointer-events-none">
                             <Image
                                 src="/images/shapes2.png"
                                 alt="Bottom Shape"
@@ -135,11 +185,13 @@ const HeroSection = () => {
                             />
                         </div>
 
-                        <p className="mt-8 text-[14px] lg:text-[25px] text-[#818181] font-bold year years">
+                        {/* Subtitle */}
+                        <p className="mt-8 text-[14px] text-[#818181] font-bold select-none">
                             SINCE 2024
                         </p>
 
-                        <div className="relative z-30 flex items-center justify-center mt-[80px] xl:mt-[40px] ">
+                        {/* Button */}
+                        <div className="relative z-30 flex items-center justify-center mt-[80px] xl:mt-[40px]">
                             <button className="bg-[#F9373A] h-[54px] w-[218px] rounded-xl text-white flex items-center justify-center gap-2 px-4">
                                 Let&apos;s get started
                                 <IoIosArrowForward className="text-[20px]" />
