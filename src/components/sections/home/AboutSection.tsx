@@ -75,7 +75,7 @@ const AboutSection = () => {
       </div>
 
 
-      <div className="triangle-section flex w-full max-w-[1420px] mx-auto flex-col md:flex-row justify-center items-start gap-10 md:gap-10 lg:gap-[63px] mt-[150px]">
+      <div className="triangle-section flex w-full max-w-[1420px] mx-auto flex-col md:flex-row justify-center items-center gap-10 md:gap-10 lg:gap-[63px] mt-[150px]">
         {[
           {
             img: "/images/Expert team.png",

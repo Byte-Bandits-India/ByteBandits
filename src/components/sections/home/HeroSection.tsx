@@ -22,7 +22,7 @@ const HeroSection = () => {
     return (
         <section
             ref={scrollRef}
-            className="relative h-[117vh] bg-[#F2F2F0] flex flex-col justify-center items-center text-center hero-section md:pt-20 lg:pt-16 overflow-hidden"
+            className="relative h-100dvh lg:h-[117vh] bg-[#F2F2F0] flex flex-col justify-center items-center text-center hero-section md:pt-20 lg:pt-16 overflow-hidden"
         >
             <div className="relative w-full">
                 {/* Floating 3D Shapes */}
@@ -37,7 +37,7 @@ const HeroSection = () => {
                             repeatType: "mirror",
                             ease: "easeInOut",
                         }}
-                        className="absolute pointer-events-none left-[-24vw] top-[-46vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
+                        className="absolute pointer-events-none left-[-24vw] top-[-30vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
                     >
                         <Image
                             src="/images/gold.webp"
@@ -83,7 +83,7 @@ const HeroSection = () => {
                             ease: "easeInOut",
                             delay: 0.4,
                         }}
-                        className="absolute pointer-events-none right-[-26vw] -top-[38vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
+                        className="absolute pointer-events-none right-[-24vw] -top-[30vh] w-[68vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
                     >
                         <Image
                             src="/images/green.webp"
@@ -97,7 +97,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Title + Shapes */}
-                <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8 z-[50]">
+                <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8 z-[10]">
                     {/* Shape 1 Above Text */}
                     <div className="absolute hidden lg:block w-[6rem] md:w-[7.5rem] -top-16 left-44 xl:left-36 pointer-events-none">
                         <Image
@@ -191,7 +191,7 @@ const HeroSection = () => {
                         </p>
 
                         {/* Button */}
-                        <div className="relative z-30 flex items-center justify-center mt-[80px] xl:mt-[40px]">
+                        <div className="relative z-30 flex items-center justify-center mt-[40px] md:mt-[80px] xl:mt-[40px]">
                             <button
                                 className="bg-[#F9373A] h-[54px] w-[218px] rounded-xl text-white flex items-center justify-center gap-2 px-4
   shadow-[0_18px_30px_rgba(0,0,0,0.35)]
@@ -202,10 +202,6 @@ const HeroSection = () => {
                                 Let&apos;s get started
                                 <IoIosArrowForward className="text-[20px]" />
                             </button>
-
-
-
-
                         </div>
                     </motion.div>
                 </div>
