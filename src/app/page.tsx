@@ -148,7 +148,7 @@ export default function Home() {
           alt="Scroll Down"
           style={{ rotate }}
           className="absolute -top-[55px] right-10 w-[20vw] lg:w-[14vw] h-auto
-               md:-top-[120px] lg:right-20 xl:-top-[184px] xl:right-[30px] 
+               md:-top-[120px] lg:right-20 xl:-top-[184px] xl:right-[90px] 
                z-50 will-change-transform scroll-icon pointer-events-none"
         />
       </section>
@@ -173,7 +173,7 @@ export default function Home() {
               TRUSTED BY
             </h1>
             <p className="inline-block px-6 sm:px-8 py-3 sm:py-2 text-[#ffffff] font-inter">
-              The Brand Shaping Tomorrow
+              The Brands Shaping Tommorow
             </p>
           </div>
         </div>

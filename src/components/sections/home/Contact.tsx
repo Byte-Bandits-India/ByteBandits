@@ -1,5 +1,6 @@
-import Button from "@/components/ui/button"
+import { IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ContactSection() {
     return (
@@ -27,8 +28,14 @@ export default function ContactSection() {
                         </p>
 
 
-                        <div className="mt-8">
-                            <Button />
+                        <div className="mt-8 flex">
+                            <Link
+                                href="/contact"
+                                className="flex items-center justify-center gap-2 text-white bg-[#F9373A] w-full h-[50px] max-w-[195px] rounded-full text-center hover:bg-[#d92f33] transition-colors duration-300"
+                            >
+                                CONTACT
+                                <IoIosArrowForward className="text-[20px]" />
+                            </Link>
                         </div>
                     </div>
 

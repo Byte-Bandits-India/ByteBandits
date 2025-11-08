@@ -21,7 +21,7 @@ const HeroSection = () => {
             {/* Hero Section - 100dvh */}
             <section
                 ref={scrollRef}
-                className="relative h-[104dvh] md:h-[108dvh] lg:h-[110dvh]  bg-[#F2F2F0] flex flex-col justify-center items-center text-center overflow-hidden"
+                className="relative h-[104dvh] md:h-[108dvh] lg:h-[114dvh]  bg-[#F2F2F0] flex flex-col justify-center items-center text-center overflow-hidden"
             >
                 <div className="relative w-full">
                     {/* Floating 3D Shapes */}
@@ -158,9 +158,9 @@ const HeroSection = () => {
                             </p>
 
                             {/* Button */}
-                            <div className="flex items-center justify-center mt-[40px] md:mt-[80px] xl:mt-[40px]">
+                            <div className="flex items-center justify-center mt-[40px] md:mt-[32px] xl:mt-[60px]">
                                 <button
-                                    className="bg-[#F9373A] h-[40px] w-[155px] md:h-[54px] md:w-[218px]
+                                    className="bg-[#F9373A] h-[40px] w-[155px] md:h-[44px] md:w-[176px] xl:h-[54px] xl:w-[218px]
                     rounded-xl text-[12px] md:text-[16px] text-white flex items-center justify-center gap-2
                     shadow-[0_18px_30px_rgba(0,0,0,0.35)]
                     hover:shadow-[0_25px_40px_rgba(0,0,0,0.25)]

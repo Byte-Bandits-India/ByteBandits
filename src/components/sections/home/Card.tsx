@@ -26,32 +26,50 @@ export default function Card() {
 
     const cards: ServiceCard[] = [
         {
-            title: "Data Security",
-            desc: "Secure your data with our end-to-end data protection services — encryption, monitoring, and compliance all in one place. Our solutions are designed to safeguard your business against breaches, data loss, and evolving cyber threats.",
+            title: "Artificial Intelligence",
+            desc: "Harness the power of AI to automate, optimize, and innovate. We build intelligent solutions that analyze data, predict outcomes, and streamline operations turning your business challenges into competitive advantages. It’s not just about technology; it’s about creating a smarter, more efficient future for your brand.",
             tags: ["MFA", "Auth0", "DLP"],
             link: "/services/data-security",
         },
         {
-            title: "SEO & Optimization",
-            desc: "Get higher rankings, more visibility, and organic traffic that actually converts. Your site gets fully optimized—keywords, structure, speed, and more. Show up when your audience is searching. This is how you grow without paying for every click.",
+            title: "Branding & Social Media",
+            desc: "Craft a brand that commands attention and a social presence that builds community. We develop memorable logos, compelling visuals, and a cohesive identity, then bring it to life with strategic social content that engages, grows your audience, and drives real results. Your story, amplified.",
             tags: ["ONPAGE", "LOCAL", "OFF PAGE"],
             link: "/services/seo-optimization",
         },
         {
             title: "Web Development",
-            desc: "Get a fast, modern, and mobile-friendly website built to impress and perform. Clean design, smooth user experience, and everything tailored to your brand. Your site won't just look great—it'll work hard to support your business. Everything is built to scale with you.",
+            desc: "Get a fast, modern, and mobile-friendly website built to impress and perform. Clean design, smooth user experience, and everything tailored to your brand. Your site won’t just look great—it’ll work hard to support your business. Everything is built to scale with you.",
             tags: ["REACT", "SQL", "NODE"],
             link: "/services/web-development",
         },
         {
             title: "Mobile Development",
-            desc: "Launch a custom mobile app that looks amazing and runs flawlessly on iOS and Android. Whether it's for customers or internal use, everything is designed for usability and performance. Your idea turns into a powerful app. Built smart, built to last.",
+            desc: "Reach your customers in their pockets with a beautiful, intuitive, and powerful mobile app. We build native and cross-platform apps that deliver a flawless experience, drive engagement, and solve real-world problems. Your vision, perfected for every screen.",
             tags: ["UI/UX", "NATIVE", "STUDIO"],
             link: "/services/mobile-development",
         },
         {
-            title: "Cloud Scaling",
-            desc: "Scale your app with serverless architecture and intelligent cost optimization strategies tailored for modern businesses.",
+            title: "Cloud & DevOps",
+            desc: "Unite your development and operations into a single, high-velocity force. We build automated CI/CD pipelines on robust, scalable cloud infrastructure. This seamless synergy means more reliable releases, efficient resource use, and a technology foundation that actively drives your business growth.",
+            tags: ["AWS", "AZURE", "GCP"],
+            link: "/services/cloud-scaling",
+        },
+        {
+            title: "Digital Marketing",
+            desc: "Turn clicks into customers and browsers into buyers. We deploy targeted strategies across SEO, PPC, and social advertising to increase your visibility, generate qualified leads, and maximize your return on investment. Data-driven campaigns designed for growth.",
+            tags: ["AWS", "AZURE", "GCP"],
+            link: "/services/cloud-scaling",
+        },
+        {
+            title: "Customer Support",
+            desc: "Transform customer interactions into lasting relationships. We implement and manage modern support systems—including live chat, help desks, and AI-powered assistants—that provide timely, helpful, and personalized service. Elevate your support from a cost center to a loyalty engine.",
+            tags: ["AWS", "AZURE", "GCP"],
+            link: "/services/cloud-scaling",
+        },
+        {
+            title: "Cyber Security",
+            desc: "Protect your business, your data, and your reputation with robust, multi-layered security. We assess vulnerabilities, implement advanced defenses, and monitor for threats 24/7. Proactive protection that lets you operate with confidence in a connected world.",
             tags: ["AWS", "AZURE", "GCP"],
             link: "/services/cloud-scaling",
         },
@@ -77,6 +95,8 @@ export default function Card() {
         // Add extra space to ensure the last card is fully centered
         const horizontalScrollDistance = lastCardCenterPosition + (viewportWidth - cardWidth) / 2;
 
+
+
         // Create the horizontal scroll animation
         const containerAnimation = gsap.to(sectionPin, {
             x: () => -horizontalScrollDistance + "px",
@@ -90,8 +110,11 @@ export default function Card() {
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
                 markers: false,
-            }
+            },
         });
+
+        // Store it in ref so we can pass to FadeUp
+        (carouselRef as any).currentAnimation = containerAnimation;
 
         // Add active classes to cards as they come into view
         const cardElements = sectionPin.querySelectorAll('.solution-card');
@@ -123,6 +146,7 @@ export default function Card() {
             });
         });
 
+
         // Cleanup function
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -134,12 +158,12 @@ export default function Card() {
         <>
             <section
                 ref={sectionRef}
-                className="w-full py-16 px-5 sm:px-10 lg:px-0 text-[#333333] mx-auto"
+                className="w-full py-16 px-6 text-[#333333] mx-auto"
                 id="service-section"
             >
                 {/* Header + Controls */}
                 <div className="max-w-[1420px] mx-auto">
-                    <div className="mt-[42px] solutions-header">
+                    <div className="mt-[42px]">
                         <p
                             className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
                         >
@@ -193,7 +217,7 @@ export default function Card() {
 
                                     {/* Tags */}
                                     <div className="card-tags flex-1 flex flex-col justify-end gap-6">
-                                        <div className="tags flex gap-3 text-[13px] justify-center font-bold text-black tracking-[1px]">
+                                        <div className="tags hidden gap-3 text-[13px] justify-center font-bold text-black tracking-[1px]">
                                             {item.tags.map((tag, idx) => (
                                                 <span key={idx} className="tag relative flex items-center gap-1">
                                                     {tag}

@@ -1,6 +1,12 @@
 "use client";
 
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 interface FadeUpProps {
     children: ReactNode;
@@ -8,59 +14,56 @@ interface FadeUpProps {
     delay?: number;
     duration?: number;
     distance?: number;
+    containerAnimation?: gsap.core.Animation; // 👈 connect to horizontal scroll
 }
 
 const FadeUp: React.FC<FadeUpProps> = ({
     children,
     className = "",
     delay = 0,
-    duration = 600,
-    distance = 40,
+    duration = 0.8, // seconds
+    distance = 50,
+    containerAnimation,
 }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [hasBeenVisible, setHasBeenVisible] = useState(false);
-    const elementRef = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setHasBeenVisible(true);
-                    setTimeout(() => setIsVisible(true), delay);
-                } else {
-                    // Only fade out if the element has been visible at least once
-                    if (hasBeenVisible) {
-                        setIsVisible(false);
-                    }
-                }
+        if (!ref.current) return;
+
+        const el = ref.current;
+
+        const fadeAnim = gsap.fromTo(
+            el,
+            {
+                opacity: 0,
+                x: distance,
+                y: distance,
             },
             {
-                threshold: 0.3,
+                opacity: 1,
+                x: 0,
+                y: 0,
+                duration,
+                ease: "power2.out",
+                delay: delay / 1000,
+                scrollTrigger: {
+                    trigger: el,
+                    start: "left center",
+                    end: "right center",
+                    containerAnimation: containerAnimation, // 👈 tie to horizontal scroll
+                    scrub: true,
+                },
             }
         );
 
-        const el = elementRef.current;
-        if (el) observer.observe(el);
-
         return () => {
-            if (el) observer.unobserve(el);
+            fadeAnim.scrollTrigger?.kill();
+            fadeAnim.kill();
         };
-    }, [delay, hasBeenVisible]); // Add hasBeenVisible to dependencies
+    }, [delay, distance, duration, containerAnimation]);
 
     return (
-        <div
-            ref={elementRef}
-            className={className}
-            style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible
-                    ? "translate(0, 0)"
-                    : `translate(${distance}px, ${distance}px)`,
-                transition: `opacity ${duration}ms ease-out, transform ${duration}ms ease-out`,
-                transitionDelay: `${delay}ms`,
-                willChange: "transform, opacity",
-            }}
-        >
+        <div ref={ref} className={className}>
             {children}
         </div>
     );
