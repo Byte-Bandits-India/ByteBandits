@@ -22,7 +22,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="about-section px-6 mt-[25lvh] md:mt-2 lg:mt-[10lvh] xl:mt-[40lvh] max-w-[1420px] mx-auto w-full" id="about-section">
+    <section className="about-section px-6 mt-[25lvh] md:mt-2 lg:mt-[10lvh] xl:mt-[36lvh] max-w-[1420px] mx-auto w-full" id="about-section">
       <p className="section-label text-left mb-10 md:text-[14px] text-[12px] text-[#818181] font-normal year pt-10">ABOUT US</p>
       <div className="about-content flex flex-col lg:flex-row items-start gap-10 lg:gap-[242px] ">
         {/* Left Column: Title and Description */}
