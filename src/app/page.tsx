@@ -152,7 +152,7 @@ export default function Home() {
       </div>
 
       {/* Background Image Section */}
-      <section className="relative w-full md:h-[48vh] overflow-visible z-10">
+      <section className="relative w-full md:h-[48vh] 2xl:h-[28vw] overflow-visible z-10">
         {/* Background Image with Zoom (identical position & size) */}
         <motion.img
           src="/images/home_1.webp"

@@ -314,10 +314,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           </div>
 
           {/* Button Group */}
-          <div className="relative flex bg-[#d8d8d8] px-4 py-2 rounded-full cursor-pointer gap-2 mt-2 pointer-events-auto">
+          <div className="relative flex bg-[#d8d8d8] px-[13px] py-3 lg:py-[15px] lg:px-4 shadow-xl rounded-full cursor-pointer gap-2 mt-2 pointer-events-auto">
             <Link href="/contact" aria-label="Go to contact">
               <div
-                className="navbar-icon text-[14px] sm:text-[24px] md:text-[26px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
+                className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
                 onClick={scrollToContact}
               >
                 <TfiEmail />
@@ -326,7 +326,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             <button
               ref={toggleBtnRef}
               type="button"
-              className="navbar-icon text-[14px] sm:text-[24px] md:text-[26px] text-[#ff9b42] bg-[#353639] px-4 py-4 rounded-full"
+              className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
               onClick={toggleMenu}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
