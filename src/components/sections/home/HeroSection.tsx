@@ -111,20 +111,11 @@ const HeroSection = () => {
                         {["WHERE IDEAS", "BECOME DIGITAL", "REALITIES"].map((line, lineIndex) => (
                             <div
                                 key={lineIndex}
-                                className="flex justify-center text-center text-[50px] sm:text-[clamp(40px,7vw,142px)] leading-[1.1] font-[anton] tracking-tight"
+                                className="flex justify-center text-center text-[clamp(50px,8vw,120px)] leading-[clamp(60px,7vw,132px)] font-[anton] tracking-tight"
                             >
                                 <div className="flex flex-wrap justify-center gap-x-2 sm:gap-x-4 md:gap-x-6">
                                     {line.split(" ").map((word, wIndex) => (
-                                        <div
-                                            key={wIndex}
-                                            className="inline-flex"
-                                            style={{
-                                                color:
-                                                    word === "IDEAS" || word === "REALITIES"
-                                                        ? "#DE2D40"
-                                                        : "#333333",
-                                            }}
-                                        >
+                                        <div key={wIndex} className="inline-flex text-[#333333]">
                                             {word.split("").map((char, i) => {
                                                 const charId = `${lineIndex}-${wIndex}-${i}`;
                                                 return (
@@ -133,13 +124,9 @@ const HeroSection = () => {
                                                         className="inline-block transition-transform duration-150 origin-bottom cursor-default"
                                                         style={{
                                                             transform:
-                                                                hoveredChar === charId
-                                                                    ? "scaleY(1.1)"
-                                                                    : "scaleY(1)",
+                                                                hoveredChar === charId ? "scaleY(1.1)" : "scaleY(1)",
                                                         }}
-                                                        onMouseEnter={() =>
-                                                            setHoveredChar(charId)
-                                                        }
+                                                        onMouseEnter={() => setHoveredChar(charId)}
                                                         onMouseLeave={() => setHoveredChar(null)}
                                                     >
                                                         {char}
@@ -151,6 +138,8 @@ const HeroSection = () => {
                                 </div>
                             </div>
                         ))}
+
+
 
                         {/* Shape 2 (near REALITIES, slightly above) */}
                         <div className="absolute top-[32%] md:top-[34%] lg:top-[28%] xl:top-[48%] right-[6%] w-[3rem] md:w-[4.5rem] lg:w-[6rem] xl:w-[6.5rem] pointer-events-none">
@@ -165,7 +154,7 @@ const HeroSection = () => {
 
 
                         {/* Subtitle */}
-                        <p className="mt-8 text-[14px] text-[#818181] font-bold select-none">
+                        <p className="mt-8 text-[13px] text-[#818181] font-bold select-none">
                             SINCE 2024
                         </p>
 

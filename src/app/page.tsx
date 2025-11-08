@@ -8,6 +8,7 @@ import ContactSection from "@/components/sections/home/Contact";
 import CrossedBanner from "@/components/ui/CrossedTape";
 import BlogSection from "@/components/sections/home/Blog";
 import { useScroll, useTransform, motion } from "framer-motion";
+import Card from "@/components/sections/home/Card";
 
 // Define proper types for the TubesCursor
 interface TubesCursorApp {
@@ -177,11 +178,15 @@ export default function Home() {
       </section>
 
       <Solution />
+      <Card />
       <ContactSection />
 
       <section>
         {/* Our Agency Section */}
         <div className="agency-section bg-[#FFFFF] text-center py-20 px-6 lg:px-0 w-full max-w-[1306px] mx-auto ">
+          <p className="mt-8 text-[13px] lg:text-[16px] text-[#818181] font-bold select-none">
+            OUR AGENCY
+          </p>
           <h2 className="text-[20px] md:text-[clamp(40px,6vw,60px)] md:leading-[1.2] leading-[32px] font-[anton] max-w-[90rem] mx-auto mt-10 text-[#312F2F] text-center">
             <span className="text-[#F9373A] lg:text-[#FAAC61]">BYTEBANDITS</span> IS WHERE BOLD IDEAS BECOME <span className="text-[#F9373A] lg:text-[#FAAC61]">POWERFUL </span>
             DIGITAL <span className="text-[#F9373A] lg:text-[#FAAC61]">REALITIES</span>. WE ENGINEER SMART SOLUTIONS, DESIGN

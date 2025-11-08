@@ -28,7 +28,7 @@ const AboutSection = () => {
         {/* Left Column: Title and Description */}
         <div className="flex-1" data-aos="fade-up" data-aos-delay="10">
           <h1 className="about-title text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] font-[anton]">
-            LET&apos;S KNOW <span className="highlight text-[#F9373A]">ABOUT</span> OUR COMPANY
+            WEB BRANDING<span className="highlight text-[#F9373A]"> HOUSE</span>
           </h1>
 
           <div className="about-description mt-6 text-[16px] sm:text-[18px] max-w-[600px] text-[#333333]" data-aos="fade-up" data-aos-delay="20">

@@ -5,11 +5,11 @@ export default function ContactSection() {
     return (
         <>
             <section id="service-section" className="w-full bg-[radial-gradient(circle,_#333437_0%,_#1C1D1F_100%)]">
-                <div className="w-full max-w-[1420px] mx-auto flex flex-col lg:flex-row gap-10 items-start">
+                <div className="w-full flex flex-col lg:flex-row gap-10 items-start">
 
                     {/* Left Column: Text */}
                     <div
-                        className="flex-1 px-6 flex pt-16 lg:py-16 flex-col"
+                        className="flex-1 px-6 flex pt-16 lg:py-16 flex-col xl:pl-24"
                         data-aos="fade-up"
                         data-aos-delay="5"
                     >
