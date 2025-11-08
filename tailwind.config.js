@@ -44,6 +44,7 @@ module.exports = {
           '"Segoe UI Symbol"',
         ],
         anonymous: ['"Anonymous Pro"', "monospace"],
+        inter: ["var(--font-inter)", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
