@@ -23,11 +23,12 @@ export default function Card() {
     const carouselRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const carouselTrackRef = useRef<HTMLDivElement>(null);
+    const animationRef = useRef<gsap.core.Tween | null>(null);
 
     const cards: ServiceCard[] = [
         {
             title: "Artificial Intelligence",
-            desc: "Harness the power of AI to automate, optimize, and innovate. We build intelligent solutions that analyze data, predict outcomes, and streamline operations turning your business challenges into competitive advantages. It’s not just about technology; it’s about creating a smarter, more efficient future for your brand.",
+            desc: "Harness the power of AI to automate, optimize, and innovate. We build intelligent solutions that analyze data, predict outcomes, and streamline operations turning your business challenges into competitive advantages. It's not just about technology; it's about creating a smarter, more efficient future for your brand.",
             tags: ["MFA", "Auth0", "DLP"],
             link: "/services/data-security",
         },
@@ -39,7 +40,7 @@ export default function Card() {
         },
         {
             title: "Web Development",
-            desc: "Get a fast, modern, and mobile-friendly website built to impress and perform. Clean design, smooth user experience, and everything tailored to your brand. Your site won’t just look great—it’ll work hard to support your business. Everything is built to scale with you.",
+            desc: "Get a fast, modern, and mobile-friendly website built to impress and perform. Clean design, smooth user experience, and everything tailored to your brand. Your site won't just look great—it'll work hard to support your business. Everything is built to scale with you.",
             tags: ["REACT", "SQL", "NODE"],
             link: "/services/web-development",
         },
@@ -95,8 +96,6 @@ export default function Card() {
         // Add extra space to ensure the last card is fully centered
         const horizontalScrollDistance = lastCardCenterPosition + (viewportWidth - cardWidth) / 2;
 
-
-
         // Create the horizontal scroll animation
         const containerAnimation = gsap.to(sectionPin, {
             x: () => -horizontalScrollDistance + "px",
@@ -113,8 +112,8 @@ export default function Card() {
             },
         });
 
-        // Store it in ref so we can pass to FadeUp
-        (carouselRef as any).currentAnimation = containerAnimation;
+        // Store it in ref with proper type
+        animationRef.current = containerAnimation;
 
         // Add active classes to cards as they come into view
         const cardElements = sectionPin.querySelectorAll('.solution-card');
@@ -146,13 +145,12 @@ export default function Card() {
             });
         });
 
-
         // Cleanup function
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            animationRef.current?.kill();
         };
     }, [cards.length]);
-
 
     return (
         <>

@@ -69,6 +69,10 @@ export default function Home() {
 
     let mounted = true;
 
+    // Store cleanup functions in variables inside the effect
+    let cleanupFunction: (() => void) | undefined;
+    let currentApp: TubesCursorApp | null = null;
+
     const init = async () => {
       const start = Date.now();
       const timeout = 5000;
@@ -88,6 +92,7 @@ export default function Home() {
         },
       });
 
+      currentApp = app;
       appRef.current.app = app;
 
       const randomColors = (count: number) =>
@@ -107,20 +112,35 @@ export default function Home() {
 
       document.body.addEventListener("click", handleClick);
 
-      appRef.current.cleanup = () => {
+      cleanupFunction = () => {
         document.body.removeEventListener("click", handleClick);
         app?.dispose?.();
       };
+
+      appRef.current.cleanup = cleanupFunction;
     };
 
     init();
 
     return () => {
       mounted = false;
-      appRef.current.cleanup?.();
-      document.body.removeChild(script);
+
+      // Use the variables declared inside the effect instead of appRef.current
+      if (cleanupFunction) {
+        cleanupFunction();
+      } else if (currentApp) {
+        // Fallback cleanup if cleanupFunction wasn't set
+        currentApp?.dispose?.();
+      }
+
+      // Clean up the script
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
       URL.revokeObjectURL(blobUrl);
-      delete window.TubesCursor;
+
+      // Clear the ref
+      appRef.current = { app: null };
     };
   }, []);
 
@@ -160,7 +180,7 @@ export default function Home() {
       {/* Tubes Cursor Section */}
       <section
         id="tubes-cursor-section"
-        className="relative w-full max-h-[900px] h-[80vh] overflow-hidden flex items-center justify-center bg-black/90 mt-[70px] md:mt-[110px]"
+        className="relative w-full max-h-[800px] h-[70vh] overflow-hidden flex items-center justify-center bg-black/90 mt-[70px] md:mt-[110px]"
       >
         <canvas
           ref={canvasRef}
