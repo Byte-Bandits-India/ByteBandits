@@ -180,7 +180,7 @@ export default function Home() {
       {/* Tubes Cursor Section */}
       <section
         id="tubes-cursor-section"
-        className="relative w-full max-h-[800px] h-[70vh] overflow-hidden flex items-center justify-center bg-black/90 mt-[70px] md:mt-[110px]"
+        className="relative w-full h-[100vh] overflow-hidden flex items-center justify-center bg-black/90 mt-[70px] md:mt-[110px]"
       >
         <canvas
           ref={canvasRef}
@@ -189,7 +189,7 @@ export default function Home() {
         />
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto space-y-6 md:space-y-4 transform transition-all duration-500 ease-out hover:scale-105">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-inter text-white leading-tight tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-[20px] md:text-[clamp(40px,6vw,60px)] md:leading-[1.2] font-bold font-inter text-white leading-tight tracking-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               TRUSTED BY
             </h1>
             <p className="inline-block px-6 sm:px-8 py-3 sm:py-2 text-[#ffffff] font-inter">

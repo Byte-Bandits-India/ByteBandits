@@ -74,7 +74,7 @@ export default function Home() {
                     style={{ scale, rotate: -60 }}
                     animate={{ y: [0, -36, 0] }}
                     transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
-                    className="absolute -right-[80px] top-[6%] w-[160px] sm:w-[150px] md:-right-[18%] md:w-[300px] lg:-right-[14%] xl:-right-[14%] xl:w-[450px] z-10"
+                    className="absolute -right-[80px] top-[6%] w-[160px] sm:w-[150px] md:-right-[18%] md:w-[300px] lg:-right-[14%] xl:-right-[10%] xl:w-[450px] z-10"
                 />
 
             </div>
@@ -95,14 +95,14 @@ export default function Home() {
                             <div
                                 key={lineIndex}
                                 className="title-line flex flex-wrap justify-center items-center 
-                 text-[50px] sm:text-[clamp(40px,7vw,142px)] leading-[1.1]
+                 text-[clamp(50px,8vw,120px)] leading-[60px] md:leading-[70px] lg:leading-[85px] xl:leading-[120px] font-[anton] tracking-tight
                  space-x-2 sm:space-x-4 lg:space-x-6"
                             >
                                 {line.split(" ").map((word, wIndex) => (
                                     <div
                                         key={wIndex}
                                         className="flex"
-                                        style={{ color: word === "CONTACT" ? "#F9373A" : "#353639" }}
+                                        style={{ color: word === "CONTACT" ? "#F9373A" : "#333333" }}
                                     >
                                         {word.split("").map((char, i) => (
                                             <span
@@ -190,7 +190,7 @@ export default function Home() {
                         </div>
 
                         <div className="lg:mt-8 md:max-w-[600px] mx-auto lg:max-w-full">
-                            <h1 className="text-[42px] sm:text-[clamp(40px,7vw,60px)] leading-[1.1] text-[#333333] font-anton text-left mt-5 lg:mt-0">
+                            <h1 className="text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] text-[#333333] font-anton text-left mt-5 lg:mt-0">
                                 CONTACT OUR <span className="text-[#F9373A]">TEAM</span>
                             </h1>
                             <p className="text-[#696969] text-[16px] lg:text-[18px] lg:mt-6">
@@ -285,7 +285,7 @@ export default function Home() {
                 </div>
 
                 <div className="md:flex md:max-w-[600px] mx-auto lg:max-w-full flex-col items-start lg:items-center justify-center text-left hidden lg:mt-[100px]">
-                    <h2 className="text-[42px] sm:text-[clamp(40px,7vw,60px)] leading-[1.1] text-[#333333] font-anton mt-5 lg:mt-0">Looking for a <br className="hidden md:block lg:hidden" /> technology partner ?</h2>
+                    <h2 className="text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] text-[#333333] font-anton mt-5 lg:mt-0">Looking for a <br className="hidden md:block lg:hidden" /> technology partner ?</h2>
                     <h3 className="text-[42px] sm:text-[clamp(40px,7vw,60px)] leading-[1.1] 
 bg-gradient-to-b from-[#9E1520] to-[#630C13] bg-clip-text text-transparent 
 font-anton mt-5 lg:mt-0">
