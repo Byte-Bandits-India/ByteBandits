@@ -1,22 +1,13 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { FaArrowRight } from "react-icons/fa";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
-}
-
-interface ServiceCard {
-    title: string;
-    desc: string;
-    tags: string[];
-    link: string;
 }
 
 export default function ServicesSection() {
