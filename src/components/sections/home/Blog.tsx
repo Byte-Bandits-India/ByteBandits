@@ -25,7 +25,7 @@ export default function BlogSection() {
 
     return (
         <div>
-            <div className="py-16 px-5 sm:px-10 md:px-20 lg:px-4 text-[#333333] w-full max-w-[1420px] mx-auto">
+            <div className="pb-16 px-5 sm:px-10 md:px-20 lg:px-4 text-[#333333] w-full max-w-[1420px] mx-auto">
                 {/* Section Heading */}
                 <p
                     className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"

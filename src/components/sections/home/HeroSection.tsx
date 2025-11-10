@@ -113,7 +113,7 @@ const HeroSection = () => {
                             {["WHERE IDEAS", "BECOME DIGITAL", "REALITIES"].map((line, lineIndex) => (
                                 <div
                                     key={lineIndex}
-                                    className="flex justify-center text-center text-[clamp(50px,8vw,120px)] leading-[60px] md:leading-[70px] lg:leading-[85px] xl:leading-[120px] font-[anton] tracking-tight"
+                                    className="flex justify-center text-center text-[clamp(50px,8vw,120px)] leading-[60px] md:leading-[70px] lg:leading-[85px] xl:leading-[130px] font-[anton] tracking-tight"
                                 >
                                     <div className="flex flex-wrap justify-center gap-x-2 sm:gap-x-4 md:gap-x-6">
                                         {line.split(" ").map((word, wIndex) => (

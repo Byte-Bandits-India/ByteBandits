@@ -62,18 +62,6 @@ export default function Card() {
             tags: ["AWS", "AZURE", "GCP"],
             link: "/services/cloud-scaling",
         },
-        {
-            title: "Customer Support",
-            desc: "Transform customer interactions into lasting relationships. We implement and manage modern support systems—including live chat, help desks, and AI-powered assistants—that provide timely, helpful, and personalized service. Elevate your support from a cost center to a loyalty engine.",
-            tags: ["AWS", "AZURE", "GCP"],
-            link: "/services/cloud-scaling",
-        },
-        {
-            title: "Cyber Security",
-            desc: "Protect your business, your data, and your reputation with robust, multi-layered security. We assess vulnerabilities, implement advanced defenses, and monitor for threats 24/7. Proactive protection that lets you operate with confidence in a connected world.",
-            tags: ["AWS", "AZURE", "GCP"],
-            link: "/services/cloud-scaling",
-        },
     ];
 
     // Initialize GSAP ScrollTrigger for horizontal scrolling
@@ -168,7 +156,7 @@ export default function Card() {
                             Services
                         </p>
                         <h2
-                            className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-4 text-[#333] font-[anton]"
+                            className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-4 text-[#333333] font-[anton]"
                         >
                             EXPLORE OUR <span className="text-[#F9373A]">EXPERTISE</span>
                         </h2>
@@ -205,10 +193,10 @@ export default function Card() {
 
                                     {/* Title & Description */}
                                     <div>
-                                        <h3 className="card-title text-[18px] sm:text-[25px] font-[anton] text-black uppercase">
+                                        <h3 className="card-title text-[18px] sm:text-[25px] font-[anton] text-[#333333] uppercase">
                                             {item.title}
                                         </h3>
-                                        <p className="card-desc text-[12px] sm:text-[14px] text-[#000000] my-5 inter">
+                                        <p className="card-desc text-[12px] sm:text-[14px] leading-[21px] text-[#333333] my-5 inter">
                                             {item.desc}
                                         </p>
                                     </div>

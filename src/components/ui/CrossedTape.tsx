@@ -35,14 +35,14 @@ export default function CrossedBanner() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-[60vh] sm:h-[80vh] bg-[#ffffff] overflow-hidden"
+            className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] bg-[#ffffff] overflow-hidden"
         >
             {/* Orange Tape */}
             <motion.div
                 style={{ x: orangeX }}
                 className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
             >
-                <div className="rotate-[-15deg] md:rotate-[-10deg] w-[600%] bg-[#FAAC61] text-[#454545] text-[18px] sm:text-[30px] font-[anton] whitespace-nowrap py-3 sm:py-4 tracking-wide">
+                <div className="rotate-[-15deg] md:rotate-[-10deg] w-[600%] bg-[#FAAC61] text-[#333333] text-[18px] sm:text-[30px] font-[anton] whitespace-nowrap py-3 sm:py-4 tracking-wide">
                     <div className="flex gap-16 sm:gap-40">
                         {Array.from({ length: 20 }).map((_, i) => (
                             <span key={i}>{orangeWords[i % orangeWords.length]}</span>
@@ -60,7 +60,7 @@ export default function CrossedBanner() {
                     {Array.from({ length: 20 }).map((_, i) => (
                         <span
                             key={i}
-                            className="bg-white text-[#454545] text-[12px] sm:text-[15px] font-[anton] px-4 py-2 sm:px-9 sm:py-5 uppercase rounded-full border border-black shadow-md whitespace-nowrap"
+                            className="bg-white text-[#333333] text-[12px] sm:text-[15px] font-[anton] px-4 py-2 sm:px-9 sm:py-5 uppercase rounded-full border border-[#333333] shadow-md whitespace-nowrap"
                         >
                             {whiteWords[i % whiteWords.length]}
                         </span>

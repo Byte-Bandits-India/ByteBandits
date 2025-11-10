@@ -91,7 +91,7 @@ export default function Home() {
                 <div className="text-center text-[#333333] text-[14px] mt-[24px]">
                     {/* Title */}
                     <motion.div className="contact-title mt-[45px] font-anton">
-                        {["LETS CONTACT", "WITH US"].map((line, lineIndex) => (
+                        {["GET IN TOUCH", "WITH US"].map((line, lineIndex) => (
                             <div
                                 key={lineIndex}
                                 className="title-line flex flex-wrap justify-center items-center 
@@ -102,7 +102,7 @@ export default function Home() {
                                     <div
                                         key={wIndex}
                                         className="flex"
-                                        style={{ color: word === "CONTACT" ? "#F9373A" : "#333333" }}
+                                        style={{ color: word === "TOUCH" ? "#F9373A" : "#333333" }}
                                     >
                                         {word.split("").map((char, i) => (
                                             <span

@@ -14,13 +14,13 @@ export default function ContactSection() {
                         data-aos="fade-up"
                         data-aos-delay="5"
                     >
-                        <p className="section-label text-xs sm:text-sm uppercase tracking-widest text-[#ECECEA] lg:text-[20px] mb-6 inter">
+                        <p className="section-label text-[14px] md:text-[16px] uppercase tracking-widest text-[#ECECEA] lg:text-[20px] mb-6 inter">
                             Contact
                         </p>
                         <h2 className="section-title text-[30px] sm:text-[40px] md:text-[60px] uppercase leading-tight mb-6 text-[#ECECEA] font-[anton]">
                             JUST A <span className="text-[#FAAC61]">MESSAGE</span> AWAY
                         </h2>
-                        <p className="text-[14px] text-[#828282] leading-relaxed md:text-[15px] lg:text-[20px] md:leading-6 border-l-[4px] border-[#FAAC61] pl-4">
+                        <p className="text-[14px] text-[#BABABA] leading-relaxed md:text-[16px] lg:text-[20px] md:leading-6 border-l-[4px] border-[#FAAC61] pl-4">
                             Have an <span className="text-[#F9373A]">idea, a project</span>, or just a spark of inspiration?
                             We’re here to turn it into a <span className="text-[#F9373A]">digital success story</span>.
                             Whether it’s building an app, scaling your business with smart tech, or crafting a brand that stands out —
@@ -31,10 +31,10 @@ export default function ContactSection() {
                         <div className="mt-8 flex">
                             <Link
                                 href="/contact"
-                                className="flex items-center justify-center gap-2 text-white bg-[#F9373A] w-full h-[50px] max-w-[195px] rounded-full text-center hover:bg-[#d92f33] transition-colors duration-300"
+                                className="flex items-center justify-center gap-2 text-white bg-[#F9373A] text-[14px] md:text-[16px] lg:text-[20px] w-full h-[40px] max-w-[170px] md:h-[50px] md:max-w-[195px] rounded-full text-center hover:bg-[#d92f33] transition-colors duration-300"
                             >
                                 CONTACT
-                                <IoIosArrowForward className="text-[20px]" />
+                                <IoIosArrowForward className="text-[14px] md:text-[16px] lg:text-[20px]" />
                             </Link>
                         </div>
                     </div>
