@@ -13,9 +13,9 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#252628] px-6 py-8 text-white overflow-x-hidden">
+    <footer className="bg-[#252628] px-6 py-8 text-white overflow-x-hidden relative">
       {/* Mobile View */}
-      <div className="md:hidden">
+      <div className="md:hidden absolute z-10">
         <div>
           <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
           <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
@@ -86,7 +86,7 @@ export default function Footer() {
           <div>
             <h2 className="text-[16px] font-semibold mb-6">Main Office</h2>
             <div>
-              
+
               <p className="text-[12px] whitespace-pre-line">
                 1/509A, Krishna Nagar
                 {"\n"}Periyar Rd, Ramapuram,
@@ -107,7 +107,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-<div className="flex flex-col md:flex-row md:gap-4 mt-8 justify-center items-center md:ml-[180px] md:mt-[-80px]">
+        <div className="flex flex-col md:flex-row md:gap-4 mt-8 justify-center items-center md:ml-[180px] md:mt-[-80px]">
           <div className="bg-[#A31621] w-[100%] md:w-[283px] h-[61px] flex items-center px-5">
             <Image
               src="/icons/Whatsapp.png"
@@ -164,79 +164,79 @@ export default function Footer() {
 
           {/* 2 - Our Services */}
           <div className="lg:w-[70%] flex justify-start gap-20 lg:gap-0 mt-10 lg:justify-around lg:mt-[-30px] ">
-          <div className=" relative top-[-10px]">
-            <h2 className="text-[18px] xl:text-[20px] font-semibold mb-4 md:mb-6">
-              Our Services
-            </h2>
-            <ul className="space-y-2 text-[12px] xl:text-[18px]">
-              {[
-                "Website and Application Designing",
-                "AI ML and Custom Bots",
-                "Domain and Web Hosting",
-                "Digital Marketing",
-                "Seo Optimizations and Social media",
-                "Cloud Solutions And Dev ops Automation",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <IoIosArrowForward size={12} />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className=" relative top-[-10px]">
+              <h2 className="text-[18px] xl:text-[20px] font-semibold mb-4 md:mb-6">
+                Our Services
+              </h2>
+              <ul className="space-y-2 text-[12px] xl:text-[18px]">
+                {[
+                  "Website and Application Designing",
+                  "AI ML and Custom Bots",
+                  "Domain and Web Hosting",
+                  "Digital Marketing",
+                  "Seo Optimizations and Social media",
+                  "Cloud Solutions And Dev ops Automation",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <IoIosArrowForward size={12} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* 3 - Useful Links */}
-          <div className="relative top-[-10px]">
-            <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">
-              Useful Links
-            </h2>
-            <ul className="space-y-2 text-[12px] xl:text-[18px]">
-              {[
-                { name: "Home", href: "/" },
-                { name: "Contact Us", href: "/contact" },
-                { name: "FAQ", href: "/faq" },
-                { name: "Services", href: "/service" },
-                { name: "About Us", href: "/about" },
-                { name: "Blogs", href: "/blogs" },
-              ].map((link) => (
-                <li key={link.name} className="flex items-center gap-2">
-                  <IoIosArrowForward size={12} />
-                  <Link href={link.href} className="hover:underline">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* 3 - Useful Links */}
+            <div className="relative top-[-10px]">
+              <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">
+                Useful Links
+              </h2>
+              <ul className="space-y-2 text-[12px] xl:text-[18px]">
+                {[
+                  { name: "Home", href: "/" },
+                  { name: "Contact Us", href: "/contact" },
+                  { name: "FAQ", href: "/faq" },
+                  { name: "Services", href: "/service" },
+                  { name: "About Us", href: "/about" },
+                  { name: "Blogs", href: "/blogs" },
+                ].map((link) => (
+                  <li key={link.name} className="flex items-center gap-2">
+                    <IoIosArrowForward size={12} />
+                    <Link href={link.href} className="hover:underline">
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* 4 - Office Locations */}
-          <div className="relative top-[-10px]">
-            <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">
-              Main Office
-            </h2>
-            <div className="text-[12px] space-y-4">
-              <div>
-                
-                <p className="whitespace-pre-line xl:text-[16px]">
-                  1/509A, Krishna Nagar{"\n"}Periyar Rd, Ramapuram,{"\n"}Indira Nagar, Manappakkam,{"\n"}Chennai, Tamil Nadu 600125
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold xl:text-[18px] mb-2">Trichy Branch</h3>
-                <p className="whitespace-pre-line xl:text-[16px]">
-                  Bhima Nagar,{"\n"}Sangillyandapuram,{"\n"}Tiruchirappalli-620001.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold xl:text-[18px] mb-2">Bangalore Branch</h3>
-                <p className="whitespace-pre-line xl:text-[16px]">
-                  Silicon Town, Rayasandra,{"\n"}Bengaluru, Karnataka 560100
-                </p>
+            {/* 4 - Office Locations */}
+            <div className="relative top-[-10px]">
+              <h2 className="text-[16px] xl:text-[20px] font-semibold mb-4 md:mb-6">
+                Main Office
+              </h2>
+              <div className="text-[12px] space-y-4">
+                <div>
+
+                  <p className="whitespace-pre-line xl:text-[16px]">
+                    1/509A, Krishna Nagar{"\n"}Periyar Rd, Ramapuram,{"\n"}Indira Nagar, Manappakkam,{"\n"}Chennai, Tamil Nadu 600125
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold xl:text-[18px] mb-2">Trichy Branch</h3>
+                  <p className="whitespace-pre-line xl:text-[16px]">
+                    Bhima Nagar,{"\n"}Sangillyandapuram,{"\n"}Tiruchirappalli-620001.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold xl:text-[18px] mb-2">Bangalore Branch</h3>
+                  <p className="whitespace-pre-line xl:text-[16px]">
+                    Silicon Town, Rayasandra,{"\n"}Bengaluru, Karnataka 560100
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
         {/* Social Media */}
         <div className="flex gap-4 my-8">
           {socialMedia.map((social) => (
@@ -288,7 +288,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
 
         {/* Footer Bottom */}
         <div className="mt-8 border-t border-[#FFFFFF] pt-4">

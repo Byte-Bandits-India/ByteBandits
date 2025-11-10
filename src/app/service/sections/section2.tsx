@@ -626,57 +626,7 @@ export default function PinnedHorizontalSection() {
                         >
                             <div className="slide w-screen h-screen flex-shrink-0 flex items-center justify-center">
                             </div>
-                            <div className="slide w-screen h-screen flex-shrink-0 flex items-center justify-center">
-                                <Image
-                                    src="/images/service/cybersecurity.png"
-                                    alt="cybersecurity"
-                                    fill
-                                    className="object-cover mix-blend-multiply"
-                                    sizes="100vw"
-                                />
-                            </div>
                         </div>
-                    </div>
-                </section>
-
-                {/* First AI Horizontal Cards Section */}
-                <section
-                    ref={aiSectionRef}
-                    className="relative w-full h-screen overflow-hidden z-10 bg-transparent"
-                >
-                    <div
-                        ref={aiTrackRef}
-                        className="flex h-full items-center will-change-transform gap-x-10 px-20"
-                        style={{ width: "max-content" }}
-                    >
-                        <div className="flex-shrink-0 h-full flex items-center justify-start">
-                            <h2 className="text-[clamp(50px,6vw,120px)] font-extrabold leading-[1.1] uppercase text-black">
-                                Artificial <br /> Intelligence
-                            </h2>
-                        </div>
-                        {aiCards.map((card) => (
-                            <div
-                                key={card.id}
-                                className="flex-shrink-0 flex items-center justify-center"
-                            >
-                                <div
-                                    className="w-[380px] h-[450px] rounded-2xl bg-white/80 backdrop-blur-lg shadow-2xl border border-gray-200 
-          flex flex-col justify-between p-8 group transition-all duration-300 hover:scale-105 hover:shadow-3xl"
-                                >
-                                    <div className="text-[40px] font-anton font-bold text-gray-700">
-                                        {card.number}
-                                    </div>
-                                    <div className="flex-1 flex flex-col justify-center">
-                                        <h3 className="font-bold text-[24px] mb-4 text-gray-900 font-inter group-hover:text-black transition-colors duration-300 leading-tight">
-                                            {card.title}
-                                        </h3>
-                                        <p className="text-gray-700 text-[16px] leading-relaxed">
-                                            {card.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </section>
 
