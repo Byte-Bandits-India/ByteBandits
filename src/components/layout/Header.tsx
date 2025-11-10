@@ -5,7 +5,7 @@ export const Header = () => {
     const menuItems = [
         { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
         { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
-        { label: 'Services', ariaLabel: 'View our services', link: '/services' },
+        { label: 'Services', ariaLabel: 'View our services', link: '/service' },
         { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' },
     ];
 
