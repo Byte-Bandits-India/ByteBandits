@@ -149,7 +149,7 @@ export default function Footer() {
                                 { name: "Home", href: "/" },
                                 { name: "Contact Us", href: "/contact" },
                                 { name: "FAQ", href: "/faq" },
-                                { name: "Services", href: "/services" },
+                                { name: "Services", href: "/service" },
                                 { name: "About Us", href: "/about" },
                                 { name: "Blogs", href: "/blogs" },
                             ].map((link) => (
