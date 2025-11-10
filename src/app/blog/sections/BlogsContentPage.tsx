@@ -1,22 +1,14 @@
 "use client"
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import Image from 'next/image';
 
-// Define types for the section contents
-interface SectionContent {
-  what: string;
-  why: string;
-  how: string[];
-}
-
-// Define props interface (empty in this case, but good practice)
-interface BlogContentPageProps { }
-
-export default function BlogContentPage(props: BlogContentPageProps) {
+export default function BlogContentPage() {
   const contentRef = useRef<HTMLDivElement>(null);
   const leftSidebarRef = useRef<HTMLDivElement>(null);
   const rightSidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const ctaSectionRef = useRef<HTMLDivElement>(null);
 
   const [isPinned, setIsPinned] = useState(false);
   const [leftSidebarStyle, setLeftSidebarStyle] = useState({});
@@ -51,12 +43,17 @@ export default function BlogContentPage(props: BlogContentPageProps) {
 
       // Calculate when to start and stop pinning
       const contentStart = contentRect.top + scrollTop;
-      const contentEnd = contentRect.bottom + scrollTop;
+
+      // Check if CTA section is in view
+      let ctaSectionInView = false;
+      if (ctaSectionRef.current) {
+        const ctaRect = ctaSectionRef.current.getBoundingClientRect();
+        ctaSectionInView = ctaRect.top < viewportHeight * 0.8; // CTA section is 80% in view
+      }
 
       // Start pinning when content reaches 100px from top
-      // Stop pinning when content bottom reaches top of viewport
-      const shouldPin = scrollTop >= contentStart - 100 &&
-        scrollTop <= contentEnd - viewportHeight;
+      // Stop pinning when CTA section comes into view
+      const shouldPin = scrollTop >= contentStart - 100 && !ctaSectionInView;
 
       setIsPinned(shouldPin);
       setShouldShowSidebars(true);
@@ -82,7 +79,8 @@ export default function BlogContentPage(props: BlogContentPageProps) {
           zIndex: 40
         });
       } else {
-        // Reset styles when not pinned
+        // When not pinned, reset to natural flow (no styles)
+        // This allows the sidebars to stay at their natural position at the bottom of main content
         setLeftSidebarStyle({});
         setRightSidebarStyle({});
       }
@@ -114,12 +112,12 @@ export default function BlogContentPage(props: BlogContentPageProps) {
 
   const sectionContents = [
     {
-      what: "New designers often try to include everything on one screen — menus, banners, popups, icons, tips, sidebars… the list goes on. The result? A crowded, confusing interface that overwhelms users. Why It's a Problem: Users don't know where to look or what to do first. Too many elements fight for attention, which increases cognitive load.",
-      why: "Users don't know where to look or what to do first. Too many elements fight for attention, which increases cognitive load.",
+      what: "New designers often try to include everything on one screen — menus, banners, popups, icons, tips, sidebars… the list goes on. The result? A crowded, confusing interface that overwhelms users. Why It&apos;s a Problem: Users don&apos;t know where to look or what to do first. Too many elements fight for attention, which increases cognitive load.",
+      why: "Users don&apos;t know where to look or what to do first. Too many elements fight for attention, which increases cognitive load.",
       how: [
         "Start with a clear visual hierarchy.Identify the primary action or content, and design around it.",
-        "Use whitespace generously. It's not 'empty' — it provides breathing space.",
-        "Declutter ruthlessly — if an element doesn't add value, cut it."
+        "Use whitespace generously. It&apos;s not &apos;empty&apos; — it provides breathing space.",
+        "Declutter ruthlessly — if an element doesn&apos;t add value, cut it."
       ]
     },
     {
@@ -146,11 +144,11 @@ export default function BlogContentPage(props: BlogContentPageProps) {
       how: [
         "Follow WCAG guidelines.Aim for at least a 4.5:1 contrast ratio.",
         "Test your designs.Use tools like Stark or Figma plugins.",
-        "Think inclusively.Accessibility isn't a feature — it's a foundation."
+        "Think inclusively.Accessibility isn&apos;t a feature — it&apos;s a foundation."
       ]
     },
     {
-      what: "Every button is a different color. There's red, blue, green, yellow — it looks like a UI rainbow.",
+      what: "Every button is a different color. There&apos;s red, blue, green, yellow — it looks like a UI rainbow.",
       why: "Without meaning attached to color, users get confused.Also, too many colors feel unprofessional",
       how: [
         "Define a design system palette. Primary, secondary, neutral, and alert colors.",
@@ -159,19 +157,19 @@ export default function BlogContentPage(props: BlogContentPageProps) {
       ]
     },
     {
-      what: "Icons look sleek, but users have no idea what they mean — is that a rocket for 'Submit'?",
-      why: "Users shouldn't have to guess. Unclear icons increase friction.",
+      what: "Icons look sleek, but users have no idea what they mean — is that a rocket for &apos;Submit&apos;?",
+      why: "Users shouldn&apos;t have to guess. Unclear icons increase friction.",
       how: [
         " Use familiar icons. Search, settings, back, and delete should be instantly recognizable.",
         "Add labels. Especially for complex or custom icons.",
-        "Maintain consistency. Don't mix icon styles (e.g., outline with solid)."
+        "Maintain consistency. Don&apos;t mix icon styles (e.g., outline with solid)."
       ]
     },
     {
-      what: "Buttons that say 'Click Here' or 'Submit' without context.",
-      why: "The CTA is the user's next step. If it's unclear, users hesitate — or worse, bounce.",
+      what: "Buttons that say &apos;Click Here&apos; or &apos;Submit&apos; without context.",
+      why: "The CTA is the user&apos;s next step. If it&apos;s unclear, users hesitate — or worse, bounce.",
       how: [
-        "Be specific. Use action-oriented labels like 'Download Resume' or 'Create Account.'",
+        "Be specific. Use action-oriented labels like &apos;Download Resume&apos; or &apos;Create Account.&apos;",
         " Make CTAs visually distinct. Use size, contrast, and placement.",
         "Limit choices. Too many CTAs compete with each other — use one primary CTA per screen when possible."
       ]
@@ -211,7 +209,7 @@ export default function BlogContentPage(props: BlogContentPageProps) {
       <div className="mx-auto px-4 md:px-8 py-8 lg:py-20" ref={contentRef}>
         {/* Main Grid Layout */}
         <div className="lg:grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
-          {/* Left Sidebar - Table of Contents - PINNED */}
+          {/* Left Sidebar - Table of Contents */}
           <div className="lg:col-span-2 order-1 lg:order-1 flex justify-start lg:block">
             <motion.div
               ref={leftSidebarRef}
@@ -262,7 +260,7 @@ export default function BlogContentPage(props: BlogContentPageProps) {
             <div className="space-y-12 max-w-[1200px] mx-auto">
               <div className="prose prose-lg max-w-none">
                 <p className="text-[16px] lg:text-[20px] font-inter font-semibold text-[#000000] leading-[26px] md:leading-[30px] lg:leading-[36px]">
-                  User Interface (UI) design is a critical part of creating digital products that feel intuitive, look polished, and keep users engaged. However, beginners often fall into some common traps that can hinder usability and overall user satisfaction. If you're new to UI design, learning to spot and fix these mistakes early can save you time and elevate your work dramatically.
+                  User Interface (UI) design is a critical part of creating digital products that feel intuitive, look polished, and keep users engaged. However, beginners often fall into some common traps that can hinder usability and overall user satisfaction. If you&apos;re new to UI design, learning to spot and fix these mistakes early can save you time and elevate your work dramatically.
                 </p>
                 <p className="text-[16px] lg:text-[20px] font-inter font-semibold leading-[26px] md:leading-[30px] lg:leading-[36px] mt-6 md:mt-8 lg:mt-10">
                   Here are the top 10 UI mistakes beginners make — and how to avoid them.
@@ -286,7 +284,7 @@ export default function BlogContentPage(props: BlogContentPageProps) {
                         {sectionContents[index]?.what}
                       </p>
                       <p className="text-[#000000] text-[16px] lg:text-[20px] font-inter font-semibold lg:leading-[36px]">
-                        <span className="font-bold text-[#005FA4]">Why It's a Problem: </span>
+                        <span className="font-bold text-[#005FA4]">Why It&apos;s a Problem: </span>
                         {sectionContents[index]?.why}
                       </p>
                     </div>
@@ -308,7 +306,7 @@ export default function BlogContentPage(props: BlogContentPageProps) {
             </div>
           </main>
 
-          {/* Right Sidebar - Suggested Articles - PINNED */}
+          {/* Right Sidebar - Suggested Articles */}
           <div className="lg:col-span-2 order-3 lg:order-3">
             <motion.div
               ref={rightSidebarRef}
@@ -326,9 +324,11 @@ export default function BlogContentPage(props: BlogContentPageProps) {
               }}
             >
               <div className="bg-white py-6">
-                <img
+                <Image
                   src="/images/blog/blog-2.png"
                   alt="Digital Marketing Strategies"
+                  width={300}
+                  height={192}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
                 <div className="space-y-2">
@@ -342,9 +342,11 @@ export default function BlogContentPage(props: BlogContentPageProps) {
               </div>
 
               <div className="bg-white py-6">
-                <img
+                <Image
                   src="/images/blog/blog-3.png"
                   alt="Cloud Hosting Comparison"
+                  width={300}
+                  height={192}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
                 <div className="space-y-2">
@@ -361,13 +363,13 @@ export default function BlogContentPage(props: BlogContentPageProps) {
         </div>
       </div>
 
-      {/* Bottom CTA Section */}
-      <div>
+      {/* Bottom CTA Section - Added ref */}
+      <div ref={ctaSectionRef}>
         <div className="bg-[#252628] h-[50vh] md:h-[100vh] w-full pt-12 pb-32 relative overflow-hidden">
           <div className="max-w-8xl mx-auto px-6 flex items-center justify-center mt-10">
             <div className="text-xl md:text-[70px] cta-heading font-black text-black font-inter text-center">
-              <p className="md:ml-[350px]"><span className="text-[#168372]">Don't stop</span> now</p>
-              <p className="md:mt-[-25px]"> <span className="text-[#168372]">There's more</span> where that came from.</p>
+              <p className="md:ml-[350px]"><span className="text-[#168372]">Don&apos;t stop</span> now</p>
+              <p className="md:mt-[-25px]"> <span className="text-[#168372]">There&apos;s more</span> where that came from.</p>
             </div>
           </div>
         </div>
@@ -376,9 +378,11 @@ export default function BlogContentPage(props: BlogContentPageProps) {
           <div className="card-section max-w-8xl px-2 flex flex-col md:flex-row justify-center gap-16">
             {/* Card 1 */}
             <div className="bg-white card md:rounded-4xl rounded-2xl shadow-md overflow-hidden w-full md:w-[700px] h-[750px]">
-              <img
+              <Image
                 src="/images/blog/card2.png"
                 alt="Card 1"
+                width={700}
+                height={400}
                 className="w-full h-100 md:px-4 md:py-4 px-1.5 py-1.5 md:rounded-4xl rounded-2xl object-cover card-img"
               />
               <div className="md:py-5 py-2 md:ml-10 ml-5">
@@ -391,9 +395,11 @@ export default function BlogContentPage(props: BlogContentPageProps) {
 
             {/* Card 2 */}
             <div className="bg-white card md:rounded-4xl rounded-2xl shadow-md overflow-hidden w-full md:w-[700px] md:h-[750px]">
-              <img
+              <Image
                 src="/images/blog/card1.png"
                 alt="Card 2"
+                width={700}
+                height={400}
                 className="w-full h-100 md:px-4 md:py-4 px-1.5 py-1.5 md:rounded-4xl rounded-2xl object-cover card-img"
               />
               <div className="md:py-5 py-2 md:ml-10 ml-5">
