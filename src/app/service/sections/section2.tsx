@@ -616,6 +616,7 @@ export default function PinnedHorizontalSection() {
                     </div>
                 </div>
 
+
                 {/* Horizontal Scroll Section */}
                 <section ref={sectionRef} className="relative w-full overflow-hidden z-10">
                     <div className="relative w-full h-screen overflow-hidden z-20">
