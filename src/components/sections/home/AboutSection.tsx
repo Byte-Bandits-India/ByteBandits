@@ -65,7 +65,7 @@ const AboutSection = () => {
 
           <div className="mt-10">
             <div className="bg-[#D7D7D7] text-[14px] md:text-[16px] lg:text-[20px] w-full px-4 py-4 rounded-[5px] border-l-4 border-[#F9373A]">
-              <p className="text-[#333333]">
+              <p className="text-[#333333] font-medium">
                 We don’t just build technology <br />
                 We build possibilities that grow with you.
               </p>
