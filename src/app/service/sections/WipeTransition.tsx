@@ -20,17 +20,18 @@ export default function WipeTransition({ children }: { children: React.ReactNode
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "bottom top",
+                    end: "+=50%", // ⏱ End earlier for smoother transition
                     scrub: true,
                     pin: true,
-                }
+                    pinSpacing: false, // 🚫 Prevent layout pushdown
+                },
             });
 
-            // Stagger the bars for stair-step effect
+            // Wipe bars move upward in a stagger
             tl.to(".wipe-bar", {
                 yPercent: -100,
                 ease: "none",
-                stagger: 0.1
+                stagger: 0.1,
             });
         }, containerRef);
 
@@ -38,8 +39,8 @@ export default function WipeTransition({ children }: { children: React.ReactNode
     }, []);
 
     return (
-        <div ref={containerRef} className="relative h-screen">
-            {/* Content */}
+        <div ref={containerRef} className="relative h-screen overflow-hidden">
+            {/* Page Content */}
             <div className="relative z-10 h-full">
                 {children}
             </div>
@@ -52,10 +53,9 @@ export default function WipeTransition({ children }: { children: React.ReactNode
                 {[...Array(5)].map((_, i) => (
                     <div
                         key={i}
-                        className={`wipe-bar bar-${i + 1} flex-1 h-full bg-white transform translate-y-full`}
+                        className={`wipe-bar flex-1 h-full bg-white transform translate-y-full`}
                     />
                 ))}
-
             </div>
         </div>
     );
