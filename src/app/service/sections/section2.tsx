@@ -171,17 +171,47 @@ export default function PinnedHorizontalSection() {
     const serviceSections: ServiceSectionType[] = [
         {
             id: "branding",
-            title: "Branding & Social Media",
+            title: "Branding & \nSocial Media",
             image: "/images/service/medium-shot-woman-holding-smartphone 1.png",
             imageAlt: "Branding & Social Media",
             cards: [
-                { id: 1, number: "01", title: "BRAND STRATEGY & IDENTITY", description: "Comprehensive brand development including positioning, visual identity, tone of voice, and brand guidelines." },
-                { id: 2, number: "02", title: "LOGO DESIGN & VISUAL ASSETS", description: "Memorable logo design, color palettes, typography, and complete visual identity systems." },
-                { id: 3, number: "03", title: "SOCIAL MEDIA MANAGEMENT", description: "Content creation, community management, and strategic posting across all major social platforms." },
-                { id: 4, number: "04", title: "CONTENT CREATION & MARKETING", description: "Engaging visual and written content, video production, and strategic content distribution." },
-                { id: 5, number: "05", title: "INFLUENCER COLLABORATIONS", description: "Strategic partnerships with influencers and creators to amplify brand reach and authenticity." },
-                { id: 6, number: "06", title: "SOCIAL MEDIA ADVERTISING", description: "Targeted ad campaigns, performance tracking, and ROI optimization across social platforms." },
-            ],
+                {
+                    id: 1,
+                    number: "01",
+                    title: "BRAND STRATEGY & IDENTITY",
+                    description: "Comprehensive brand development including positioning, visual identity, tone of voice, and brand guidelines.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "LOGO DESIGN & VISUAL ASSETS",
+                    description: "Memorable logo design, color palettes, typography, and complete visual identity systems.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "SOCIAL MEDIA MANAGEMENT",
+                    description: "Content creation, community management, and strategic posting across all major social platforms.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "CONTENT CREATION & MARKETING",
+                    description: "Engaging visual and written content, video production, and strategic content distribution.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "INFLUENCER COLLABORATIONS",
+                    description: "Strategic partnerships with influencers and creators to amplify brand reach and authenticity.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "SOCIAL MEDIA ADVERTISING",
+                    description: "Targeted ad campaigns, performance tracking, and ROI optimization across social platforms.",
+                },
+            ]
         },
         {
             id: "web",
@@ -189,13 +219,175 @@ export default function PinnedHorizontalSection() {
             image: "/images/service/still-life-graphic-design-studio 1.png",
             imageAlt: "Website Development",
             cards: [
-                { id: 1, number: "01", title: "Custom Web Solutions", description: "Tailored platforms using Laravel, Next.js, and React for speed and flexibility." },
-                { id: 2, number: "02", title: "E-Commerce Development", description: "Secure, conversion-focused stores with seamless payment integration." },
-                { id: 3, number: "03", title: "UI/UX Design", description: "Modern, intuitive interfaces designed for engagement and accessibility." },
-                { id: 4, number: "04", title: "CMS Development", description: "WordPress, Strapi, or custom dashboards for effortless content control." },
-                { id: 5, number: "05", title: "API & System Integrations", description: "Connecting external tools, CRMs, and payment gateways for unified performance." },
-                { id: 6, number: "06", title: "Maintenance & Optimization", description: "Continuous updates, monitoring, and SEO-ready enhancements." },
-            ],
+                {
+                    id: 1,
+                    number: "01",
+                    title: "Custom Web Solutions",
+                    description: "Tailored platforms using Laravel, Next.js, and React for speed and flexibility.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "E-Commerce Development",
+                    description: "Secure, conversion-focused stores with seamless payment integration.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "UI/UX Design",
+                    description: "Modern, intuitive interfaces designed for engagement and accessibility.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "CMS Development",
+                    description: "WordPress, Strapi, or custom dashboards for effortless content control.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "API & System Integrations",
+                    description: "Connecting external tools, CRMs, and payment gateways for unified performance.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "Maintenance & Optimization",
+                    description: "Continuous updates, monitoring, and SEO-ready enhancements.",
+                },
+            ]
+        },
+        {
+            id: "mobile",
+            title: "Mobile Application \nDevelopment",
+            image: "/images/service/representations-user-experience-interface-design 1.png",
+            imageAlt: "Mobile Development",
+            cards: [
+                {
+                    id: 1,
+                    number: "01",
+                    title: "Native App Development",
+                    description: "Android and iOS apps built for performance, stability, and user delight.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "Cross-Platform Solutions",
+                    description: "Flutter and React Native apps for faster, unified deployment.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "App UI/UX Design",
+                    description: "Engaging interfaces focused on usability and retention.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "API & Third-Party Integration",
+                    description: "Secure connections to CRMs, databases, and cloud systems.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "App Store Optimization",
+                    description: "Visibility enhancement through metadata and creative assets.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "Maintenance & Support",
+                    description: "Regular updates, security patches, and performance tuning.",
+                },
+            ]
+        },
+        {
+            id: "digital",
+            title: "Digital \nMarketing",
+            image: "/images/service/top-viewtop-view-manager-employee-doing-teamwork-business-office-looking-charts-laptop-display 1.png",
+            imageAlt: "Digital Marketing",
+            cards: [
+                {
+                    id: 1,
+                    number: "01",
+                    title: "Paid Advertising & Boosting",
+                    description: "Google Search, Display, YouTube, Meta, and Spotify Ads, along with strategic reel and post boosting.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "SEO & Search Strategy",
+                    description: "Local, technical, and international SEO combined with targeted backlink building.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "Content Marketing",
+                    description: "High-quality video, audio, social, and website content aligned with client goals and audience behavior.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "Performance Analytics",
+                    description: "Real-time insights, conversion tracking, and funnel optimization for better ROI.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "Email & Retargeting",
+                    description: "Personalized outreach and automated re-marketing to drive retention.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "Campaign Strategy ",
+                    description: "End-to-end planning, execution, and reporting for sustained digital visibility.",
+                },
+            ]
+        },
+        {
+            id: "cloud",
+            title: "Cloud & \nDevOps",
+            image: "/images/service/devops.png",
+            imageAlt: "Cloud & DevOps",
+            cards: [
+                {
+                    id: 1,
+                    number: "01",
+                    title: "CLOUD INFRASTRUCTURE",
+                    description: "Architecture design and implementation on AWS, Azure, or Google Cloud.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "CI/CD PIPELINES",
+                    description: "Continuous integration and deployment for faster, error-free releases.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "CONTAINERIZATION & ORCHESTRATION",
+                    description: "Docker and Kubernetes solutions for scalability and efficiency.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "INFRASTRUCTURE AS CODE",
+                    description: "Automated provisioning using Terraform and Ansible for consistency.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "MONITORING & OPTIMIZATION",
+                    description: "Real-time tracking, load management, and cost efficiency improvements.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "CLOUD SECURITY & COMPLIANCE",
+                    description: "Data encryption, access control, and adherence to industry standards.",
+                },
+            ]
         },
         {
             id: "ai",
@@ -203,15 +395,46 @@ export default function PinnedHorizontalSection() {
             image: "/images/service/cybersecurity-concept-collage-design 2.png",
             imageAlt: "Artificial Intelligence",
             cards: [
-                { id: 1, number: "01", title: "AI STRATEGY & CONSULTING", description: "Readiness assessments, implementation roadmaps, and responsible AI audits." },
-                { id: 2, number: "02", title: "CUSTOM AI SOLUTIONS", description: "Machine learning models, workflow automation, predictive analytics, and generative AI." },
-                { id: 3, number: "03", title: "CONVERSATIONAL AI & NLP", description: "Intelligent chatbots, sentiment analysis, and multilingual assistants." },
-                { id: 4, number: "04", title: "COMPUTER VISION", description: "Image recognition, OCR, video analytics, and AR/VR-driven use cases." },
-                { id: 5, number: "05", title: "PREDICTIVE ANALYTICS", description: "Intelligent forecasting, trend analysis, and proactive insights." },
-                { id: 6, number: "06", title: "AI INTEGRATION", description: "Seamless deployment of AI tools into existing applications, CRMs, and ecosystems." },
-            ],
-        },
+                {
+                    id: 1,
+                    number: "01",
+                    title: "AI STRATEGY & CONSULTING",
+                    description: "Readiness assessments, implementation roadmaps, and responsible AI audits to align innovation with business goals.",
+                },
+                {
+                    id: 2,
+                    number: "02",
+                    title: "CUSTOM AI SOLUTIONS",
+                    description: "Machine learning models, workflow automation, predictive analytics, and generative AI for smarter decision-making.",
+                },
+                {
+                    id: 3,
+                    number: "03",
+                    title: "CONVERSATIONAL AI & NLP",
+                    description: "Intelligent chatbots, sentiment analysis, and multilingual assistants that enhance customer engagement.",
+                },
+                {
+                    id: 4,
+                    number: "04",
+                    title: "COMPUTER VISION",
+                    description: "Image recognition, OCR, video analytics, and AR/VR-driven use cases for advanced visual intelligence.",
+                },
+                {
+                    id: 5,
+                    number: "05",
+                    title: "PREDICTIVE ANALYTICS",
+                    description: "Intelligent forecasting, trend analysis, and data-driven insights for proactive business decisions.",
+                },
+                {
+                    id: 6,
+                    number: "06",
+                    title: "AI INTEGRATION",
+                    description: "Seamless deployment of AI tools into existing applications, CRMs, and enterprise ecosystems.",
+                },
+            ]
+        }
     ];
+
 
     // ---------- Refs for each service section ----------
     const sectionRefs = [
