@@ -23,7 +23,7 @@ export async function POST(req: Request): Promise<Response> {
 
     // Send API request
     const response = await fetch(
-      "http://ec2-3-6-37-194.ap-south-1.compute.amazonaws.com:3035/v1/message/send",
+      "https://api.bytebandits.in/v1/message/send",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
