@@ -1,8 +1,8 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useMotionValue, useScroll } from "framer-motion";
+import { motion, useMotionValue, useScroll, MotionValue } from "framer-motion";
 import Image from "next/image";
 
 if (typeof window !== "undefined") {
@@ -65,17 +65,17 @@ const useHorizontalScroll = (sectionRef: React.RefObject<HTMLElement | null>, tr
 const ServiceCard: React.FC<{ card: ServiceCard }> = ({ card }) => (
     <div className="flex-shrink-0 flex items-center justify-center">
         <div
-            className="w-[380px] h-[450px] rounded-2xl bg-white/80 backdrop-blur-lg shadow-2xl border border-gray-200 
-          flex flex-col justify-between p-8 group transition-all duration-300 hover:scale-105 hover:shadow-3xl"
+            className="h-[330px] w-[300px] lg:w-[380px] lg:h-[450px] rounded-2xl bg-white/20 backdrop-blur-lg border border-[#D7D7D7] 
+          flex flex-col justify-between p-8 group transition-all duration-300 hover:scale-105"
         >
-            <div className="text-[40px] font-anton font-bold text-gray-700">
+            <div className="text-[40px] font-anton font-bold text-[#333333]">
                 {card.number}
             </div>
             <div className="flex-1 flex flex-col justify-center">
-                <h3 className="font-bold text-[24px] mb-4 text-gray-900 font-inter group-hover:text-black transition-colors duration-300 leading-tight">
+                <h3 className="font-medium text-[20px] lg:text-[24px] mb-4 text-[#333333] font-inter group-hover:text-black transition-colors duration-300 leading-tight">
                     {card.title}
                 </h3>
-                <p className="text-gray-700 text-[16px] leading-relaxed">
+                <p className="text-[14px] md:text-[16px] text-[#333333] leading-relaxed">
                     {card.description}
                 </p>
             </div>
@@ -83,15 +83,14 @@ const ServiceCard: React.FC<{ card: ServiceCard }> = ({ card }) => (
     </div>
 );
 
-// Reusable Image Section Component - UPDATED for horizontal scroll
 // Reusable Image Section Component - SINGLE IMAGE (80vh)
 const ImageSection: React.FC<{
-    sectionRef: React.RefObject<HTMLElement | null>;
-    trackRef: React.RefObject<HTMLElement | null>;
+    sectionRef: React.RefObject<HTMLDivElement | null>;
+    trackRef: React.RefObject<HTMLDivElement | null>;
     imageSrc: string;
     imageAlt: string;
     title: string;
-}> = ({ sectionRef, trackRef, imageSrc, imageAlt, title }) => {
+}> = ({ sectionRef, trackRef, imageSrc, imageAlt }) => {
     useEffect(() => {
         if (!sectionRef.current || !trackRef.current) return;
 
@@ -122,21 +121,21 @@ const ImageSection: React.FC<{
 
     return (
         <section
-            ref={sectionRef as React.RefObject<HTMLDivElement>}
+            ref={sectionRef}
             className="relative w-full h-screen z-10 flex items-center justify-center overflow-hidden bg-transparent"
         >
             <div
-                ref={trackRef as React.RefObject<HTMLDivElement>}
+                ref={trackRef}
                 className="relative flex items-center justify-center h-full w-full"
             >
                 {/* ✅ Image is wider to allow full slide-out */}
-                <div className="scroll-image relative h-[80vh] w-[200vw]">
+                <div className="scroll-image relative h-[80vh] w-full">
                     <Image
                         src={imageSrc}
                         alt={imageAlt}
                         fill
                         priority
-                        className="object-cover object-left"
+                        className="object-contain object-center"
                     />
                 </div>
             </div>
@@ -144,13 +143,10 @@ const ImageSection: React.FC<{
     );
 };
 
-
-
-
 // Reusable Cards Section Component
 const CardsSection: React.FC<{
-    sectionRef: React.RefObject<HTMLElement | null>;
-    trackRef: React.RefObject<HTMLElement | null>;
+    sectionRef: React.RefObject<HTMLDivElement | null>;
+    trackRef: React.RefObject<HTMLDivElement | null>;
     title: string;
     cards: ServiceCard[];
 }> = ({ sectionRef, trackRef, title, cards }) => {
@@ -158,16 +154,16 @@ const CardsSection: React.FC<{
 
     return (
         <section
-            ref={sectionRef as React.RefObject<HTMLDivElement>}
+            ref={sectionRef}
             className="relative w-full h-screen overflow-hidden z-10 bg-transparent"
         >
             <div
-                ref={trackRef as React.RefObject<HTMLDivElement>}
+                ref={trackRef}
                 className="flex h-full items-center will-change-transform gap-x-10 px-20"
                 style={{ width: "max-content" }}
             >
                 <div className="flex-shrink-0 h-full flex items-center justify-start">
-                    <h2 className="text-[clamp(50px,6vw,120px)] font-extrabold leading-[1.1] uppercase text-black">
+                    <h2 className="text-[clamp(50px,6vw,120px)] font-extrabold leading-[1.1] uppercase text-[#333333]">
                         {title.split('\n').map((line, index) => (
                             <span key={index}>
                                 {line}
@@ -184,14 +180,143 @@ const CardsSection: React.FC<{
     );
 };
 
-// Create typed refs
-const createRef = () => useRef<HTMLDivElement>(null);
+// Service Sections Wrapper Component with robust containment
+const ServiceSectionsWrapper: React.FC<{
+    children: React.ReactNode;
+    rotate: MotionValue<number>;
+}> = ({
+    children,
+    rotate,
+}) => {
+        const wrapperRef = useRef<HTMLDivElement>(null);
+        const bgRef = useRef<HTMLDivElement>(null);
+
+        useEffect(() => {
+            if (!wrapperRef.current || !bgRef.current) return;
+
+            // Set up intersection observer to contain fixed background
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Show background when wrapper enters viewport
+                            gsap.to(bgRef.current, {
+                                opacity: 1,
+                                duration: 0.5,
+                                ease: "power2.out"
+                            });
+                        } else {
+                            // Hide background when wrapper leaves viewport
+                            gsap.to(bgRef.current, {
+                                opacity: 0,
+                                duration: 0.3,
+                                ease: "power2.in"
+                            });
+                        }
+                    });
+                },
+                {
+                    threshold: [0, 0.1, 0.9, 1],
+                    rootMargin: '0px'
+                }
+            );
+
+            observer.observe(wrapperRef.current);
+
+            return () => observer.disconnect();
+        }, []);
+
+        return (
+            <div ref={wrapperRef} className="service-sections-wrapper relative">
+                {/* Fixed Background - Always perfectly centered */}
+                <div ref={bgRef} className="fixed-service-bg">
+                    <div className="fixed-center-container">
+                        {/* Rotating frame */}
+                        <motion.div
+                            className="relative w-[300px] md:w-[400px] lg:w-[600px] aspect-square"
+                            style={{ rotate }}
+                        >
+                            <Image
+                                src="/images/service/silver-frame.png"
+                                alt="frame"
+                                width={641}
+                                height={641}
+                                className="w-full h-full object-contain"
+                            />
+                        </motion.div>
+
+                        {/* Static L1 centered inside frame */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <Image
+                                src="/images/service/L1.png"
+                                alt="L1"
+                                width={80}
+                                height={80}
+                                className="object-contain w-[60px] md:w-[90px] lg:w-[120px] h-auto"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Children content */}
+                {children}
+
+                <style jsx global>{`
+      .service-sections-wrapper {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .fixed-service-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .fixed-center-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(0, 0);
+      }
+
+      .service-sections-wrapper section {
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Ensure proper cleanup of fixed positioning */
+      @media (max-width: 768px) {
+        .fixed-service-bg {
+          z-index: 1;
+        }
+        
+        .service-sections-wrapper section {
+          z-index: 2;
+        }
+      }
+    `}</style>
+            </div>
+        );
+    };
 
 // Main Component
 export default function PinnedHorizontalSection() {
-    const sectionRef = createRef();
-    const trackRef = createRef();
-    const helloRef = createRef();
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const helloRef = useRef<HTMLDivElement>(null);
 
     // Framer Motion value for combined rotation
     const rotate = useMotionValue(0);
@@ -204,63 +329,6 @@ export default function PinnedHorizontalSection() {
         });
         return () => unsubscribe();
     }, [scrollYProgress, rotate]);
-
-    // Main horizontal scroll effect
-    useEffect(() => {
-        if (!sectionRef.current || !trackRef.current) return;
-
-        const track = trackRef.current;
-        const section = sectionRef.current;
-        const totalWidth = track.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        const scrollDistance = totalWidth - viewportWidth;
-
-        const animation = gsap.to(track, {
-            x: () => -scrollDistance,
-            ease: "none",
-            scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: () => `+=${scrollDistance}`,
-                scrub: true,
-                pin: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-                markers: false,
-                onUpdate: (self) => {
-                    const base = scrollYProgress.get() * 360;
-                    const horizontalAdd = self.progress * 360;
-                    rotate.set(base + horizontalAdd);
-                },
-            },
-        });
-
-        if (helloRef.current) {
-            gsap.fromTo(helloRef.current,
-                {
-                    y: 100,
-                    opacity: 0
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: helloRef.current,
-                        start: "top 80%",
-                        end: "top 20%",
-                        scrub: true,
-                        markers: false
-                    }
-                }
-            );
-        }
-
-        return () => {
-            animation.scrollTrigger?.kill();
-        };
-    }, [rotate, scrollYProgress]);
 
     // Data for all sections
     const serviceSections: ServiceSection[] = [
@@ -530,33 +598,77 @@ export default function PinnedHorizontalSection() {
         }
     ];
 
-    return (
-        <div>
-            {/* Fixed background that appears across ALL sections */}
-            <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0">
-                <motion.div
-                    className="w-[641px] h-auto object-contain absolute"
-                    style={{ rotate }}
-                >
-                    <Image
-                        src="/images/service/silver-frame.png"
-                        alt="frame"
-                        width={641}
-                        height={641}
-                        className="w-full h-auto object-contain"
-                    />
-                </motion.div>
-                <div className="h-auto object-contain absolute">
-                    <Image
-                        src="/images/service/L1.png"
-                        alt="L1"
-                        width={200}
-                        height={200}
-                        className="h-auto object-contain"
-                    />
-                </div>
-            </div>
+    // Create refs for all dynamic sections upfront
+    const sectionRefs = useMemo(() => {
+        const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {};
+        serviceSections.forEach(section => {
+            refs[`${section.id}-image-section`] = React.createRef<HTMLDivElement>();
+            refs[`${section.id}-image-track`] = React.createRef<HTMLDivElement>();
+            refs[`${section.id}-cards-section`] = React.createRef<HTMLDivElement>();
+            refs[`${section.id}-cards-track`] = React.createRef<HTMLDivElement>();
+        });
+        return refs;
+    }, [serviceSections]);
 
+    // Main horizontal scroll effect
+    useEffect(() => {
+        if (!sectionRef.current || !trackRef.current) return;
+
+        const track = trackRef.current;
+        const section = sectionRef.current;
+        const totalWidth = track.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        const scrollDistance = totalWidth - viewportWidth;
+
+        const animation = gsap.to(track, {
+            x: () => -scrollDistance,
+            ease: "none",
+            scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: () => `+=${scrollDistance}`,
+                scrub: true,
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                markers: false,
+                onUpdate: (self) => {
+                    const base = scrollYProgress.get() * 360;
+                    const horizontalAdd = self.progress * 360;
+                    rotate.set(base + horizontalAdd);
+                },
+            },
+        });
+
+        if (helloRef.current) {
+            gsap.fromTo(helloRef.current,
+                {
+                    y: 100,
+                    opacity: 0
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: helloRef.current,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: true,
+                        markers: false
+                    }
+                }
+            );
+        }
+
+        return () => {
+            animation.scrollTrigger?.kill();
+        };
+    }, [rotate, scrollYProgress, sectionRef, trackRef, helloRef]);
+
+    return (
+        <ServiceSectionsWrapper rotate={rotate}>
             {/* Horizontal Scroll Section */}
             <section ref={sectionRef} className="relative w-full overflow-hidden z-10">
                 <div className="relative w-full h-screen overflow-hidden z-20">
@@ -571,30 +683,23 @@ export default function PinnedHorizontalSection() {
             </section>
 
             {/* Render all service sections */}
-            {serviceSections.map((section) => {
-                const imageSectionRef = createRef();
-                const imageTrackRef = createRef();
-                const cardsSectionRef = createRef();
-                const cardsTrackRef = createRef();
-
-                return (
-                    <React.Fragment key={section.id}>
-                        <ImageSection
-                            sectionRef={imageSectionRef}
-                            trackRef={imageTrackRef}
-                            imageSrc={section.image}
-                            imageAlt={section.imageAlt}
-                            title={section.title}
-                        />
-                        <CardsSection
-                            sectionRef={cardsSectionRef}
-                            trackRef={cardsTrackRef}
-                            title={section.title}
-                            cards={section.cards}
-                        />
-                    </React.Fragment>
-                );
-            })}
-        </div>
+            {serviceSections.map((section) => (
+                <React.Fragment key={section.id}>
+                    <ImageSection
+                        sectionRef={sectionRefs[`${section.id}-image-section`]}
+                        trackRef={sectionRefs[`${section.id}-image-track`]}
+                        imageSrc={section.image}
+                        imageAlt={section.imageAlt}
+                        title={section.title}
+                    />
+                    <CardsSection
+                        sectionRef={sectionRefs[`${section.id}-cards-section`]}
+                        trackRef={sectionRefs[`${section.id}-cards-track`]}
+                        title={section.title}
+                        cards={section.cards}
+                    />
+                </React.Fragment>
+            ))}
+        </ServiceSectionsWrapper>
     );
 }
