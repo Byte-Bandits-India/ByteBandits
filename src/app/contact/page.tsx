@@ -50,13 +50,13 @@ export default function Home() {
         {
             img: "/icons/contact/location.png",
             alt: "Location",
-            text: "Plot no.3a, door no.1/1033, Kumudham Nagar Extension, Mugalivakkam, Chennai - 600125",
+            text: "1/509A, Krishna Nagar\nPeriyar Rd, Ramapuram,\nIndira Nagar, Manappakkam,\nChennai, Tamil Nadu 600125",
             textSize: "text-[14px]",
         },
     ];
 
     return (
-        <div ref={scrollRef} className="relative overflow-x-hidden bg-[#F2F2F0] pt-[80px] md:py-[100px]">
+        <div ref={scrollRef} className="relative overflow-x-hidden bg-[#F2F2F0] pt-[80px]">
             <div className="shapes px-6">
                 {/* Scroll-animated shapes */}
                 <motion.img
@@ -295,10 +295,20 @@ font-anton mt-5 lg:mt-0">
 
 
             </div>
-            {/* Map Image */}
-            <div className="relative mt-8 w-full h-[331px] md:w-[331px] mb-[48px] md:hidden">
-                <Image src="/images/map.png" alt="map" fill className="object-cover" />
-            </div>
+            
+           {/* Google Map Section */}
+<div className="w-full bg-gradient-to-b from-[#E84353] to-[#57000C] mt-[5%] py-10 md:py-20 flex justify-center items-center">
+  <div className="w-[90%] max-w-[1400px] overflow-hidden rounded-2xl shadow-xl">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.320708672846!2d80.16865997585755!3d13.015237513918464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5260c6aef11a2b%3A0x33401c0956a864bf!2s1%2F509A%2C%20Krishna%20Nagar%20Periyar%20Rd%2C%20Ramapuram%2C%20Indira%20Nagar%2C%20Manappakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600125!5e0!3m2!1sen!2sin!4v1762867197770!5m2!1sen!2sin"
+      className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-2xl border-0"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</div>
+
         </div>
     );
 }
