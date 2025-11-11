@@ -11,9 +11,9 @@ export const Header = () => {
 
     const socialItems = [
         { label: 'Twitter', link: 'https://twitter.com' },
-        { label: 'GitHub', link: 'https://github.com' },
-        { label: 'LinkedIn', link: 'https://linkedin.com' },
-        { label: 'Facebook', link: 'https://facebook.com' },
+        { label: 'GitHub', link: 'https://github.com/Byte-Bandits-India' },
+        { label: 'LinkedIn', link: 'https://www.linkedin.com/company/bytebanditsindia/' },
+        { label: 'Facebook', link: 'https://www.facebook.com/bytebanditsindia' },
     ];
 
     return (
