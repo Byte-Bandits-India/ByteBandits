@@ -135,6 +135,7 @@ const ServiceSectionsWrapper: React.FC<{ children: React.ReactNode }> = ({
 };
 
 // ---------- Main Component ----------
+// ---------- Main Component ----------
 export default function PinnedHorizontalSection() {
     const rotate = useMotionValue(0);
     const { scrollYProgress } = useScroll();
@@ -436,17 +437,19 @@ export default function PinnedHorizontalSection() {
     ];
 
 
-    // ---------- Refs for each service section ----------
-    const sectionRefs = [
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null)
-    ];
-    const trackRefs = [
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null),
-        useRef<HTMLDivElement>(null)
-    ];
+    // ---------- Create refs for each service section ----------
+    const sectionRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
+    const trackRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);
+
+    // Ensure we have enough refs for all sections
+    if (sectionRefs.current.length !== serviceSections.length) {
+        sectionRefs.current = Array(serviceSections.length)
+            .fill(null)
+            .map((_, i) => sectionRefs.current[i] || React.createRef<HTMLDivElement>());
+        trackRefs.current = Array(serviceSections.length)
+            .fill(null)
+            .map((_, i) => trackRefs.current[i] || React.createRef<HTMLDivElement>());
+    }
 
     return (
         <ServiceSectionsWrapper>
@@ -494,8 +497,8 @@ export default function PinnedHorizontalSection() {
                     <ServiceSection
                         key={section.id}
                         section={section}
-                        sectionRef={sectionRefs[index]}
-                        trackRef={trackRefs[index]}
+                        sectionRef={sectionRefs.current[index]}
+                        trackRef={trackRefs.current[index]}
                     />
                 ))}
             </div>
