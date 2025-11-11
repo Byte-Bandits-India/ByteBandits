@@ -296,44 +296,46 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-start justify-between px-[1em] lg:px-[3em] bg-transparent pointer-events-none z-20">
-          <div className="sm-logo flex items-start select-none pointer-events-auto relative" aria-label="Logo">
-            {/* Desktop Logo — flush with top */}
-            <div className="relative bg-[#353639] h-[63px] w-[138px] md:h-[70px] md:w-[158px] lg:h-[120px] lg:w-[210px] flex items-center justify-center rounded-b-xl m-0 p-0 -top-2">
-              <Link href="/" className="block m-0 p-0">
-                <Image
-                  src="/images/logo1.png"
-                  alt="Logo"
-                  className="h-[34px] md:h-[46px] lg:h-[62px] w-auto object-contain m-0 p-0"
-                  draggable={false}
-                  width={110}
-                  height={24}
-                  priority
-                />
-              </Link>
-            </div>
-          </div>
-
-          {/* Button Group */}
-          <div className="relative flex bg-[#d8d8d8] px-[13px] py-3 lg:py-[15px] lg:px-4 shadow-xl rounded-full cursor-pointer gap-2 mt-2 pointer-events-auto">
-            <Link href="/contact" aria-label="Go to contact">
-              <div
-                className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
-                onClick={scrollToContact}
-              >
-                <TfiEmail />
+          <div className="w-full max-w-[1440px] mx-auto flex items-start justify-between">
+            <div className="sm-logo flex items-start select-none pointer-events-auto relative" aria-label="Logo">
+              {/* Desktop Logo — flush with top */}
+              <div className="relative bg-[#353639] h-[63px] w-[138px] md:h-[70px] md:w-[158px] lg:h-[110px] lg:w-[200px] flex items-center justify-center rounded-b-xl m-0 p-0 -top-2">
+                <Link href="/" className="block m-0 p-0">
+                  <Image
+                    src="/images/logo1.png"
+                    alt="Logo"
+                    className="h-[34px] md:h-[46px] lg:h-[56px] w-auto object-contain m-0 p-0"
+                    draggable={false}
+                    width={110}
+                    height={24}
+                    priority
+                  />
+                </Link>
               </div>
-            </Link>
-            <button
-              ref={toggleBtnRef}
-              type="button"
-              className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
-              onClick={toggleMenu}
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              aria-expanded={open}
-              aria-controls="staggered-menu-panel"
-            >
-              {open ? <FiX /> : <FiMenu />}
-            </button>
+            </div>
+
+            {/* Button Group */}
+            <div className="relative flex bg-[#d8d8d8] px-[13px] py-3 lg:py-[15px] lg:px-4 shadow-xl rounded-full cursor-pointer gap-2 mt-2 pointer-events-auto">
+              <Link href="/contact" aria-label="Go to contact">
+                <div
+                  className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
+                  onClick={scrollToContact}
+                >
+                  <TfiEmail />
+                </div>
+              </Link>
+              <button
+                ref={toggleBtnRef}
+                type="button"
+                className="navbar-icon text-[24px] sm:text-[24px] lg:text-[32px] text-[#ff9b42] bg-[#353639] px-3 py-3 lg:px-4 lg:py-4 rounded-full"
+                onClick={toggleMenu}
+                aria-label={open ? 'Close menu' : 'Open menu'}
+                aria-expanded={open}
+                aria-controls="staggered-menu-panel"
+              >
+                {open ? <FiX /> : <FiMenu />}
+              </button>
+            </div>
           </div>
         </header>
 

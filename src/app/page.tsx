@@ -167,8 +167,8 @@ export default function Home() {
           src="/images/scroll-down.png"
           alt="Scroll Down"
           style={{ rotate }}
-          className="absolute -top-[55px] right-10 w-[20vw] lg:w-[14vw] h-auto
-               md:-top-[120px] lg:right-20 xl:-top-[184px] xl:right-[90px] 
+          className="absolute -top-[55px] right-10 w-[20vw] lg:w-[200px] h-auto
+               md:-top-[120px] lg:right-20 xl:-top-[197px] xl:right-[90px] 
                z-50 will-change-transform scroll-icon pointer-events-none"
         />
       </section>

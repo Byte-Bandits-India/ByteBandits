@@ -36,7 +36,7 @@ const HeroSection = () => {
                                 repeatType: "mirror",
                                 ease: "easeInOut",
                             }}
-                            className="absolute pointer-events-none left-[-24vw] top-[-30vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[54vw] md:w-[50vw] lg:w-[50vw] xl:w-[44vw] xl:-left-[28vw] xl:-top-[34vw] z-10"
+                            className="absolute pointer-events-none left-[-24vw] top-[-30vh] md:left-[-26vw] md:top-[-50vw] lg:left-[-28vw] lg:top-[-38vw] w-[54vw] md:w-[50vw] lg:w-[50vw] xl:w-[38vw] xl:-left-[20vw] xl:-top-[34vw] z-10"
                         >
                             <Image
                                 src="/images/gold.webp"
@@ -59,7 +59,7 @@ const HeroSection = () => {
                                 ease: "easeInOut",
                                 delay: 0.2,
                             }}
-                            className="absolute pointer-events-none left-[-36vw] -bottom-[34vh] w-[70vw] md:w-[54vw] lg:w-[50vw] xl:w-[46vw] xl:left-[-30vw] xl:-bottom-[28vw] z-0"
+                            className="absolute pointer-events-none left-[-36vw] -bottom-[34vh] w-[70vw] md:w-[54vw] lg:w-[50vw] xl:w-[36vw] xl:left-[-18vw] xl:-bottom-[28vw] z-0"
                         >
                             <Image
                                 src="/images/white.webp"
@@ -82,7 +82,7 @@ const HeroSection = () => {
                                 ease: "easeInOut",
                                 delay: 0.4,
                             }}
-                            className="absolute pointer-events-none right-[-24vw] -top-[30vh] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[42vw] xl:-top-[10vw] xl:right-[-24vw] z-10"
+                            className="absolute pointer-events-none right-[-24vw] -top-[30vh] w-[64vw] md:w-[50vw] lg:w-[50vw] xl:w-[36vw] xl:-top-[10vw] xl:right-[-18vw] z-10"
                         >
                             <Image
                                 src="/images/green.webp"
@@ -97,9 +97,20 @@ const HeroSection = () => {
 
                     {/* Title + Shapes */}
                     <div className="relative w-full max-w-[942px] mx-auto text-center xl:pb-8 z-[10]">
-                        <motion.div className="relative z-[20] inline-block">
+                        <motion.div className="relative z-[50] inline-block">
                             {/* Shape 1 (top left near text) */}
-                            <div className="absolute -top-[8%] left-[5%] w-[3rem] md:w-[4rem] lg:w-[6rem] pointer-events-none">
+                            <motion.div
+                                style={{ scale }}
+                                animate={{ y: ["0%", "-12%", "0%"] }}
+                                transition={{
+                                    duration: 5.5,
+                                    repeat: Infinity,
+                                    repeatType: "mirror",
+                                    ease: "easeInOut",
+                                    delay: 0.4,
+                                }}
+                                className="absolute -top-[2%] -left-[3%] w-[3rem] md:w-[4rem] lg:w-[6rem] pointer-events-none z-[60]" // ⬅️ higher than text z-index
+                            >
                                 <Image
                                     src="/images/shape-1.png"
                                     alt="Top Shape"
@@ -107,7 +118,7 @@ const HeroSection = () => {
                                     height={120}
                                     className="w-full h-auto"
                                 />
-                            </div>
+                            </motion.div>
 
                             {/* Title */}
                             {["WHERE IDEAS", "BECOME DIGITAL", "REALITIES"].map((line, lineIndex) => (
@@ -142,7 +153,17 @@ const HeroSection = () => {
                             ))}
 
                             {/* Shape 2 (near REALITIES, slightly above) */}
-                            <div className="absolute top-[32%] md:top-[34%] lg:top-[28%] xl:top-[48%] right-[6%] w-[3rem] md:w-[4.5rem] lg:w-[6rem] xl:w-[6.5rem] pointer-events-none">
+                            <motion.div
+                                style={{ scale }}
+                                animate={{ y: ["0%", "-12%", "0%"] }}
+                                transition={{
+                                    duration: 5.5,
+                                    repeat: Infinity,
+                                    repeatType: "mirror",
+                                    ease: "easeInOut",
+                                    delay: 0.4,
+                                }}
+                                className="absolute top-[32%] md:top-[34%] lg:top-[28%] xl:top-[48%] right-[6%] w-[3rem] md:w-[4.5rem] lg:w-[6rem] xl:w-[6.5rem] pointer-events-none">
                                 <Image
                                     src="/images/shape-2.png"
                                     alt="Shape near REALITIES"
@@ -150,15 +171,15 @@ const HeroSection = () => {
                                     height={128}
                                     className="w-full h-auto"
                                 />
-                            </div>
+                            </motion.div>
 
                             {/* Subtitle */}
-                            <p className="mt-8 text-[13px] text-[#818181] font-bold select-none">
-                                SINCE 2024
+                            <p className="mt-12 text-[13px] text-[#818181] font-bold select-none">
+                                SINCE 2025
                             </p>
 
                             {/* Button */}
-                            <div className="flex items-center justify-center mt-[40px] md:mt-[32px] xl:mt-[60px]">
+                            <div className="flex items-center justify-center mt-[24px] md:mt-[24px] xl:mt-[40px]">
                                 <button
                                     className="bg-[#F9373A] h-[40px] w-[155px] md:h-[44px] md:w-[176px] xl:h-[54px] xl:w-[218px]
                     rounded-xl text-[12px] md:text-[16px] text-white flex items-center justify-center gap-2

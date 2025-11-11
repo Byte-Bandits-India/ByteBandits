@@ -7,7 +7,7 @@ export default function HeroSection() {
 
                 {/* Content with higher z-index */}
                 <div className="relative z-20">
-                    <h1 className="text-[clamp(20px,6vw,67px)] font-medium leading-[1.1] font-inter max-w-[959px]">
+                    <h1 className="text-[clamp(20px,6vw,67px)] text-[#000000] font-medium leading-[1.1] font-inter max-w-[959px]">
                         We revolutionize how businesses build, scale, and connect through technology.
                     </h1>
                 </div>
