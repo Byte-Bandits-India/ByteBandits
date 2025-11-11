@@ -4,144 +4,142 @@ import { IoIosArrowForward } from "react-icons/io";
 
 export default function Footer() {
   const socialMedia = [
-    { name: "Facebook", href: "https://facebook.com", icon: "/icons/social_media/Facebook.png" },
+    { name: "Facebook", href: "https://www.facebook.com/bytebanditsindia", icon: "/icons/social_media/Facebook.png" },
     { name: "Twitter", href: "https://twitter.com", icon: "/icons/social_media/X.png" },
-    { name: "Instagram", href: "https://instagram.com", icon: "/icons/social_media/Instagram.png" },
-    { name: "LinkedIn", href: "https://linkedin.com", icon: "/icons/social_media/Linkdin.png" },
-    { name: "GitHub", href: "https://github.com", icon: "/icons/social_media/Github.png" },
+    { name: "Instagram", href: "https://www.instagram.com/bytebandits_/", icon: "/icons/social_media/Instagram.png" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/bytebanditsindia/", icon: "/icons/social_media/Linkdin.png" },
+    { name: "GitHub", href: "https://github.com/Byte-Bandits-India", icon: "/icons/social_media/Github.png" },
     { name: "Medium", href: "https://medium.com", icon: "/icons/social_media/Medium.png" },
   ];
 
   return (
-    <footer className="bg-[#252628] px-6 py-8 text-white overflow-x-hidden relative z-20">
+    <footer className="bg-[#252628] px-6 py-8 text-white overflow-x-hidden relative">
       {/* Mobile View */}
-      <div className="md:hidden relative">
+      <div className="md:hidden absolute z-10">
         <div>
-          <div>
-            <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
-            <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
-              We are a passionate team of tech innovators dedicated to crafting smart, scalable, and
-              user-centric digital solutions. From custom software and mobile apps to eCommerce
-              platforms, digital marketing, branding, and cloud services.
-            </p>
-          </div>
+          <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
+          <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
+            We are a passionate team of tech innovators dedicated to crafting smart, scalable, and
+            user-centric digital solutions. From custom software and mobile apps to eCommerce
+            platforms, digital marketing, branding, and cloud services.
+          </p>
+        </div>
 
-          <div className="flex gap-4 my-8">
-            {socialMedia.map((social) => (
-              <Link
-                key={social.name}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:scale-110 transition-transform"
-              >
-                <Image src={social.icon} alt={social.name} width={24} height={24} />
-              </Link>
+        <div className="flex gap-4 my-8">
+          {socialMedia.map((social) => (
+            <Link
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:scale-110 transition-transform"
+            >
+              <Image src={social.icon} alt={social.name} width={24} height={24} />
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-8">
+          <h2 className="text-[18px] font-semibold mb-6">Our Services</h2>
+          <ul className="text-[12px] pl-2 list-none space-y-2">
+            {[
+              { name: "Website and Application Designing", href: "/services/website-design" },
+              { name: "AI ML and Custom Bots", href: "/services/ai-ml-bots" },
+              { name: "Domain and Web Hosting", href: "/services/domain-hosting" },
+              { name: "Digital Marketing", href: "/services/digital-marketing" },
+              { name: "Seo Optimizations and Social media", href: "/services/seo-social" },
+              { name: "Cloud Solutions And Dev ops Automation", href: "/services/cloud-devops" },
+            ].map((service) => (
+              <li key={service.name} className="flex items-center gap-2">
+                <IoIosArrowForward size={12} className="shrink-0" />
+                <Link href={service.href} className="hover:underline">
+                  {service.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
 
-          <div className="mt-8">
-            <h2 className="text-[18px] font-semibold mb-6">Our Services</h2>
-            <ul className="text-[12px] pl-2 list-none space-y-2">
+        {/* Useful Links and Office Locations */}
+        <div className="mt-8 grid grid-cols-2 text-left">
+          <div className="text-left justify-self-start">
+            <h2 className="text-[16px] font-semibold mb-[25px]">Useful Links</h2>
+            <div className="space-y-4 pl-2">
               {[
-                { name: "Website and Application Designing", href: "/services/website-design" },
-                { name: "AI ML and Custom Bots", href: "/services/ai-ml-bots" },
-                { name: "Domain and Web Hosting", href: "/services/domain-hosting" },
-                { name: "Digital Marketing", href: "/services/digital-marketing" },
-                { name: "Seo Optimizations and Social media", href: "/services/seo-social" },
-                { name: "Cloud Solutions And Dev ops Automation", href: "/services/cloud-devops" },
-              ].map((service) => (
-                <li key={service.name} className="flex items-center gap-2">
+                { name: "Home", href: "/" },
+                { name: "Contact Us", href: "/contact" },
+                { name: "FAQ", href: "/faq" },
+                { name: "Services", href: "/service" },
+                { name: "About Us", href: "/about" },
+                { name: "Blogs", href: "/blogs" },
+              ].map((link) => (
+                <div key={link.name} className="flex items-center gap-2">
                   <IoIosArrowForward size={12} className="shrink-0" />
-                  <Link href={service.href} className="hover:underline">
-                    {service.name}
+                  <Link href={link.href} className="text-[12px] hover:underline">
+                    {link.name}
                   </Link>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* Useful Links and Office Locations */}
-          <div className="mt-8 grid grid-cols-2 text-left">
-            <div className="text-left justify-self-start">
-              <h2 className="text-[16px] font-semibold mb-[25px]">Useful Links</h2>
-              <div className="space-y-4 pl-2">
-                {[
-                  { name: "Home", href: "/" },
-                  { name: "Contact Us", href: "/contact" },
-                  { name: "FAQ", href: "/faq" },
-                  { name: "Services", href: "/service" },
-                  { name: "About Us", href: "/about" },
-                  { name: "Blogs", href: "/blogs" },
-                ].map((link) => (
-                  <div key={link.name} className="flex items-center gap-2">
-                    <IoIosArrowForward size={12} className="shrink-0" />
-                    <Link href={link.href} className="text-[12px] hover:underline">
-                      {link.name}
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          <div>
+            <h2 className="text-[16px] font-semibold mb-6">Main Office</h2>
             <div>
-              <h2 className="text-[16px] font-semibold mb-6">Main Office</h2>
-              <div>
 
-                <p className="text-[12px] whitespace-pre-line">
-                  1/509A, Krishna Nagar
-                  {"\n"}Periyar Rd, Ramapuram,
-                  {"\n"}Indira Nagar, Manappakkam,
-                  {"\n"}Chennai, Tamil Nadu 600125
-                </p>
-                <h3 className="text-[12px] font-semibold mb-1 mt-4">Trichy Branch</h3>
-                <p className="text-[12px] whitespace-pre-line">
-                  Bhima Nagar,
-                  {"\n"}Sangillyandapuram,
-                  {"\n"}Tiruchirappalli-620001.
-                </p>
-                <h3 className="text-[12px] font-semibold mb-1 mt-4">Bangalore Branch</h3>
-                <p className="text-[12px] whitespace-pre-line">
-                  Silicon Town, Rayasandra,
-                  {"\n"}Bengaluru, Karnataka 560100
-                </p>
-              </div>
+              <p className="text-[12px] whitespace-pre-line">
+                1/509A, Krishna Nagar
+                {"\n"}Periyar Rd, Ramapuram,
+                {"\n"}Indira Nagar, Manappakkam,
+                {"\n"}Chennai, Tamil Nadu 600125
+              </p>
+              <h3 className="text-[12px] font-semibold mb-1 mt-4">Trichy Branch</h3>
+              <p className="text-[12px] whitespace-pre-line">
+                Bhima Nagar,
+                {"\n"}Sangillyandapuram,
+                {"\n"}Tiruchirappalli-620001.
+              </p>
+              <h3 className="text-[12px] font-semibold mb-1 mt-4">Bangalore Branch</h3>
+              <p className="text-[12px] whitespace-pre-line">
+                Silicon Town, Rayasandra,
+                {"\n"}Bengaluru, Karnataka 560100
+              </p>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row md:gap-4 mt-8 justify-center items-center md:ml-[180px] md:mt-[-80px]">
-            <div className="bg-[#A31621] w-[100%] md:w-[283px] h-[61px] flex items-center px-5">
-              <Image
-                src="/icons/Whatsapp.png"
-                alt="WhatsApp icon"
-                width={28}
-                height={28}
-                className=" ml-5"
-              />
-              <div className="mx-auto">
-                <h1 className="text-white text-center text-[16px]">+91 89400 11098</h1>
-                <p className="text-[10px] text-center">Message Us Now</p>
-              </div>
+        </div>
+        <div className="flex flex-col md:flex-row md:gap-4 mt-8 justify-center items-center md:ml-[180px] md:mt-[-80px]">
+          <div className="bg-[#A31621] w-[100%] md:w-[283px] h-[61px] flex items-center px-5">
+            <Image
+              src="/icons/Whatsapp.png"
+              alt="WhatsApp icon"
+              width={28}
+              height={28}
+              className=" ml-5"
+            />
+            <div className="mx-auto">
+              <h1 className="text-white text-center text-[16px]">+91 89400 11098</h1>
+              <p className="text-[10px] text-center">Message Us Now</p>
             </div>
+          </div>
 
-            <div className="bg-[#161414] w-[100%] md:w-[283px] h-[61px] flex items-center px-5">
-              <Image
-                src="/icons/White_mail.png"
-                alt="Mail icon"
-                width={28}
-                height={28}
-                className="mx-auto"
-              />
-              <div className="text-center mx-auto">
-                <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
-                <p className="text-[10px]">Drop Us a Line</p>
-              </div>
+          <div className="bg-[#161414] w-[100%] md:w-[283px] h-[61px] flex items-center px-5">
+            <Image
+              src="/icons/White_mail.png"
+              alt="Mail icon"
+              width={28}
+              height={28}
+              className="mx-auto"
+            />
+            <div className="text-center mx-auto">
+              <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
+              <p className="text-[10px]">Drop Us a Line</p>
             </div>
           </div>
-          <div className="mt-8 border-t border-[#FFFFFF] pt-4">
-            <p className="text-[12px] text-center">
-              Copyright © Byte Bandits. All Rights Reserved.
-            </p>
-          </div>
+        </div>
+        <div className="mt-8 border-t border-[#FFFFFF] pt-4">
+          <p className="text-[12px] text-center">
+            Copyright © Byte Bandits. All Rights Reserved.
+          </p>
         </div>
       </div>
 
