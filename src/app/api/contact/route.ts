@@ -1,58 +1,53 @@
 export async function POST(req: Request): Promise<Response> {
   try {
+    // Parse the incoming JSON body
     const body = await req.json() as {
       name: string;
       email: string;
+      number: string;
       message: string;
     };
 
-    const { name, email, message } = body;
+    const { name, email, number, message } = body;
 
-    // Define payload type
-    interface TemplateData {
-      name: string;
-      phone: string;
-      message: string;
-    }
-
-    interface Payload {
-      from: string;
-      to: string;
-      template: string;
-      templateData: TemplateData;
-    }
-
-    const payload: Payload = {
-      from: "hr", // or fixed sender
-      to: email,  // recipient
+    // Build payload for external API
+    const payload = {
+      to: "dk.bbtech@gmail.com", // fixed recipient
+      from: "noreply",
       template: "form-reply",
       templateData: {
         name,
-        phone: email,
-        message,
+        phone: number,
+        message: `From: ${email}\n\n${message}`,
       },
     };
 
-    const response = await fetch("http://api.bytebandits.in/v1/message/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    // Send request to your external EC2 API endpoint
+    const response = await fetch(
+      "http://ec2-3-6-37-194.ap-south-1.compute.amazonaws.com:3035/v1/message/send",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
 
+    // Handle response
     if (!response.ok) {
-      throw new Error("Failed to send via ByteBandits API");
+      console.error("External API Error:", await response.text());
+      throw new Error("Failed to send message to EC2 API");
     }
 
     const result = await response.json();
 
     return Response.json(
-      { message: "Message sent successfully", result },
+      { success: true, message: "Message sent successfully!", result },
       { status: 200 }
     );
   } catch (error) {
     console.error("Error:", error);
     return Response.json(
-      { error: "Failed to send message" },
+      { success: false, error: "Failed to send message." },
       { status: 500 }
     );
   }
