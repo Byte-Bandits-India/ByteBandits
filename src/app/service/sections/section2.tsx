@@ -97,7 +97,6 @@ const ImageSection: React.FC<{
         const section = sectionRef.current;
         const imageWrapper = trackRef.current.querySelector(".scroll-image");
 
-        // ✅ Horizontal scroll: image enters -> crosses -> exits
         const animation = gsap.fromTo(
             imageWrapper,
             { xPercent: 0 }, // start fully visible
@@ -122,7 +121,7 @@ const ImageSection: React.FC<{
     return (
         <section
             ref={sectionRef}
-            className="relative w-full h-screen z-10 flex items-center justify-center overflow-hidden bg-transparent"
+            className="relative w-full h-dvh z-10 flex items-center justify-center overflow-hidden bg-transparent"
         >
             <div
                 ref={trackRef}
@@ -155,7 +154,7 @@ const CardsSection: React.FC<{
     return (
         <section
             ref={sectionRef}
-            className="relative w-full h-screen overflow-hidden z-10 bg-transparent"
+            className="relative w-full h-dvh overflow-hidden z-10 bg-transparent"
         >
             <div
                 ref={trackRef}
@@ -184,133 +183,84 @@ const CardsSection: React.FC<{
 const ServiceSectionsWrapper: React.FC<{
     children: React.ReactNode;
     rotate: MotionValue<number>;
-}> = ({
-    children,
-    rotate,
-}) => {
-        const wrapperRef = useRef<HTMLDivElement>(null);
-        const bgRef = useRef<HTMLDivElement>(null);
+}> = ({ children, rotate }) => {
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const bgRef = useRef<HTMLDivElement>(null);
 
-        useEffect(() => {
-            if (!wrapperRef.current || !bgRef.current) return;
+    useEffect(() => {
+        if (!wrapperRef.current || !bgRef.current) return;
 
-            // Set up intersection observer to contain fixed background
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Show background when wrapper enters viewport
-                            gsap.to(bgRef.current, {
-                                opacity: 1,
-                                duration: 0.5,
-                                ease: "power2.out"
-                            });
-                        } else {
-                            // Hide background when wrapper leaves viewport
-                            gsap.to(bgRef.current, {
-                                opacity: 0,
-                                duration: 0.3,
-                                ease: "power2.in"
-                            });
-                        }
-                    });
-                },
-                {
-                    threshold: [0, 0.1, 0.9, 1],
-                    rootMargin: '0px'
-                }
-            );
+        const wrapper = wrapperRef.current;
+        const bg = bgRef.current;
 
-            observer.observe(wrapperRef.current);
+        // Create a ScrollTrigger that keeps the background visible only when this section is in view
+        const trigger = ScrollTrigger.create({
+            trigger: wrapper,
+            start: "top top",
+            end: "bottom bottom", // track until the section is completely out of view
+            onEnter: () => {
+                gsap.to(bg, { opacity: 1, duration: 0.5, ease: "power2.out" });
+            },
+            onLeave: () => {
+                gsap.to(bg, { opacity: 0, duration: 0.5, ease: "power2.in" });
+            },
+            onEnterBack: () => {
+                gsap.to(bg, { opacity: 1, duration: 0.5, ease: "power2.out" });
+            },
+            onLeaveBack: () => {
+                gsap.to(bg, { opacity: 0, duration: 0.5, ease: "power2.in" });
+            },
+            scrub: false,
+            markers: false,
+        });
 
-            return () => observer.disconnect();
-        }, []);
+        return () => trigger.kill();
+    }, []);
 
-        return (
-            <div ref={wrapperRef} className="service-sections-wrapper relative">
-                {/* Fixed Background - Always perfectly centered */}
-                <div ref={bgRef} className="fixed-service-bg">
-                    <div className="fixed-center-container">
-                        {/* Rotating frame */}
-                        <motion.div
-                            className="relative w-[300px] md:w-[400px] lg:w-[600px] aspect-square"
-                            style={{ rotate }}
-                        >
-                            <Image
-                                src="/images/service/silver-frame.png"
-                                alt="frame"
-                                width={641}
-                                height={641}
-                                className="w-full h-full object-contain"
-                            />
-                        </motion.div>
+    return (
+        <div
+            ref={wrapperRef}
+            className="relative w-full min-h-screen overflow-hidden"
+            id="pinned-horizontal-wrapper"
+        >
+            {/* Fixed Background - only visible inside this section */}
+            <div
+                ref={bgRef}
+                className="pointer-events-none fixed inset-0 flex items-center justify-center z-0 opacity-0 transition-opacity duration-500"
+            >
+                {/* Rotating frame */}
+                <motion.div
+                    className="relative w-[300px] md:w-[400px] lg:w-[600px] aspect-square"
+                    style={{ rotate }}
+                >
+                    <Image
+                        src="/images/service/silver-frame.png"
+                        alt="frame"
+                        width={641}
+                        height={641}
+                        className="w-full h-full object-contain"
+                    />
+                </motion.div>
 
-                        {/* Static L1 centered inside frame */}
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <Image
-                                src="/images/service/L1.png"
-                                alt="L1"
-                                width={80}
-                                height={80}
-                                className="object-contain w-[60px] md:w-[90px] lg:w-[120px] h-auto"
-                            />
-                        </div>
-                    </div>
+                {/* Centered L1 inside frame */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <Image
+                        src="/images/service/L1.png"
+                        alt="L1"
+                        width={80}
+                        height={80}
+                        className="object-contain w-[60px] md:w-[90px] lg:w-[120px] h-auto"
+                    />
                 </div>
-
-                {/* Children content */}
-                {children}
-
-                <style jsx global>{`
-      .service-sections-wrapper {
-        position: relative;
-        width: 100%;
-        min-height: 100vh;
-        overflow: hidden;
-      }
-
-      .fixed-service-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .fixed-center-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform: translate(0, 0);
-      }
-
-      .service-sections-wrapper section {
-        position: relative;
-        z-index: 10;
-      }
-
-      /* Ensure proper cleanup of fixed positioning */
-      @media (max-width: 768px) {
-        .fixed-service-bg {
-          z-index: 1;
-        }
-        
-        .service-sections-wrapper section {
-          z-index: 2;
-        }
-      }
-    `}</style>
             </div>
-        );
-    };
+
+            {/* All the scrolling content */}
+            <div className="relative z-10">{children}</div>
+        </div>
+    );
+};
+
+
 
 // Main Component
 export default function PinnedHorizontalSection() {

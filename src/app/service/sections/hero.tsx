@@ -7,7 +7,7 @@ export default function HeroSection() {
         <WipeTransition>
             <section className="bg-gradient-to-l from-[#FF9B43] to-[#FF6B00] h-full overflow-hidden relative">
                 {/* Background Overlay to Hide Fixed Background */}
-                <div className="absolute inset-0 bg-gradient-to-l from-[#FF9B43] to-[#FF6B00] z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-l from-[#FF9B43] to-[#FF6B00] z-20"></div>
 
                 <div className="relative z-20 flex items-center justify-center h-full max-w-[1440px] mx-auto">
                     {/* Your existing content */}
