@@ -88,7 +88,7 @@ const ServiceSection: React.FC<{
             <div ref={trackRef} className="relative flex h-full items-center will-change-transform" style={{ width: "max-content" }}>
                 {/* Full-screen image before cards */}
                 <div className="flex-shrink-0 w-screen h-screen flex items-center justify-center">
-                    <div className="relative h-screen w-full">
+                    <div className="relative h-[400px] md:h-screen w-full">
                         <Image src={section.image} alt={section.imageAlt} fill priority className="object-cover object-center" />
                     </div>
                 </div>
@@ -134,7 +134,6 @@ const ServiceSectionsWrapper: React.FC<{ children: React.ReactNode }> = ({
     );
 };
 
-// ---------- Main Component ----------
 // ---------- Main Component ----------
 export default function PinnedHorizontalSection() {
     const rotate = useMotionValue(0);

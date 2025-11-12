@@ -295,7 +295,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           })()}
         </div>
 
-        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-start justify-between px-[1em] lg:px-[3em] bg-transparent pointer-events-none z-20">
+        <header className="staggered-menu-header absolute top-0 left-0 w-full flex items-start justify-between px-[1em] md:px-[2em] lg:px-[3em] bg-transparent pointer-events-none z-20">
           <div className="sm-logo flex items-start select-none pointer-events-auto relative" aria-label="Logo">
             {/* Desktop Logo — flush with top */}
             <div className="relative bg-[#353639] h-[83px] w-[138px] md:h-[70px] md:w-[158px] lg:h-[120px] lg:w-[220px] flex items-center justify-center rounded-b-xl m-0 p-0 sm:-left-3 -top-4 md:-top-2">
