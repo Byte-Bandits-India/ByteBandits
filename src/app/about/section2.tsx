@@ -4,22 +4,22 @@ import Image from "next/image";
 
 export default function WhyChooseUsSection() {
   return (
-    <section className="w-full font-inter text-[#111] px-6 2xl:px-12 lg:px-24 py-20">
+    <section className="w-full font-inter text-[#111] px-6 py-20">
       {/* ===== Top Section ===== */}
       <div className="max-w-[1400px] mx-auto">
-        <h1 className=" text-2xl md:text-[40px] 2xl:text-[55px] font-medium leading-tight">
-          We’re The Rebels Of The Digital World 
+        <h1 className=" text-[20px] md:text-[40px] 2xl:text-[55px] font-medium leading-tight">
+          We’re The Rebels Of The Digital World
           <span className="">
             Crafting Brands That Speak, Sell, And Shine.
           </span>
         </h1>
 
         {/* Red Box + Paragraph Section */}
-        <div className="mt-[8%] flex flex-col md:flex-row items-center 2xl:items-start gap-10 2xl:gap-16">
+        <div className="mt-[8%] flex flex-col lg:flex-row items-center 2xl:items-start gap-10 2xl:gap-16">
           {/* Left Red Image */}
-          <div className="relative w-[260px] sm:w-[300px] md:w-[450px] xl:w-[620px] xl:h-[420px] aspect-[4/3] rounded-lg overflow-hidden">
+          <div className="relative w-full lg:w-[400px] xl:w-[620px] xl:h-[420px] aspect-[4/3] rounded-lg overflow-hidden">
             <Image
-              src="/images/bb-big.png" 
+              src="/images/bb-big.png"
               alt="Byte Bandits Logo"
               fill
               className="rounded-xl"
@@ -72,7 +72,7 @@ export default function WhyChooseUsSection() {
         <p className="text-base mt-[6%]  md:text-[40px] 2xl:text-[60px] leading-tight tracking-[-0.05rem] font-light">
           We Don’t Follow Trends,{" "}
           <strong className="font-semibold">We Set Them.</strong> From  <br />
-         Concept To Completion, We Turn{" "}
+          Concept To Completion, We Turn{" "}
           <strong className="font-semibold">Your Vision</strong> Into Powerful
           Digital Experiences That{" "}
           <strong className="font-semibold">Stand Out</strong>, Perform Better,

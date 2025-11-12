@@ -18,29 +18,52 @@ export default function AboutSection() {
       </div>
 
       {/* About Section */}
-      <div className="bg-[#FFE5DD] h-[950px] flex flex-col items-center justify-center relative">
-        <div className="max-w-[1400px] relative flex flex-col items-center justify-center">
-          {/* About Text - Left */}
-          <h2 className="absolute z-10 -left-32 2xl:-left-48 top-24 -translate-y-1/2 text-[#BF3A3B] text-5xl 2xl:text-[120px] font-regular tracking-tight">
+      <section className="bg-[#FFE5DD] h-[600px] md:h-dvh flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="max-w-[1400px] relative flex flex-col items-center justify-center px-4 sm:px-6">
+          {/* ABOUT Text - Left */}
+          <h2
+            className="
+            absolute z-10 text-[#BF3A3B] font-regular tracking-tight
+            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
+            top-8 sm:top-10 md:top-16 lg:top-20 xl:top-24
+            -left-4 sm:left-10 md:left-20 lg:-left-16 xl:-left-48
+            -translate-y-1/2
+          "
+          >
             ABOUT
           </h2>
 
-          {/* Center Image */}
-          <div className="relative w-[320px] 2xl:w-[1000px] h-[240px] 2xl:h-[600px] overflow-hidden">
+          {/* Center Image (responsive height via aspect ratio) */}
+          <div
+            className="
+            relative overflow-hidden rounded-xl shadow-xl
+            w-[250px] sm:w-[320px] md:w-[480px] lg:w-[700px] xl:w-[1000px]
+            aspect-[5/3] 
+          "
+          >
             <Image
               src="/images/team.png"
               alt="About Byte Bandits"
               fill
-              className="object-cover rounded-xl shadow-xl"
+              className="object-cover"
+              priority
             />
           </div>
 
-          {/* Byte Bandits Text - Right */}
-          <h2 className="absolute z-10 -right-40 2xl:-right-56 -bottom-10 -translate-y-1/2 text-[#BF3A3B] text-5xl 2xl:text-[120px] font-regular tracking-tight">
+          {/* BYTE BANDITS Text - Right */}
+          <h2
+            className="
+            absolute z-10 text-[#BF3A3B] font-regular tracking-tight
+            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
+            bottom-2 sm:bottom-4 md:bottom-8 lg:bottom-12 xl:-bottom-10
+            -right-8 sm:right-10 md:right-20 lg:-right-24 xl:-right-56
+            -translate-y-1/2
+          "
+          >
             BYTE BANDITS
           </h2>
         </div>
-      </div>
+      </section>
     </section>
   );
 }
