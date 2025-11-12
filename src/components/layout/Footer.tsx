@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#252628] px-6 py-8 text-white overflow-x-hidden relative">
       {/* Mobile View */}
-      <div className="md:hidden absolute z-10">
+      <div className="md:hidden z-10">
         <div>
           <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
           <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
