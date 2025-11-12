@@ -6,9 +6,9 @@ export default function AboutSection() {
   return (
     <section className="w-full font-anton">
       {/* Top Red Section */}
-      <div className="bg-[#BF3A3B]   text-center h-[600px]  text-white">
+      <div className="bg-[#BF3A3B] text-center h-[600px] text-white px-4">
         <h1 className="text-5xl max-w-[1400px] mx-auto md:text-[80px] 2xl:text-[120px] pt-[200px] text-left font-regular text-[#FFE5DE] mb-6 ">
-          REBELS OF THE DIGITAL WORLD 
+          REBELS OF THE DIGITAL WORLD
         </h1>
         <p className="max-w-[1400px] mx-auto text-left font-inter font-light mt-16 text-sm 2xl:text-[20px] leading-tight tracking-tight">
           We Steal Attention For Your Brand. <br />
@@ -28,7 +28,7 @@ export default function AboutSection() {
           {/* Center Image */}
           <div className="relative w-[320px] 2xl:w-[1000px] h-[240px] 2xl:h-[600px] overflow-hidden">
             <Image
-              src="/images/team.png" 
+              src="/images/team.png"
               alt="About Byte Bandits"
               fill
               className="object-cover rounded-xl shadow-xl"
