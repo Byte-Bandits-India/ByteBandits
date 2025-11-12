@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useMotionValue, useScroll, MotionValue } from "framer-motion";
+import { motion, useMotionValue, useScroll } from "framer-motion";
 import Image from "next/image";
 
 if (typeof window !== "undefined") {
@@ -29,7 +29,7 @@ interface ServiceSectionType {
 const ServiceCard: React.FC<{ card: ServiceCard }> = ({ card }) => (
     <div className="flex-shrink-0 flex items-center justify-center">
         <div
-            className="h-[330px] w-[300px] lg:w-[300px] lg:h-[300px] rounded-2xl bg-white/20 backdrop-blur-lg border border-[#D7D7D7] 
+            className="h-[280px] w-[300px] lg:w-[300px] lg:h-[300px] rounded-2xl bg-white/20 backdrop-blur-lg border border-[#D7D7D7] 
           flex flex-col justify-between p-6 group transition-all duration-300 hover:scale-105"
         >
             <div className="text-[40px] font-anton font-bold text-[#000000]">{card.number}</div>
