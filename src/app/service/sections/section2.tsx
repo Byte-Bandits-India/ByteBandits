@@ -462,7 +462,7 @@ export default function PinnedHorizontalSection() {
                 {/* Centered container */}
                 <div className="flex items-center justify-center w-full h-full">
                     {/* Rotating frame */}
-                    <div className="relative w-[280px] md:w-[400px] lg:w-[600px] aspect-square flex items-center justify-center">
+                    <div className="relative w-[280px] md:w-[400px] lg:w-[500px] xl:w-[550px] aspect-square flex items-center justify-center">
                         {/* Rotating motion wrapper only around the frame */}
                         <motion.div
                             className="absolute inset-0"
