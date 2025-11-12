@@ -21,6 +21,9 @@ module.exports = {
           "100%": { transform: "translateX(0)" },
         },
       },
+      screens: {
+        xs: "320px",
+      },
       animation: {
         scrollLeft: "marqueeLeft 20s linear infinite",
         scrollRight: "marqueeRight 20s linear infinite",

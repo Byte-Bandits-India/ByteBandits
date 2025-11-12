@@ -24,9 +24,9 @@ export default function AboutSection() {
           <h2
             className="
             absolute z-10 text-[#BF3A3B] font-regular tracking-tight
-            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
+            text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
             top-8 sm:top-10 md:top-16 lg:top-20 xl:top-24
-            -left-4 sm:left-10 md:left-20 lg:-left-16 xl:-left-48
+            -left-2 sm:left-10 md:-left-10 lg:-left-16 xl:-left-40
             -translate-y-1/2
           "
           >
@@ -37,7 +37,7 @@ export default function AboutSection() {
           <div
             className="
             relative overflow-hidden rounded-xl shadow-xl
-            w-[250px] sm:w-[320px] md:w-[480px] lg:w-[700px] xl:w-[1000px]
+            w-[300px] h-[250px] md:h-auto sm:w-[320px] md:w-[480px] lg:w-[700px] xl:w-[1000px]
             aspect-[5/3] 
           "
           >
@@ -54,9 +54,9 @@ export default function AboutSection() {
           <h2
             className="
             absolute z-10 text-[#BF3A3B] font-regular tracking-tight
-            text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
+            text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
             bottom-2 sm:bottom-4 md:bottom-8 lg:bottom-12 xl:-bottom-10
-            -right-8 sm:right-10 md:right-20 lg:-right-24 xl:-right-56
+            -right-2 sm:right-10 md:-right-10 lg:-right-24 xl:-right-40
             -translate-y-1/2
           "
           >
