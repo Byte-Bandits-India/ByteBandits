@@ -23,7 +23,7 @@ export default function WipeTransition({ children }: { children: React.ReactNode
                     end: "+=50%", // ⏱ End earlier for smoother transition
                     scrub: true,
                     pin: true,
-                    pinSpacing: false, // 🚫 Prevent layout pushdown
+                    pinSpacing: false,
                 },
             });
 
@@ -31,7 +31,7 @@ export default function WipeTransition({ children }: { children: React.ReactNode
             tl.to(".wipe-bar", {
                 yPercent: -100,
                 ease: "none",
-                stagger: 0.1,
+                stagger: 0.3,
             });
         }, containerRef);
 
