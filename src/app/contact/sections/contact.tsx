@@ -14,25 +14,41 @@ export default function Contact() {
     source: "",
   });
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    setSuccess(true);
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      website: "",
-      message: "",
-      consent: false,
-      source: "",
-    });
-    setTimeout(() => setSuccess(false), 3000);
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSuccess(true);
+        setForm({
+          name: "",
+          phone: "",
+          email: "",
+          website: "",
+          message: "",
+          consent: false,
+          source: "",
+        });
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError(data.error || "Failed to send message. Please check your connection or details and try again.");
+      }
+    } catch {
+      setError("An unexpected error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -288,14 +304,21 @@ export default function Contact() {
                 {/* Submit button */}
                 <button
                   type="submit"
-                  className="w-full bg-[#FF3B30] hover:bg-[#E03027] text-white py-3 rounded-lg font-bold text-center mt-4 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:scale-[1.01]"
+                  disabled={loading}
+                  className="w-full bg-[#FF3B30] hover:bg-[#E03027] text-white py-3 rounded-lg font-bold text-center mt-4 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
 
                 {success && (
                   <div className="text-green-600 text-sm font-semibold text-center mt-2 animate-bounce">
                     Message sent successfully!
+                  </div>
+                )}
+
+                {error && (
+                  <div className="text-red-600 text-sm font-semibold text-center mt-2">
+                    {error}
                   </div>
                 )}
               </form>

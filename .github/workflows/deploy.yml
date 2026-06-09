@@ -51,6 +51,14 @@ jobs:
             echo "Pulling latest code..."
             git pull origin main
 
+            # Copy environment variables from host home directory if present
+            if [ -f /home/ec2-user/.env.local ]; then
+              echo "Copying environment variables from /home/ec2-user/.env.local..."
+              cp /home/ec2-user/.env.local .env.local
+            else
+              echo "WARNING: /home/ec2-user/.env.local not found. Mail may not work without SMTP variables configured."
+            fi
+
             echo "Installing dependencies..."
             npm ci --legacy-peer-deps --prefer-offline --no-audit --no-fund
 
