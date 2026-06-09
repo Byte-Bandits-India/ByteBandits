@@ -19,6 +19,10 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!form.source) {
+      setError("Please select how you came to know about us.");
+      return;
+    }
     setLoading(true);
     setError(null);
     setSuccess(false);
@@ -190,7 +194,7 @@ export default function Contact() {
                 <div className="flex flex-col md:flex-row gap-4 w-full">
                   <div className="flex flex-col gap-1.5 flex-1">
                     <label htmlFor="name" className="text-sm font-semibold text-[#111111] font-inter text-left">
-                      Your Name
+                      Your Name <span className="text-[#FF3B30]">*</span>
                     </label>
                     <input
                       type="text"
@@ -218,7 +222,7 @@ export default function Contact() {
                 {/* Email input */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="email" className="text-sm font-semibold text-[#111111] font-inter">
-                    Your Email
+                    Your Email <span className="text-[#FF3B30]">*</span>
                   </label>
                   <input
                     type="email"
@@ -247,7 +251,7 @@ export default function Contact() {
                 {/* Message text */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="message" className="text-sm font-semibold text-[#111111] font-inter">
-                    Message
+                    Message <span className="text-[#FF3B30]">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -262,7 +266,7 @@ export default function Contact() {
                 {/* GDPR Agreement */}
                 <div className="flex flex-col gap-1.5 mt-1">
                   <span className="text-sm font-bold text-[#111111] font-inter">
-                    GDPR Agreement
+                    GDPR Agreement <span className="text-[#FF3B30]">*</span>
                   </span>
                   <div className="flex items-start gap-3 text-left">
                     <input
@@ -282,7 +286,7 @@ export default function Contact() {
                 {/* Referral Source radio list */}
                 <div className="flex flex-col gap-2 mt-2 text-left">
                   <span className="text-sm font-bold text-[#111111] font-inter">
-                    How did you come to know about us
+                    How did you come to know about us <span className="text-[#FF3B30]">*</span>
                   </span>
                   <div className="flex flex-wrap gap-4 md:gap-5 text-sm text-gray-700">
                     {["Google ads", "Linkdin", "Email", "Instagram", "Others"].map((src) => (
@@ -290,6 +294,7 @@ export default function Contact() {
                         <input
                           type="radio"
                           name="source"
+                          required
                           value={src}
                           checked={form.source === src}
                           onChange={(e) => setForm({ ...form, source: e.target.value })}

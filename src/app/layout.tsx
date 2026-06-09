@@ -10,6 +10,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const anton = Anton({ variable: "--font-anton", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bytebandits.dedyn.io"),
   title: "Byte Bandits | Custom Software, Web, Mobile & Cloud Solutions",
   description:
     "At Byte Bandits, we turn bold ideas into powerful digital products. Web development, mobile apps, SEO, cloud scaling, branding & more. Let’s build success together.",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: "Byte Bandits | Custom Software, Web, Mobile & Cloud Solutions",
     description:
       "At Byte Bandits, we turn bold ideas into powerful digital products. Web development, mobile apps, SEO, cloud scaling, branding & more.",
-    url: "https://bytebandits.com",
+    url: "https://bytebandits.dedyn.io",
     siteName: "Byte Bandits",
     type: "website",
   },

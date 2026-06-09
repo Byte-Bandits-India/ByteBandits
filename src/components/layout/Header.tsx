@@ -1,43 +1,38 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { StaggeredMenu } from "./StaggeredMenu";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
-  ChevronDown,
   ArrowRight,
-  Cpu,
-  Cloud,
-  Globe,
-  Shield,
-  Smartphone,
-  Palette,
-  TrendingUp,
 } from "lucide-react";
-
-interface SubMenuItem {
-  title: string;
-  description: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
 
 export const Header = () => {
   const pathname = usePathname();
-  const [activeDropdown, setActiveDropdown] = useState<"consulting" | "services" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState<"consulting" | "services" | null>(null);
-  
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [staggeredOpen, setStaggeredOpen] = useState(false);
+
+  const menuItems = [
+    { label: "Home", ariaLabel: "Go to home page", link: "/" },
+    { label: "About", ariaLabel: "Learn about us", link: "/about" },
+    { label: "Consulting", ariaLabel: "Get strategic consulting", link: "/contact" },
+    { label: "Services", ariaLabel: "View our services", link: "/service" },
+  ];
+
+  const socialItems = [
+    { label: "LinkedIn", link: "https://linkedin.com" },
+    { label: "Instagram", link: "https://instagram.com" },
+    { label: "GitHub", link: "https://github.com" },
+  ];
 
   // Close mobile menu when page changes
   useEffect(() => {
     setMobileMenuOpen(false);
-    setMobileDropdown(null);
   }, [pathname]);
 
   // Lock body, html, and Lenis scroll when mobile menu is open
@@ -45,7 +40,7 @@ export const Header = () => {
     const globalWindow = typeof window !== "undefined" ? (window as unknown as { lenis?: { stop: () => void; start: () => void } }) : null;
     const lenis = globalWindow?.lenis;
 
-    if (mobileMenuOpen) {
+    if (mobileMenuOpen || staggeredOpen) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       if (lenis && typeof lenis.stop === "function") {
@@ -65,108 +60,13 @@ export const Header = () => {
         lenis.start();
       }
     };
-  }, [mobileMenuOpen]);
-
-  const handleMouseEnter = (type: "consulting" | "services") => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setActiveDropdown(type);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 150); // slight delay to prevent flickering
-  };
-
-  const toggleMobileDropdown = (type: "consulting" | "services") => {
-    if (mobileDropdown === type) {
-      setMobileDropdown(null);
-    } else {
-      setMobileDropdown(type);
-    }
-  };
-
-  const consultingItems: SubMenuItem[] = [
-    {
-      title: "IT Consulting",
-      description: "Strategic planning and expert architecture consulting.",
-      href: "/contact",
-      icon: Cpu,
-    },
-    {
-      title: "Cloud Architecture",
-      description: "Scalable, secure cloud migration and AWS/GCP setups.",
-      href: "/service",
-      icon: Cloud,
-    },
-    {
-      title: "Digital Strategy",
-      description: "Aligning your product vision with robust market strategies.",
-      href: "/contact",
-      icon: Globe,
-    },
-    {
-      title: "Security Solutions",
-      description: "DLP, identity management, and threat prevention audits.",
-      href: "/contact",
-      icon: Shield,
-    },
-  ];
-
-  const servicesItems: SubMenuItem[] = [
-    {
-      title: "Web Development",
-      description: "High-performance, modern React/Next.js web builds.",
-      href: "/service",
-      icon: Globe,
-    },
-    {
-      title: "Mobile Development",
-      description: "Stunning iOS, Android, and cross-platform native apps.",
-      href: "/service",
-      icon: Smartphone,
-    },
-    {
-      title: "UI/UX Design",
-      description: "Interactive wireframes and clean premium interfaces.",
-      href: "/service",
-      icon: Palette,
-    },
-    {
-      title: "Digital Marketing",
-      description: "Data-driven SEO strategies, social media, and paid ads.",
-      href: "/service",
-      icon: TrendingUp,
-    },
-    {
-      title: "AI & ML Solutions",
-      description: "Custom intelligent bots, LLM agents, and automation.",
-      href: "/service",
-      icon: Cpu,
-    },
-  ];
+  }, [mobileMenuOpen, staggeredOpen]);
 
   const isActive = (path: string) => pathname === path;
 
-  // Animation constants for dropdown popovers
-  const dropdownVariants: Variants = {
-    hidden: { opacity: 0, y: 15, scale: 0.98 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { duration: 0.2, ease: "easeOut" }
-    },
-    exit: { 
-      opacity: 0, 
-      y: 8, 
-      scale: 0.98,
-      transition: { duration: 0.15, ease: "easeIn" }
-    }
-  };
-
   return (
-    <header className={`${mobileMenuOpen ? "fixed" : "absolute"} top-0 left-0 w-full z-50 bg-white border-b border-gray-100 py-4`}>
+    <>
+      <header className="hidden lg:block absolute top-0 left-0 w-full z-50 bg-white border-b border-gray-100 py-4">
       <div className="max-w-[1420px] mx-auto px-6 flex items-center justify-between">
         
         {/* Left Side: Logo and Desktop Nav grouped */}
@@ -205,127 +105,37 @@ export const Header = () => {
             About us
           </Link>
 
-          {/* Consulting Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("consulting")}
-            onMouseLeave={handleMouseLeave}
+          {/* Consulting Link */}
+          <Link
+            href="/contact"
+            className={`font-medium text-sm transition-colors duration-200 ${
+              isActive("/contact")
+                ? "text-[#A31621] font-semibold"
+                : "text-[#333333] hover:text-[#A31621]"
+            }`}
           >
-            <button
-              className={`font-medium text-sm flex items-center gap-1.5 py-2 transition-colors duration-200 ${
-                activeDropdown === "consulting" ? "text-[#A31621]" : "text-[#333333] hover:text-[#A31621]"
-              }`}
-            >
-              Consulting
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
-                  activeDropdown === "consulting" ? "rotate-180 text-[#A31621]" : ""
-                }`}
-              />
-            </button>
+            Consulting
+          </Link>
 
-            <AnimatePresence>
-              {activeDropdown === "consulting" && (
-                <motion.div
-                  variants={dropdownVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-6 w-[480px] z-50"
-                >
-                  <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 overflow-hidden grid grid-cols-2 gap-4">
-                    {consultingItems.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={item.title}
-                          href={item.href}
-                          className="group p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 flex flex-col gap-1"
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className="p-1.5 rounded-lg bg-red-50 text-[#A31621] group-hover:bg-[#A31621] group-hover:text-white transition-colors duration-200">
-                              <Icon className="w-4 h-4" />
-                            </div>
-                            <span className="font-semibold text-sm text-[#333333] group-hover:text-[#A31621] transition-colors duration-200">
-                              {item.title}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#818181] leading-relaxed pl-8">
-                            {item.description}
-                          </p>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* Services Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("services")}
-            onMouseLeave={handleMouseLeave}
+          {/* Services Link */}
+          <Link
+            href="/service"
+            className={`font-medium text-sm transition-colors duration-200 ${
+              isActive("/service")
+                ? "text-[#A31621] font-semibold"
+                : "text-[#333333] hover:text-[#A31621]"
+            }`}
           >
-            <button
-              className={`font-medium text-sm flex items-center gap-1.5 py-2 transition-colors duration-200 ${
-                activeDropdown === "services" ? "text-[#A31621]" : "text-[#333333] hover:text-[#A31621]"
-              }`}
-            >
-              Services
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-200 ${
-                  activeDropdown === "services" ? "rotate-180 text-[#A31621]" : ""
-                }`}
-              />
-            </button>
-
-            <AnimatePresence>
-              {activeDropdown === "services" && (
-                <motion.div
-                  variants={dropdownVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-6 w-[540px] z-50"
-                >
-                  <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 overflow-hidden grid grid-cols-2 gap-4">
-                    {servicesItems.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={item.title}
-                          href={item.href}
-                          className="group p-3 rounded-xl hover:bg-gray-50 transition-colors duration-200 flex flex-col gap-1"
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className="p-1.5 rounded-lg bg-red-50 text-[#A31621] group-hover:bg-[#A31621] group-hover:text-white transition-colors duration-200">
-                              <Icon className="w-4 h-4" />
-                            </div>
-                            <span className="font-semibold text-sm text-[#333333] group-hover:text-[#A31621] transition-colors duration-200">
-                              {item.title}
-                            </span>
-                          </div>
-                          <p className="text-xs text-[#818181] leading-relaxed pl-8">
-                            {item.description}
-                          </p>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            Services
+          </Link>
 
           {/* Our Portfolio */}
-          <Link
+          {/* <Link
             href="/service"
             className="font-medium text-sm text-[#333333] hover:text-[#A31621] transition-colors duration-200"
           >
             Our Portfolio
-          </Link>
+          </Link> */}
         </nav>
       </div>
 
@@ -385,90 +195,36 @@ export const Header = () => {
                   About us
                 </Link>
 
-                {/* Consulting Dropdown */}
-                <div className="flex flex-col border-b border-gray-100 pb-3">
-                  <button
-                    onClick={() => toggleMobileDropdown("consulting")}
-                    className="flex items-center justify-between text-lg font-semibold text-[#333333]"
-                  >
-                    <span>Consulting</span>
-                    <ChevronDown
-                      className={`w-5 h-5 transition-transform duration-200 ${
-                        mobileDropdown === "consulting" ? "rotate-180 text-[#A31621]" : ""
-                      }`}
-                    />
-                  </button>
-                  
-                  <AnimatePresence initial={false}>
-                    {mobileDropdown === "consulting" && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden flex flex-col gap-3 mt-3 pl-4"
-                      >
-                        {consultingItems.map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-sm text-[#818181] hover:text-[#A31621] transition-colors py-1"
-                          >
-                            {item.title}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                {/* Consulting Link */}
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-lg font-semibold border-b border-gray-100 pb-3 ${
+                    isActive("/contact") ? "text-[#A31621]" : "text-[#333333]"
+                  }`}
+                >
+                  Consulting
+                </Link>
 
-                {/* Services Dropdown */}
-                <div className="flex flex-col border-b border-gray-100 pb-3">
-                  <button
-                    onClick={() => toggleMobileDropdown("services")}
-                    className="flex items-center justify-between text-lg font-semibold text-[#333333]"
-                  >
-                    <span>Services</span>
-                    <ChevronDown
-                      className={`w-5 h-5 transition-transform duration-200 ${
-                        mobileDropdown === "services" ? "rotate-180 text-[#A31621]" : ""
-                      }`}
-                    />
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {mobileDropdown === "services" && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="overflow-hidden flex flex-col gap-3 mt-3 pl-4"
-                      >
-                        {servicesItems.map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-sm text-[#818181] hover:text-[#A31621] transition-colors py-1"
-                          >
-                            {item.title}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                {/* Services Link */}
+                <Link
+                  href="/service"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-lg font-semibold border-b border-gray-100 pb-3 ${
+                    isActive("/service") ? "text-[#A31621]" : "text-[#333333]"
+                  }`}
+                >
+                  Services
+                </Link>
 
                 {/* Our Portfolio */}
-                <Link
+                {/* <Link
                   href="/service"
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-lg font-semibold border-b border-gray-100 pb-3 text-[#333333]"
                 >
                   Our Portfolio
-                </Link>
+                </Link> */}
               </div>
 
               {/* Mobile CTA */}
@@ -486,6 +242,27 @@ export const Header = () => {
           </>
         )}
       </AnimatePresence>
-    </header>
+      </header>
+
+      {/* Mobile/Tablet Menu */}
+      <div className="lg:hidden">
+        <StaggeredMenu
+          isFixed={true}
+          position="right"
+          items={menuItems}
+          socialItems={socialItems}
+          displaySocials={true}
+          displayItemNumbering={true}
+          menuButtonColor="#ff9b42"
+          openMenuButtonColor="#ff9b42"
+          changeMenuColorOnOpen={true}
+          colors={['#BF3A3B', '#FF3B30']}
+          logoUrl="/fav2.png"
+          accentColor="#FF3B30"
+          onMenuOpen={() => setStaggeredOpen(true)}
+          onMenuClose={() => setStaggeredOpen(false)}
+        />
+      </div>
+    </>
   );
 };

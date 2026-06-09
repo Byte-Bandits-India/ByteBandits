@@ -37,7 +37,7 @@ const HeroSection = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none opacity-90"
+        className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none opacity-20"
       >
         <source src="/Videos/hi.mp4" type="video/mp4" />
         Your browser does not support the video tag.
