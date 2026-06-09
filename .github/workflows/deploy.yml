@@ -25,6 +25,15 @@ jobs:
 
             cd /home/ec2-user/byteBandits
 
+            # Check if .git directory exists, if not clone the repo
+            if [ ! -d .git ]; then
+              echo "Git repository not found. Cloning repository..."
+              cd /home/ec2-user
+              rm -rf byteBandits
+              git clone https://github.com/Byte-Bandits-India/ByteBandits.git byteBandits
+              cd byteBandits
+            fi
+
             echo "Pulling latest code..."
             git pull origin main
 
