@@ -42,7 +42,8 @@ export const Header = () => {
 
   // Lock body, html, and Lenis scroll when mobile menu is open
   useEffect(() => {
-    const lenis = typeof window !== "undefined" ? (window as any).lenis : null;
+    const globalWindow = typeof window !== "undefined" ? (window as unknown as { lenis?: { stop: () => void; start: () => void } }) : null;
+    const lenis = globalWindow?.lenis;
 
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";

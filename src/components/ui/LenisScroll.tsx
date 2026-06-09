@@ -13,7 +13,7 @@ const LenisScroll = () => {
         });
 
         if (typeof window !== "undefined") {
-            (window as any).lenis = lenis;
+            (window as unknown as { lenis?: Lenis }).lenis = lenis;
         }
 
         function raf(time: number) {
@@ -25,7 +25,7 @@ const LenisScroll = () => {
 
         return () => {
             if (typeof window !== "undefined") {
-                delete (window as any).lenis;
+                delete (window as unknown as { lenis?: Lenis }).lenis;
             }
             lenis.destroy();
         };
