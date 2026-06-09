@@ -1,8 +1,39 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState, useRef } from "react";
+
+interface CounterProps {
+  target: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+}
+
+const Counter = ({ target, duration = 1.5, prefix = "", suffix = "" }: CounterProps) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [isInView, target, duration]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+};
 
 interface PortfolioItem {
   title: string;
@@ -15,22 +46,30 @@ const PortfolioSection = () => {
   // Statistics data
   const stats = [
     {
-      value: "40+",
+      target: 40,
+      prefix: "",
+      suffix: "+",
       label1: "Products shipped",
       label2: "to production",
     },
     {
-      value: "7+",
+      target: 7,
+      prefix: "",
+      suffix: "+",
       label1: "Years Of",
       label2: "Experience",
     },
     {
-      value: "$8M",
+      target: 8,
+      prefix: "$",
+      suffix: "M",
       label1: "Funding Raised",
       label2: "By Clients",
     },
     {
-      value: "40+",
+      target: 40,
+      prefix: "",
+      suffix: "+",
       label1: "Trusted",
       label2: "Customers",
     },
@@ -62,7 +101,7 @@ const PortfolioSection = () => {
           {stats.map((stat, i) => (
             <div key={i} className="flex flex-col items-center text-center">
               <span className="text-4xl md:text-[52px] font-bold text-[#FF3B30] tracking-tight mb-2">
-                {stat.value}
+                <Counter target={stat.target} prefix={stat.prefix} suffix={stat.suffix} />
               </span>
               <span className="text-xs md:text-sm font-semibold text-[#818181] leading-relaxed">
                 {stat.label1}
@@ -85,7 +124,7 @@ const PortfolioSection = () => {
         {/* COLUMN 1: INTRO TEXT & CARD 1 */}
         <div className="lg:col-span-4 flex flex-col justify-between h-full w-full gap-6 lg:gap-0">
           <motion.div variants={itemVariants} className="flex flex-col text-left py-2">
-            <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-semibold text-[#333333] leading-[57px] tracking-[2%] mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-semibold text-[#333333] mdleading-relaxed tracking-[2%] mb-4">
               Our Portfolio & Case Studies
             </h2>
             <p className="text-[#64748b] text-base leading-relaxed max-w-sm font-medium">
