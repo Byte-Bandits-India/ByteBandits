@@ -12,6 +12,10 @@ const LenisScroll = () => {
             lerp: 0.1, // Inertia (lower = smoother)
         });
 
+        if (typeof window !== "undefined") {
+            (window as any).lenis = lenis;
+        }
+
         function raf(time: number) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -20,6 +24,9 @@ const LenisScroll = () => {
         requestAnimationFrame(raf);
 
         return () => {
+            if (typeof window !== "undefined") {
+                delete (window as any).lenis;
+            }
             lenis.destroy();
         };
     }, []);

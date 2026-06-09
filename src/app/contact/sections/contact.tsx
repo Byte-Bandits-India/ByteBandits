@@ -1,313 +1,324 @@
-"use client"
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import { useState } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
 
 export default function Contact() {
-    const [form, setForm] = useState({ name: '', email: '', number: '', message: '' });
-    const [success, setSuccess] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    website: "",
+    message: "",
+    consent: false,
+    source: "",
+  });
+  const [success, setSuccess] = useState(false);
 
-    // Reference to section (so animations trigger when hero enters/leaves viewport)
-    const scrollRef = useRef<HTMLDivElement | null>(null);
-
-    // Track scroll progress relative to the hero section
-    const { scrollYProgress } = useScroll({
-        target: scrollRef,
-        offset: ["start end", "end start"],
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
     });
+    setSuccess(true);
+    setForm({
+      name: "",
+      phone: "",
+      email: "",
+      website: "",
+      message: "",
+      consent: false,
+      source: "",
+    });
+    setTimeout(() => setSuccess(false), 3000);
+  };
 
-    // Scale motion value (larger → smaller while scrolling)
-    const scale = useTransform(scrollYProgress, [0, 0], [1.5, 1.1]);
+  return (
+    <div className="relative w-full min-h-screen pb-24 pt-[80px]">
+      
+      {/* 1. HERO BANNER HEADER */}
+      <div className="w-full h-[320px] md:h-[400px] overflow-hidden relative rounded-b-[40px] md:rounded-b-[56px]">
+        {/* Background Image */}
+        <Image
+          src="/images/contact-us.png"
+          alt="Contact Us Background"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Dark opacity overlay */}
+        <div className="absolute inset-0 bg-black/65 z-10" />
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        await fetch("/api/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
-        });
-        setSuccess(true);
-        setForm({ name: "", email: "", number: "", message: "" });
-        setTimeout(() => setSuccess(false), 3000);
-    }
+        {/* Text content inside banner */}
+        <div className="relative z-20 w-full h-full max-w-[1420px] mx-auto px-6 flex flex-col justify-center items-start text-left">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-[50px] font-bold tracking-tight font-inter leading-none mb-4">
+            Reach Out to US
+          </h1>
+          <p className="text-white/80 text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-medium">
+            {"Need support, have a query, or looking for a collaboration? Let's talk!"}
+          </p>
+        </div>
+      </div>
 
-    const contactInfo = [
-        {
-            img: "/icons/contact/Headphone.png",
-            alt: "Phone",
-            text: "+91 89400 11098",
-            textSize: "text-lg",
-        },
-        {
-            img: "/icons/contact/red_mail.png",
-            alt: "Mail",
-            text: "support@bytebandits.in",
-            textSize: "text-lg",
-        },
-        {
-            img: "/icons/contact/location.png",
-            alt: "Location",
-            text: "1/509A, Krishna Nagar\nPeriyar Rd, Ramapuram,\nIndira Nagar, Manappakkam,\nChennai, Tamil Nadu 600125",
-            textSize: "text-[14px]",
-        },
-    ];
+      {/* 2. OVERLAPPING GRID SECTION */}
+      <div className="w-full max-w-[1420px] mx-auto px-6 relative z-20 -mt-20 lg:-mt-[270px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start w-full">
+          
+          {/* LEFT COLUMN: Contact Details & Info */}
+          <div className="w-full lg:col-span-5 order-2 lg:order-1 text-left flex flex-col gap-8 lg:pt-[320px]">
+            <div>
+              <h2 className="text-[#111111] text-2xl md:text-[28px] font-bold font-inter mb-4">
+                {"Let's Build Something."}
+              </h2>
+              <p className="text-gray-600 text-sm md:text-[15px] leading-relaxed font-medium max-w-md">
+                {"If u Have a project in mind, a workflow problem, or just want to explore what's possible? Start here."}
+              </p>
+            </div>
 
-    return (
-        <div ref={scrollRef} className="relative overflow-x-hidden bg-[#F2F2F0] pt-[80px]">
-            <div className="shapes px-6">
-                {/* Scroll-animated shapes */}
-                <motion.img
-                    src="/images/gold.webp"
-                    alt="Gold Shape"
-                    style={{ scale, rotate: -90 }}
-                    animate={{ y: [0, -30, 0] }}
-                    transition={{ duration: 4.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.2 }}
-                    className="absolute -left-[100px] top-[10px]  w-[200px] sm:w-[200px] md:-left-[30%] md:w-[400px] lg:-left-[24%] xl:-left-[20%] xl:-top-[10%] xl:w-[600px] z-10"
+            <div className="flex flex-col gap-4 text-gray-800 font-semibold text-sm md:text-base">
+              <div className="flex items-center gap-3">
+                <span>+91 90804 03951</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span>info@bytebandits.in</span>
+              </div>
+              <div className="flex items-start gap-3 max-w-sm leading-relaxed">
+                <span>
+                  Krishna Nagar Periyar Rd, Ramapuram, Indira Nagar, Manappakkam, Chennai, Tamil Nadu 600125
+                </span>
+              </div>
+            </div>
+
+            {/* Branded Social Icons */}
+            <div className="flex items-center gap-3 mt-4">
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Link"
+              >
+                <Image
+                  src="/images/linkedIn.png"
+                  alt="LinkedIn"
+                  width={45}
+                  height={45}
+                  className="h-[45px] w-auto object-contain hover:scale-105 transition-transform"
                 />
-
-                <motion.img
-                    src="/images/red.webp"
-                    alt="Green Shape"
-                    style={{ scale, rotate: -60 }}
-                    animate={{ y: [0, -36, 0] }}
-                    transition={{ duration: 5.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.4 }}
-                    className="absolute -right-[80px] top-[6%] w-[160px] sm:w-[150px] md:-right-[18%] md:w-[300px] lg:-right-[14%] xl:-right-[10%] xl:w-[450px] z-10"
+              </a>
+              {/* Instagram */}
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Link"
+              >
+                <Image
+                  src="/images/instagram.png"
+                  alt="Instagram"
+                  width={45}
+                  height={45}
+                  className="h-[45px] w-auto object-contain hover:scale-105 transition-transform"
                 />
-
+              </a>
+              {/* GitHub */}
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Link"
+              >
+                <Image
+                  src="/images/gitHub.png"
+                  alt="GitHub"
+                  width={51}
+                  height={45}
+                  className="h-[45px] w-auto object-contain hover:scale-105 transition-transform"
+                />
+              </a>
+              {/* Gmail / Mail */}
+              <a
+                href="mailto:info@bytebandits.in"
+                aria-label="Email Link"
+              >
+                <Image
+                  src="/images/Gmail.png"
+                  alt="Gmail"
+                  width={60}
+                  height={45}
+                  className="h-[45px] w-auto object-contain hover:scale-105 transition-transform"
+                />
+              </a>
             </div>
-            <div className="mt-[100px] w-full max-w-[1440px] mx-auto px-6">
-                {/* Header Line */}
-                <div className="flex items-center justify-center w-full">
-                    <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
-                    <h1 className="text-[#8C8C8C] text-[10px] md:text-[16px] lg:text-[20px] px-2 whitespace-nowrap text-center font-semibold leading-none">
-                        CONTACT WITH US
-                    </h1>
-                    <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
+          </div>
+
+          {/* RIGHT COLUMN: Contact Form Card */}
+          <div className="w-full lg:col-span-7 order-1 lg:order-2 flex lg:justify-end">
+            <div className="bg-white rounded-[32px] shadow-xl border border-gray-100 p-6 md:p-8 flex flex-col gap-5 text-left w-full max-w-[580px] lg:ml-auto">
+              {/* Form Header */}
+              <div>
+                <h3 className="text-[#111111] text-2xl font-bold font-inter mb-1.5">
+                  Send us a message
+                </h3>
+                <p className="text-gray-500 text-xs md:text-sm leading-relaxed font-medium">
+                  {"Get in touch with us for any inquiries or support. We're here to assist you and ensure your experience is exceptional."}
+                </p>
+              </div>
+
+              {/* Form inputs */}
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                
+                {/* Row: Name and Phone */}
+                <div className="flex flex-col md:flex-row gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <label htmlFor="name" className="text-sm font-semibold text-[#111111] font-inter text-left">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className="w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] transition-colors"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <label htmlFor="phone" className="text-sm font-semibold text-[#111111] font-inter text-left">
+                      Phone (optional)
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className="w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] transition-colors"
+                    />
+                  </div>
                 </div>
 
-                <div className="text-center text-[#333333] text-[14px] mt-[24px]">
-                    {/* Title */}
-                    <motion.div className="contact-title mt-[45px] font-anton">
-                        {["GET IN TOUCH", "WITH US"].map((line, lineIndex) => (
-                            <div
-                                key={lineIndex}
-                                className="title-line flex flex-wrap justify-center items-center 
-                 text-[clamp(50px,8vw,120px)] leading-[60px] md:leading-[70px] lg:leading-[85px] xl:leading-[120px] font-[anton] tracking-tight
-                 space-x-2 sm:space-x-4 lg:space-x-6"
-                            >
-                                {line.split(" ").map((word, wIndex) => (
-                                    <div
-                                        key={wIndex}
-                                        className="flex"
-                                        style={{ color: word === "TOUCH" ? "#F9373A" : "#333333" }}
-                                    >
-                                        {word.split("").map((char, i) => (
-                                            <span
-                                                key={i}
-                                                className="inline-block transition-transform hover:scale-y-110 origin-bottom"
-                                            >
-                                                {char}
-                                            </span>
-                                        ))}
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </motion.div>
-
-
-                    <div className="mt-[48px] lg:mt-[80px] flex flex-col items-center justify-center mx-auto lg:flex-row md:max-w-[600px] lg:max-w-full lg:flex md:gap-5 space-y-5 md:space-y-0">
-                        {contactInfo.map((item, index) => (
-                            <div
-                                key={index}
-                                className="bg-[#F4F6F8] w-full lg:w-[32%]
-                 rounded-xl flex items-center justify-start px-5 py-4 lg:py-0
-                 h-[100px] md:h-[130px] lg:h-[170px] xl:h-[180px]
-                 transition-all duration-300 shadow-md"
-                            >
-                                <Image
-                                    src={item.img}
-                                    alt={item.alt}
-                                    width={40}
-                                    height={40}
-                                    className="mr-6 w-[40px] h-[40px] md:h-[50px] md:w-[50px] lg:h-[40px] lg:w-[40px] xl:h-[60px] xl:w-[60px] object-contain flex-shrink-0"
-                                />
-                                <h1 className={`text-[#333333] ${item.textSize} text-left md:text-[20px] lg:text-[18px] xl:text-[20px] leading-snug`}>
-                                    {item.text}
-                                </h1>
-                            </div>
-                        ))}
-                    </div>
+                {/* Email input */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="email" className="text-sm font-semibold text-[#111111] font-inter">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] transition-colors"
+                  />
                 </div>
 
-                <div className="flex flex-col lg:grid lg:grid-cols-[minmax(auto,484px)_1fr] lg:gap-12 lg:mt-[100px]">
-                    {/* Left Column - Image */}
-                    <div className="w-full max-w-[484px] md:max-w-[600px] mx-auto lg:mx-0">
-                        <div
-                            className="
-      mt-8 relative w-full 
-      h-[530px] md:h-[725px] lg:h-full 
-      max-h-[725px] rounded-xl 
-      overflow-hidden
-    "
-                            style={{ boxShadow: '5px 5px 21px rgba(0,0,0,0.25)' }}
-                        >
-                            <div className="relative w-full h-full min-h-[530px] md:min-h-[530px] lg:min-h-0">
-                                <Image
-                                    src="/images/contact.webp"
-                                    alt="women"
-                                    fill
-                                    className="rounded-xl object-cover"
-                                    priority
-                                />
-                            </div>
-                        </div>
-
-                        {/* Footer Line (mobile only) */}
-                        <div className="flex items-center justify-center w-full mt-8 lg:hidden">
-                            <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
-                            <h1 className="text-[#8C8C8C] text-[12px] uppercase px-2 whitespace-nowrap text-center leading-none">
-                                {"Let's Talk"}
-                            </h1>
-                            <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
-                        </div>
-                    </div>
-
-
-
-                    {/* Right Column - Content and Form */}
-                    <div className="w-full flex flex-col justify-between lg:h-full">
-                        {/* Header Line (desktop only) */}
-                        <div className="hidden lg:flex items-center justify-center w-full mt-8">
-                            <Image src="/icons/Line_left.png" alt="line" width={16} height={2} />
-                            <h1 className="text-[#8C8C8C] lg:text-[20px] uppercase px-2 whitespace-nowrap text-center leading-none">
-                                {"Let's Talk"}
-                            </h1>
-                            <Image src="/icons/Line_right.png" alt="line" width={16} height={2} />
-                        </div>
-
-                        <div className="lg:mt-8 md:max-w-[600px] mx-auto lg:max-w-full">
-                            <h1 className="text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] text-[#333333] font-anton text-left mt-5 lg:mt-0">
-                                CONTACT OUR <span className="text-[#F9373A]">TEAM</span>
-                            </h1>
-                            <p className="text-[#696969] text-[16px] lg:text-[18px] lg:mt-6">
-                                Got Any Questions about the Service or scaling your existing project? Chat to Our Friendly team 24/7 for help.
-                            </p>
-                        </div>
-
-                        {/* Form */}
-                        <div className="min-h-[460px] w-full mt-8 rounded-xl overflow-hidden flex-1">
-                            <div className="py-4 h-full flex">
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className="w-full max-w-md md:max-w-[600px] mx-auto my-auto lg:mx-0 lg:max-w-none"
-                                >
-                                    {/* Name and Phone Number Row */}
-                                    <div className="lg:flex lg:gap-x-4">
-                                        {/* First Name */}
-                                        <div className="lg:flex-1">
-                                            <label htmlFor="name" className="block text-[16px] font-medium text-[#333333]">
-                                                First Name <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                value={form.name}
-                                                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                                type="text"
-                                                id="name"
-                                                name="First Name"
-                                                placeholder="First Name"
-                                                className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
-                                            />
-                                        </div>
-
-                                        {/* Phone Number */}
-                                        <div className="lg:flex-1 mt-[10px] lg:mt-0">
-                                            <label htmlFor="phone" className="block text-[16px] font-medium text-[#333333]">
-                                                Phone Number <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                value={form.number}
-                                                onChange={(e) => setForm({ ...form, number: e.target.value })}
-                                                type="tel"
-                                                id="phone"
-                                                name="phone"
-                                                placeholder="0000000000"
-                                                className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
-                                            />
-                                        </div>
-                                    </div>
-
-
-                                    {/* Email */}
-                                    <label htmlFor="email" className="block text-[16px] font-medium text-[#333333] mt-[10px]">
-                                        Email <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        value={form.email}
-                                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="example@gmail.com"
-                                        className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
-                                    />
-
-                                    {/* Message */}
-                                    <label htmlFor="message" className="block text-[16px] font-medium text-[#333333] mt-[10px]">
-                                        Message <span className="text-red-500">*</span>
-                                    </label>
-                                    <textarea
-                                        value={form.message}
-                                        onChange={(e) => setForm({ ...form, message: (e.target as HTMLTextAreaElement).value })}
-                                        id="message"
-                                        name="message"
-                                        placeholder="Hi there, I would like to ask about ..."
-                                        rows={4}
-                                        className="w-full p-4 mt-[10px] rounded-xl text-[18px] text-[#818181] bg-[#F4F6F8] border border-[#D7D7D7] focus:outline-none focus:border-orange-500"
-                                    />
-
-                                    {/* Submit Button */}
-                                    <button
-                                        type="submit"
-                                        className="w-full h-[60px] max-w-[350px] text-white font-medium text-[18px] rounded-[10px] bg-gradient-to-r from-[#9F1520] to-[#600C13] hover:opacity-90 transition-opacity mt-[10px]"
-                                    >
-                                        Submit Now
-                                    </button>
-
-                                    {success && <div className="text-green-500 mt-2">Message sent successfully!</div>}
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                {/* Website optional */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="website" className="text-sm font-semibold text-[#111111] font-inter">
+                    Website (optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="website"
+                    value={form.website}
+                    onChange={(e) => setForm({ ...form, website: e.target.value })}
+                    className="w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] transition-colors"
+                  />
                 </div>
 
-                <div className="md:flex md:max-w-[600px] mx-auto lg:max-w-full flex-col items-start lg:items-center justify-center text-left hidden lg:mt-[100px]">
-                    <h2 className="text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[1.3] text-[#333333] font-anton mt-5 lg:mt-0">Looking for a <br className="hidden md:block lg:hidden" /> technology partner ?</h2>
-                    <h3 className="text-[42px] sm:text-[clamp(40px,7vw,60px)] leading-[1.1] 
-bg-gradient-to-b from-[#9E1520] to-[#630C13] bg-clip-text text-transparent 
-font-anton mt-5 lg:mt-0">
-                        Let’s talk.
-                    </h3>
+                {/* Message text */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="message" className="text-sm font-semibold text-[#111111] font-inter">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={4}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    className="w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#FF3B30] focus:ring-1 focus:ring-[#FF3B30] transition-colors resize-none"
+                  />
                 </div>
 
+                {/* GDPR Agreement */}
+                <div className="flex flex-col gap-1.5 mt-1">
+                  <span className="text-sm font-bold text-[#111111] font-inter">
+                    GDPR Agreement
+                  </span>
+                  <div className="flex items-start gap-3 text-left">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      required
+                      checked={form.consent}
+                      onChange={(e) => setForm({ ...form, consent: e.target.checked })}
+                      className="mt-1 w-4 h-4 rounded border-gray-300 text-[#FF3B30] focus:ring-[#FF3B30]"
+                    />
+                    <label htmlFor="consent" className="text-sm text-gray-600 font-medium leading-relaxed cursor-pointer">
+                      I consent to having this website store my submitted information so they can respond to my inquiry.
+                    </label>
+                  </div>
+                </div>
 
+                {/* Referral Source radio list */}
+                <div className="flex flex-col gap-2 mt-2 text-left">
+                  <span className="text-sm font-bold text-[#111111] font-inter">
+                    How did you come to know about us
+                  </span>
+                  <div className="flex flex-wrap gap-4 md:gap-5 text-sm text-gray-700">
+                    {["Google ads", "Linkdin", "Email", "Instagram", "Others"].map((src) => (
+                      <label key={src} className="flex items-center gap-2 cursor-pointer font-medium hover:text-[#FF3B30] transition-colors">
+                        <input
+                          type="radio"
+                          name="source"
+                          value={src}
+                          checked={form.source === src}
+                          onChange={(e) => setForm({ ...form, source: e.target.value })}
+                          className="w-4 h-4 text-[#FF3B30] focus:ring-[#FF3B30] border-gray-300"
+                        />
+                        {src}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  className="w-full bg-[#FF3B30] hover:bg-[#E03027] text-white py-3 rounded-lg font-bold text-center mt-4 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:scale-[1.01]"
+                >
+                  Send Message
+                </button>
+
+                {success && (
+                  <div className="text-green-600 text-sm font-semibold text-center mt-2 animate-bounce">
+                    Message sent successfully!
+                  </div>
+                )}
+              </form>
             </div>
-
-            {/* Google Map Section */}
-            <div className="w-full bg-gradient-to-b from-[#E84353] to-[#57000C] mt-[5%] py-10 md:py-20 flex justify-center items-center">
-                <div className="w-[90%] max-w-[1400px] overflow-hidden rounded-2xl shadow-xl">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.320708672846!2d80.16865997585755!3d13.015237513918464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5260c6aef11a2b%3A0x33401c0956a864bf!2s1%2F509A%2C%20Krishna%20Nagar%20Periyar%20Rd%2C%20Ramapuram%2C%20Indira%20Nagar%2C%20Manappakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600125!5e0!3m2!1sen!2sin!4v1762867197770!5m2!1sen!2sin"
-                        className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-2xl border-0"
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                </div>
-            </div>
+          </div>
 
         </div>
-    );
+      </div>
+
+      {/* 3. GOOGLE MAP SECTION */}
+      {/* <div className="w-full max-w-[1420px] mx-auto px-6 mt-16 md:mt-24">
+        <div className="w-full overflow-hidden rounded-[32px] border border-gray-100 shadow-lg h-[300px] sm:h-[400px] md:h-[480px]">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.320708672846!2d80.16865997585755!3d13.015237513918464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5260c6aef11a2b%3A0x33401c0956a864bf!2s1%2F509A%2C%20Krishna%20Nagar%20Periyar%20Rd%2C%20Ramapuram%2C%20Indira%20Nagar%2C%20Manappakkam%2C%20Chennai%2C%20Tamil%20Nadu%20600125!5e0!3m2!1sen!2sin!4v1762867197770!5m2!1sen!2sin"
+            className="w-full h-full border-0"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Byte Bandits Office Location"
+          ></iframe>
+        </div>
+      </div> */}
+
+    </div>
+  );
 }

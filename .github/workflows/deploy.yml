@@ -1,0 +1,46 @@
+name: Deploy Next.js to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 13.232.158.86
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          script: |
+            set -e
+
+            git config --global --add safe.directory /home/ec2-user/byteBandits
+
+            cd /home/ec2-user/byteBandits
+
+            echo "Pulling latest code..."
+            git pull origin main
+
+            echo "Installing dependencies..."
+            npm install
+            npm install sharp
+
+            echo "Building project..."
+            npm run build
+
+            echo "Fixing permissions..."
+            chmod -R 755 .next public
+
+            echo "Restarting app..."
+            pm2 restart byteBandits || pm2 start npm --name "byteBandits" -- start
+
+            pm2 save
+
+            echo "Deployment complete"

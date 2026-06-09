@@ -4,80 +4,69 @@ import Image from "next/image";
 
 export default function WhyChooseUsSection() {
   return (
-    <section className="w-full font-inter text-[#111] px-6 py-20">
-      {/* ===== Top Section ===== */}
-      <div className="max-w-[1400px] mx-auto">
-        <h1 className=" text-[20px] md:text-[40px] 2xl:text-[55px] font-medium leading-tight">
-          We’re The Rebels Of The Digital World
-          <span className="">
-            Crafting Brands That Speak, Sell, And Shine.
-          </span>
-        </h1>
-
-        {/* Red Box + Paragraph Section */}
-        <div className="mt-[8%] flex flex-col lg:flex-row items-center 2xl:items-start gap-10 2xl:gap-16">
-          {/* Left Red Image */}
-          <div className="relative w-full lg:w-[400px] xl:w-[620px] xl:h-[420px] aspect-[4/3] rounded-lg overflow-hidden">
-            <Image
-              src="/images/bb-big.png"
-              alt="Byte Bandits Logo"
-              fill
-              className="rounded-xl"
-              priority
-            />
+    <section className="w-full bg-white py-20 md:py-28 text-left">
+      <div className="w-full max-w-[1200px] mx-auto px-6 flex flex-col gap-20 md:gap-24">
+        
+        {/* Row 1: Who We Are? */}
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full gap-8">
+          <div className="w-full md:w-[60%] lg:w-[50%] flex flex-col text-left">
+            <h3 className="text-xl sm:text-2xl md:text-[28px] font-bold font-inter text-[#111111] mb-4">
+              {"Who We Are?"}
+            </h3>
+            <p className="text-gray-700 text-sm sm:text-base md:text-[16px] font-medium leading-relaxed">
+              {"A Full-Stack Product Engineering Studio Of 40+ Specialists Across AI, Development, And Operations With Experience On Global Grounds In Various Industry Verticals Built To Deliver Intelligent Software For Founders And Operators Who Demand Real Outcomes."}
+            </p>
           </div>
+          <div className="w-full md:w-[30%] flex justify-end items-start mt-4 md:mt-0">
+            <div className="relative w-[100px] h-[100px] md:w-[120px] md:h-[120px]">
+              <Image
+                src="/images/weAre.png"
+                alt="Who We Are Icon"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+          </div>
+        </div>
 
-          {/* Right Text Content */}
-          <div className="flex-1 text-sm md:text-base 2xl:text-[20px] leading-relaxed space-y-4 my-auto">
-            <p>
-              <strong>Every great brand starts with a story:</strong> Ours began
-              with a group of tech geeks, creative thinkers, and{" "}
-              <strong>coffee-fuelled dreamers</strong> who wanted to do more than
-              just build websites or run ads.
-            </p>
-
-            <p>
-              We set out to create connections, not just campaigns, but helping
-              brands look great, feel real, and <strong>make an impact</strong>{" "}
-              that lasts.
-            </p>
-
-            <p>
-              By blending creativity with logic, we built a space where design,
-              code, and marketing work together seamlessly. That’s how{" "}
-              <strong>Byte Bandits</strong> was born to be a team on a mission to{" "}
-              <strong>redefine digital creativity.</strong>
-            </p>
-
-            <p>
-              At Byte Bandits, we don’t just build online presence — we help
-              brands grow, engage, and thrive. From bold visuals to smart
-              websites and campaigns that convert, everything we create follows
-              one mantra:
-            </p>
-
-            <p className="text-lg 2xl:text-[24px] leading-snug font-semibold">
-              Make it meaningful. Make it memorable. Make it work.
+        {/* Row 2: What We Do? */}
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="w-full md:w-[60%] lg:w-[50%] flex flex-col text-left">
+            <h3 className="text-xl sm:text-2xl md:text-[28px] font-bold font-inter text-[#111111] mb-4">
+              {"What We Do?"}
+            </h3>
+            <p className="text-gray-700 text-sm sm:text-base md:text-[16px] font-medium leading-relaxed">
+              {"We're Focused On Honing Our Crafts And Bringing Everything We Have To The Table For Our Clients. We Create Custom Built Solutions From AI Agents, Micro-SaaS Products, Web Applications To MVPs!"}
             </p>
           </div>
         </div>
-      </div>
 
-      {/* ===== Why Choose Us Section ===== */}
-      <div className="max-w-[1400px] mx-auto text-center mt-[10%]">
-        <h2 className="text-xl md:text-[50px] 2xl:text-[67px] font-semibold mb-8">
-          Why Choose Us ?
-        </h2>
+        {/* Row 3: Why We Do It? */}
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full gap-8">
+          {/* Left Column: Image (on mobile, stacks correctly) */}
+          <div className="w-full md:w-[30%] flex justify-start items-start mb-4 md:mb-0 order-2 md:order-1">
+            <div className="relative w-[100px] h-[100px] md:w-[120px] md:h-[120px]">
+              <Image
+                src="/images/ai.png"
+                alt="Why We Do It Icon"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+          </div>
+          {/* Right Column: Text */}
+          <div className="w-full md:w-[60%] lg:w-[50%] flex flex-col text-left order-1 md:order-2">
+            <h3 className="text-xl sm:text-2xl md:text-[28px] font-bold font-inter text-[#111111] mb-4">
+              {"Why We Do It?"}
+            </h3>
+            <p className="text-gray-700 text-sm sm:text-base md:text-[16px] font-medium leading-relaxed">
+              {"Working With Clients Who Are Serious About What They Build Makes Every Engagement Better And Sharper Briefs, Faster Decisions, And Outcomes Worth Being Proud Of. That's Not A Coincidence. That's The Standard."}
+            </p>
+          </div>
+        </div>
 
-        <p className="text-base mt-[6%]  md:text-[40px] 2xl:text-[60px] leading-tight tracking-[-0.05rem] font-light">
-          We Don’t Follow Trends,{" "}
-          <strong className="font-semibold">We Set Them.</strong> From  <br />
-          Concept To Completion, We Turn{" "}
-          <strong className="font-semibold">Your Vision</strong> Into Powerful
-          Digital Experiences That{" "}
-          <strong className="font-semibold">Stand Out</strong>, Perform Better,
-          And Scale <strong className="font-semibold">Effortlessly.</strong>
-        </p>
       </div>
     </section>
   );

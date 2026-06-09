@@ -1,69 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutSection() {
   return (
-    <section className="w-full font-anton">
+    <section className="w-full">
       {/* Top Red Section */}
-      <div className="bg-[#BF3A3B] text-center h-[600px] text-white px-4">
-        <h1 className="text-5xl max-w-[1400px] mx-auto md:text-[80px] 2xl:text-[120px] pt-[200px] text-left font-regular text-[#FFE5DE] mb-6 ">
-          REBELS OF THE DIGITAL WORLD
+      <div className="bg-[#BF3A3B] h-screen text-center w-full px-4 flex flex-col items-center justify-center">
+        <h1 className="text-[#FFE5DE] text-5xl md:text-[72px] xl:text-[90px] pt-[120px] md:pt-[160px] pb-4 font-anton uppercase tracking-wide leading-none text-center">
+          {"THE STUDIO"}
         </h1>
-        <p className="max-w-[1400px] mx-auto text-left font-inter font-light mt-16 text-sm 2xl:text-[20px] leading-tight tracking-tight">
-          We Steal Attention For Your Brand. <br />
-          Blend Design, Code, And Content Like Art. <br />
-          Byte By Byte, We Build Digital Legends.
+        
+        <h3 className="text-[#FFFFFF] text-lg sm:text-xl md:text-2xl lg:text-[28px] mt-4 mb-8 font-inter font-semibold leading-tight text-center max-w-[90%]">
+          {"Not An Agency. Not A Vendor. A Studio Built To Ship."}
+        </h3>
+
+        <p className="text-[#FFFFFF]/85 text-xs sm:text-sm md:text-[16px] xl:text-[20px] leading-[20px] md:leading-[26px] xl:leading-[32px] tracking-[2%] font-inter font-medium text-center max-w-[1032px] mx-auto mb-10">
+          {"We are an AI-native product engineering studio built around one focused mandate. By turning complex workflows and early-stage ideas into intelligent software products that scale. We specialize in Agentic AI Systems, Micro-SaaS Development, Web Applications, and MVP builds which are working exclusively with founders and operators in the US and UK who need real engineering output, not agency overhead."}
         </p>
+
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 bg-white text-black px-6 py-3.5 rounded-xl font-bold font-inter text-sm md:text-base transition-all hover:bg-white/90 hover:scale-[1.02] shadow-sm mb-[80px] md:mb-[120px]"
+        >
+          {"Book a Call"} <span className="text-lg">{"→"}</span>
+        </Link>
       </div>
-
-      {/* About Section */}
-      <section className="bg-[#FFE5DD] h-[600px] md:h-dvh flex flex-col items-center justify-center relative overflow-hidden">
-        <div className="max-w-[1400px] relative flex flex-col items-center justify-center px-4 sm:px-6">
-          {/* ABOUT Text - Left */}
-          <h2
-            className="
-            absolute z-10 text-[#BF3A3B] font-regular tracking-tight
-            text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
-            top-8 sm:top-10 md:top-16 lg:top-20 xl:top-24
-            -left-2 sm:left-10 md:-left-10 lg:-left-16 xl:-left-40
-            -translate-y-1/2
-          "
-          >
-            ABOUT
-          </h2>
-
-          {/* Center Image (responsive height via aspect ratio) */}
-          <div
-            className="
-            relative overflow-hidden rounded-xl shadow-xl
-            w-[300px] h-[250px] md:h-auto sm:w-[320px] md:w-[480px] lg:w-[700px] xl:w-[1000px]
-            aspect-[5/3] 
-          "
-          >
-            <Image
-              src="/images/team.png"
-              alt="About Byte Bandits"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          {/* BYTE BANDITS Text - Right */}
-          <h2
-            className="
-            absolute z-10 text-[#BF3A3B] font-regular tracking-tight
-            text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[120px]
-            bottom-2 sm:bottom-4 md:bottom-8 lg:bottom-12 xl:-bottom-10
-            -right-2 sm:right-10 md:-right-10 lg:-right-24 xl:-right-40
-            -translate-y-1/2
-          "
-          >
-            BYTE BANDITS
-          </h2>
-        </div>
-      </section>
     </section>
   );
 }

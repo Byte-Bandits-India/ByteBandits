@@ -1,137 +1,101 @@
+"use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TechStackSection() {
-  const techStackCol1 = [
-    {
-      name: "React.Js",
-      desc: "Building dynamic, responsive user interfaces",
-      icon: "/icons/react.png",
-    },
-    {
-      name: "TypeScript",
-      desc: "Powering fast, scalable server-side applications",
-      icon: "/icons/ts.png",
-    },
-    {
-      name: "Ant Design",
-      desc: "Building dynamic, responsive user interfaces",
-      icon: "/icons/ant.png",
-    },
-    {
-      name: "Material UI",
-      desc: "Powering fast, scalable server-side applications",
-      icon: "/icons/ui.png",
-    },
-  ];
-
-  const techStackCol2 = [
-    {
-      name: "Nextjs",
-      desc: "Building dynamic, responsive user interfaces",
-      icon: "/icons/nextjs.png",
-    },
-    {
-      name: "Tailwind",
-      desc: "Powering fast, scalable server-side applications",
-      icon: "/icons/tailwind.png",
-    },
-    {
-      name: "Bootstrap",
-      desc: "Building dynamic, responsive user interfaces",
-      icon: "/icons/bootstrap.png",
-    },
-    {
-      name: "Node.Js",
-      desc: "Powering fast, scalable server-side applications",
-      icon: "/icons/nodejs.png",
-    },
-    {
-      name: "Flask",
-      desc: "Building dynamic, responsive user interfaces",
-      icon: "/icons/flask.png",
-    },
-  ];
-
   return (
-    <section className="w-full bg-white md:py-20">
-      <div className="mx-4 bg-[#F1EAEA]  rounded-2xl px-6 2xl:px-12 py-16 2xl:py-24">
-        <div className="max-w-[1440px] mx-auto">
-          {/* Top Heading */}
-          <p className="text-[#A04444] text-sm 2xl:text-[20px] font-semibold tracking-wide uppercase mb-6 2xl:mb-10 text-center lg:text-left">
-            Web Development
-          </p>
-
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
-            {/* ===== Left Content ===== */}
-            <div className="w-full lg:w-auto 2xl:max-w-[1000px] lg:pt-80 text-center lg:text-left">
-              <h2 className="text-3xl xl:text-[40px] 2xl:text-[50px] tracking-tight font-inter font-medium leading-tight">
-                We Use Industry-Leading <br /> <span>Tech To Build Your</span> <br /> Advantage
-              </h2>
-            </div>
-
-            {/* ===== Right Grid (Staggered Columns) ===== */}
-            <div className="flex gap-6 w-full 2xl:w-[850px] justify-center flex-wrap md:flex-nowrap">
-              {/* ===== Column 1 ===== */}
-              <div className="flex flex-col gap-6 mt-0 md:mt-28">
-                {techStackCol1.map((tech, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between bg-white w-full h-[100px] md:w-[340px] md:h-[110px] lg:w-[300px] 2xl:w-[400px] 2xl:h-[130px] rounded-2xl shadow-md p-5 hover:shadow-xl transition-all"
-                  >
-                    <div className="text-left pr-3">
-                      <h3 className="font-semibold text-[16px] md:text-[18px] 2xl:text-[22px]">
-                        {tech.name}
-                      </h3>
-                      <p className="text-xs md:text-sm text-[#666] font-light max-w-[200px] mt-2 leading-snug">
-                        {tech.desc}
-                      </p>
-                    </div>
-                    <div className="relative w-[40px] h-[40px] md:w-[60px] md:h-[60px] 2xl:w-[80px] 2xl:h-[80px] flex-shrink-0">
-                      <Image src={tech.icon} alt={tech.name} fill className="object-contain" />
-                    </div>
-                  </div>
-                ))}
+    <div className="w-full">
+      {/* 3-Column Working Model Section */}
+      <section className="w-full bg-[#F5F5F5] py-20 md:py-28 text-left border-t border-gray-100">
+        <div className="w-full max-w-[1420px] mx-auto px-6">
+          {/* 3-Column Layout */}
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-stretch w-full">
+            
+            {/* Column 1: How we deliver */}
+            <div className="w-full lg:w-[33.333333%] flex flex-col text-left justify-between">
+              <div>
+                <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-medium font-inter text-[#111111] mb-6 leading-tight">
+                  {"How we deliver"}
+                </h3>
+                <p className="text-gray-700 text-sm sm:text-base font-medium leading-relaxed mb-8">
+                  {"We execute projects through a defined delivery process that reduces ambiguity, validates decisions early, and ensures the system is stable in real operational use. Each stage has a clear output and review before moving forward."}
+                </p>
               </div>
-
-              {/* ===== Column 2 ===== */}
-              <div className="flex flex-col gap-6 md:mt-12">
-                {techStackCol2.map((tech, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between bg-white w-full h-[100px] md:w-[340px] md:h-[110px] lg:w-[300px] 2xl:w-[400px] 2xl:h-[130px] rounded-2xl shadow-md p-5 hover:shadow-xl transition-all"
-                  >
-                    <div className="text-left pr-3">
-                      <h3 className="font-semibold text-[16px] md:text-[18px] 2xl:text-[22px]">
-                        {tech.name}
-                      </h3>
-                      <p className="text-xs md:text-sm text-[#666] font-light max-w-[200px] mt-2 leading-snug">
-                        {tech.desc}
-                      </p>
-                    </div>
-                    <div className="relative w-[40px] h-[40px] md:w-[60px] md:h-[60px] 2xl:w-[80px] 2xl:h-[80px] flex-shrink-0">
-                      <Image src={tech.icon} alt={tech.name} fill className="object-contain" />
-                    </div>
-                  </div>
-                ))}
+              <div className="w-full aspect-[1408/1540] relative rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                <Image
+                  src="/images/howWeDeliver.png"
+                  alt="How we deliver"
+                  fill
+                  priority
+                  className="object-cover"
+                />
               </div>
             </div>
+
+            {/* Column 2: Discovery & planning */}
+            <div className="w-full lg:w-[33.333333%] flex flex-col text-left justify-between">
+              <div>
+                <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-medium font-inter text-[#111111] mb-6 leading-tight">
+                  {"1. Discovery & planning"}
+                </h3>
+                <p className="text-gray-700 text-sm sm:text-base font-medium leading-relaxed mb-8">
+                  {"We study your business operations, stakeholders, and current tools to understand how work is actually performed. Requirements, risks, and dependencies are documented before development begins. We define scope, architecture approach, priorities, and milestones."}
+                </p>
+              </div>
+              <div className="w-full aspect-[1408/1540] relative rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                <Image
+                  src="/images/Discover.png"
+                  alt="Discovery & planning"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Column 3: UX / UI design */}
+            <div className="w-full lg:w-[33.333333%] flex flex-col text-left justify-between">
+              <div>
+                <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-medium font-inter text-[#111111] mb-6 leading-tight">
+                  {"2. UX / UI design"}
+                </h3>
+                <p className="text-gray-700 text-sm sm:text-base font-medium leading-relaxed mb-8">
+                  {"We map user journeys, workflows, and permission levels based on operational roles. Wireframes and prototypes are created and reviewed with your team. Interfaces are designed for usability, not visual appearance alone. Approval here ensures development starts with complete clarity."}
+                </p>
+              </div>
+              <div className="w-full aspect-[1408/1540] relative rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                <Image
+                  src="/images/Ui:Ux.png"
+                  alt="UX / UI design"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ===== Footer CTA ===== */}
-      <div className="flex md:max-w-[600px] mx-auto lg:max-w-full flex-col items-center justify-center text-left my-6 md:my-8 lg:mt-[100px] px-4">
-        <h2 className="text-[30px] sm:text-[48px] md:text-[56px] lg:text-[64px] text-center leading-[1.3] text-[#333333] font-anton mt-5 lg:mt-0">Looking for a <br className="hidden md:block lg:hidden" /> technology partner ?</h2>
-        <h3 className="text-[42px] sm:text-[clamp(40px,7vw,60px)] leading-[1.1] 
-bg-gradient-to-b from-[#9E1520] to-[#630C13] bg-clip-text text-transparent 
-font-anton mt-5 lg:mt-0">
-          Let’s talk.
-        </h3>
-      </div>
-    </section>
-
-
-
+      {/* CTA Section */}
+      <section className="w-full bg-white py-24 md:py-32 text-center border-t border-gray-100">
+        <div className="w-full max-w-[1420px] mx-auto px-6 flex flex-col items-center justify-center">
+          <h2 className="text-[#111111] text-4xl sm:text-5xl md:text-[64px] font-anton uppercase tracking-tight leading-tight mb-2">
+            {"Looking for a technology partner ?"}
+          </h2>
+          <h3 className="text-[#BF3A3B] text-4xl sm:text-5xl md:text-[64px] font-anton tracking-tight leading-none mb-10">
+            {"Let's talk."}
+          </h3>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 bg-[#FF3B30] text-white px-8 py-4 rounded-xl font-bold font-inter text-sm md:text-base transition-all hover:bg-[#FF3B30]/90 hover:scale-[1.02] shadow-sm"
+          >
+            {"Book a Call"} <span className="text-lg">{"→"}</span>
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -19,9 +19,6 @@ export default function ServicesSection() {
         { src: "/icons/clients/Group 115 2.png" },
         { src: "/icons/clients/image 90.png" },
         { src: "/icons/clients/Mask group-7.png" },
-    ];
-
-    const bottomRow: ClientLogo[] = [
         { src: "/icons/clients/Mask group-8.png" },
         { src: "/icons/clients/Mask group-9.png" },
         { src: "/icons/clients/Mask group-10.png" },
@@ -89,7 +86,7 @@ export default function ServicesSection() {
                 <div>
                     {/* Logo Marquee */}
                     <div
-                        className="w-screen relative mb-[48px] bg-[#A31621] lg:h-[406px] lg:flex lg:items-center"
+                        className="w-screen relative mb-[48px] bg-[#A31621] lg:h-[200px] lg:flex lg:items-center"
                     >
                         <div className="max-w-[1500px] w-full overflow-hidden py-6 lg:py-0 mx-auto relative">
                             <div className="flex flex-col gap-[74px]">
@@ -103,24 +100,6 @@ export default function ServicesSection() {
                                                     alt={getAltFromSrc(logo.src)}
                                                     height={30}
                                                     width={135}
-                                                    className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={index < 6}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Bottom Row - Infinite Scroll */}
-                                <div className="flex overflow-hidden">
-                                    <div className="flex animate-scrollRight w-max flex-shrink-0 whitespace-nowrap will-change-transform">
-                                        {[...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow, ...bottomRow].map((logo, index) => (
-                                            <div key={`bottom-${index}`} className="flex flex-col items-center mx-4">
-                                                <Image
-                                                    src={logo.src}
-                                                    alt={getAltFromSrc(logo.src)}
-                                                    width={135}
-                                                    height={30}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
                                                     priority={index < 6}
                                                 />
