@@ -22,6 +22,19 @@ jobs:
           script: |
             set -e
 
+            # Enable Swap space if it doesn't exist to prevent OOM freezes
+            if [ $(free -m | awk '/^Swap:/{print $2}') -eq 0 ]; then
+              echo "No active Swap detected. Checking for /swapfile..."
+              if [ ! -f /swapfile ]; then
+                echo "Creating 2G Swap file..."
+                sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+                sudo chmod 600 /swapfile
+                sudo mkswap /swapfile
+              fi
+              echo "Activating Swap file..."
+              sudo swapon /swapfile
+            fi
+
             git config --global --add safe.directory /home/ec2-user/byteBandits
 
             cd /home/ec2-user/byteBandits
