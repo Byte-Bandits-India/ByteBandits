@@ -49,7 +49,10 @@ jobs:
             fi
 
             echo "Pulling latest code..."
+            git reset --hard HEAD
+            git clean -fd
             git pull origin main
+
 
             # Copy environment variables from host home directory if present
             if [ -f /home/ec2-user/.env.local ]; then
