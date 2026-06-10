@@ -2,8 +2,13 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 const MarketSurvivalSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const timeline = [
     {
       title: "Product-Thinking,",
@@ -51,10 +56,10 @@ const MarketSurvivalSection = () => {
   return (
     <section className="w-full px-4 sm:px-6 py-12 bg-white">
       <motion.div
+        ref={ref}
         variants={sectionVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isInView ? "visible" : "hidden"}
         className="mx-auto bg-black text-white rounded-[32px] md:rounded-[40px] p-6 sm:p-10 md:p-16 lg:p-20 flex flex-col gap-12 sm:gap-16 shadow-sm overflow-hidden"
       >
         {/* UPPER ROW: mockups and aligned copy using Flexbox to bypass CSS Grid pollution */}

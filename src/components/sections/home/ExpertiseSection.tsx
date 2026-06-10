@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useInView } from "@/hooks/useInView";
 
 interface ExpertiseCard {
   title: string;
@@ -14,6 +15,8 @@ interface ExpertiseCard {
 export const ExpertiseSection = () => {
   const [hoveredCardIdx, setHoveredCardIdx] = useState<number | null>(null);
   const activeCardIdx = hoveredCardIdx !== null ? hoveredCardIdx : 0;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const cards: ExpertiseCard[] = [
     {
@@ -66,10 +69,10 @@ export const ExpertiseSection = () => {
   return (
     <section className="w-full relative z-20 -mt-16 md:-mt-24 pb-12 md:pb-20 bg-transparent">
       <motion.div
+        ref={ref}
         variants={sectionVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isInView ? "visible" : "hidden"}
         className="w-full bg-[#FFBFBF] rounded-[32px] md:rounded-[48px] px-6 py-16 sm:px-10 lg:px-20 xl:px-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start shadow-sm"
       >
         {/* LEFT COLUMN: OVERVIEW */}

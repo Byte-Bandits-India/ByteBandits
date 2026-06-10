@@ -2,6 +2,8 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface CardData {
   type: "title" | "text" | "bg-only" | "illustration" | "quote";
@@ -19,6 +21,9 @@ interface CardData {
 }
 
 const HowWeWorkSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const cards: CardData[] = [
     // Chronological order for mobile/tablet flow, rearranged for desktop S-curve via lg:order-*
     {
@@ -143,10 +148,10 @@ const HowWeWorkSection = () => {
 
         {/* 2x4 GRID CONTAINER */}
         <motion.div
+          ref={ref}
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 !gap-6 !justify-items-stretch w-full"
         >
           {cards.map((card, idx) => {

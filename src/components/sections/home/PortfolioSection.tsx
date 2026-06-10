@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, Variants, useInView } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface CounterProps {
   target: number;
@@ -36,6 +37,9 @@ const Counter = ({ target, duration = 1.5, prefix = "", suffix = "" }: CounterPr
 };
 
 const PortfolioSection = () => {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const isGridInView = useInView(gridRef, { once: true, margin: "-100px" });
+
   // Statistics data
   const stats = [
     {
@@ -108,10 +112,10 @@ const PortfolioSection = () => {
       <div className="bg-[#F5F3F3] py-6 md:py-8 lg:py-16">
         {/* 2. ASYMMETRIC PORTFOLIO GRID */}
       <motion.div
+        ref={gridRef}
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        animate={isGridInView ? "visible" : "hidden"}
         className="w-full max-w-[1420px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch lg:h-[700px]"
       >
         {/* COLUMN 1: INTRO TEXT & CARD 1 */}
