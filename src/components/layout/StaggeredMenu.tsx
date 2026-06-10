@@ -74,11 +74,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       xPercent: offscreen,
       display: 'none'
     });
-
-    if (toggleBtnRef.current) {
-      gsap.set(toggleBtnRef.current, { color: menuButtonColor });
-    }
-  }, [menuButtonColor, position]);
+  }, [position]);
 
   // Open/close menu animations
   useEffect(() => {
@@ -212,32 +208,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       });
     };
 
-    const animateColor = (opening: boolean) => {
-      const btn = toggleBtnRef.current;
-      if (!btn) return;
-      if (changeMenuColorOnOpen) {
-        const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        gsap.to(btn, { color: targetColor, delay: 0.18, duration: 0.3, ease: 'power2.out' });
-      } else {
-        gsap.set(btn, { color: menuButtonColor });
-      }
-    };
-
     if (open) {
       buildOpenTimeline();
-      animateColor(true);
       if (onMenuOpen) onMenuOpen();
     } else {
       playClose();
-      animateColor(false);
       if (onMenuClose) onMenuClose();
     }
   }, [
     open,
     position,
-    changeMenuColorOnOpen,
-    menuButtonColor,
-    openMenuButtonColor,
     onMenuOpen,
     onMenuClose
   ]);
@@ -309,7 +289,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           <button
             ref={toggleBtnRef}
             type="button"
-            className="p-2 text-[#333333] transition-colors duration-200 focus:outline-none z-50 pointer-events-auto"
+            className="p-2 transition-colors duration-200 focus:outline-none z-50 pointer-events-auto"
+            style={{ color: changeMenuColorOnOpen && open ? openMenuButtonColor : menuButtonColor }}
             onClick={toggleMenu}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
