@@ -17,7 +17,7 @@ export default function Footer() {
       {/* Mobile View */}
       <div className="md:hidden z-10">
         <div>
-          <Image src="/logo_red.png" alt="Logo" width={156} height={61} />
+          <Image src="/logo_red.png" alt="Byte Bandits Logo" width={156} height={61} />
           <p className="text-[14px] text-left mt-[38px] font-normal tracking-[-0.02em]">
             We are a passionate team of tech innovators dedicated to crafting smart, scalable, and
             user-centric digital solutions. From custom software and mobile apps to eCommerce
@@ -147,7 +147,7 @@ export default function Footer() {
       <div className="hidden md:block max-w-[1420px] mx-auto">
         <Image
           src="/logo_white.png"
-          alt="Logo"
+          alt="Byte Bandits Logo"
           width={156}
           height={61}
           className="xl:h-[61px] xl:w-[220px]"

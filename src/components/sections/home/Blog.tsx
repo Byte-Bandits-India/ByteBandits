@@ -28,7 +28,7 @@ export default function BlogSection() {
             <div className="pb-16 px-5 sm:px-10 md:px-20 lg:px-4 text-[#333333] w-full max-w-[1420px] mx-auto">
                 {/* Section Heading */}
                 <p
-                    className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#818181] mb-[32px] inter"
+                    className="section-label text-xs lg:text-[20px] sm:text-sm uppercase tracking-widest text-[#555555] mb-[32px] inter"
                     data-aos="fade-up"
                     data-aos-delay="5"
                 >

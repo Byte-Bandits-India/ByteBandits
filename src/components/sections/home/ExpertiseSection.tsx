@@ -136,7 +136,7 @@ export const ExpertiseSection = () => {
 
               <Link
                 href={card.href}
-                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#818181] hover:text-[#FF3B30] transition-colors duration-200 w-fit"
+                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[#555555] hover:text-[#C62727] transition-colors duration-200 w-fit"
               >
                 Know More
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

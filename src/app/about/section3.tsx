@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 
 export default function TechStackSection() {
@@ -17,7 +16,7 @@ export default function TechStackSection() {
           </h3>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#FF3B30] text-white px-8 py-4 rounded-xl font-bold font-inter text-sm md:text-base transition-all hover:bg-[#FF3B30]/90 hover:scale-[1.02] shadow-sm"
+            className="inline-flex items-center gap-2 bg-[#C62727] hover:bg-[#A31621] text-white px-8 py-4 rounded-xl font-bold font-inter text-sm md:text-base transition-all hover:scale-[1.02] shadow-sm"
           >
             {"Book a Call"} <span className="text-lg">{"→"}</span>
           </Link>

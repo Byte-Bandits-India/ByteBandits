@@ -1,22 +1,51 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function AboutSection() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout;
+    const handleLoad = () => {
+      timerId = setTimeout(() => {
+        setMounted(true);
+      }, 1500);
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        if (timerId) clearTimeout(timerId);
+      };
+    }
+    return () => {
+      if (timerId) clearTimeout(timerId);
+    };
+  }, []);
+
   return (
     <section className="w-full">
       {/* Top Red Section */}
       <div className="relative h-screen text-center w-full px-4 flex flex-col items-center justify-center overflow-hidden">
         {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-        >
-          <source src="/Videos/hi.mp4" type="video/mp4" />
-        </video>
+        {mounted && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+          >
+            <source src="/Videos/hi.mp4" type="video/mp4" />
+            <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A" label="No captions" />
+          </video>
+        )}
         
         {/* Red Overlay */}
         <div className="absolute inset-0 bg-[#BF3A3B] opacity-80 z-10 pointer-events-none" />

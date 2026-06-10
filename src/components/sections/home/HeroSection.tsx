@@ -1,10 +1,35 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const HeroSection = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout;
+    const handleLoad = () => {
+      timerId = setTimeout(() => {
+        setMounted(true);
+      }, 1500);
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+        if (timerId) clearTimeout(timerId);
+      };
+    }
+    return () => {
+      if (timerId) clearTimeout(timerId);
+    };
+  }, []);
+
   // Container variants to stagger animations
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,16 +57,20 @@ const HeroSection = () => {
   return (
     <section className="relative w-full h-[100dvh] flex flex-col justify-center items-center text-center overflow-hidden bg-white">
       {/* BACKGROUND VIDEO */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none opacity-20"
-      >
-        <source src="/Videos/hi.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {mounted && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover z-0 select-none pointer-events-none opacity-20"
+        >
+          <source src="/Videos/hi.mp4" type="video/mp4" />
+          <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A" label="No captions" />
+          Your browser does not support the video tag.
+        </video>
+      )}
 
       {/* TEXTURED GRID OVERLAY */}
       <div 
@@ -80,7 +109,7 @@ const HeroSection = () => {
         <motion.div variants={itemVariants}>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#FF3B30] hover:bg-[#E03027] text-white px-8 py-3 rounded-xl text-base font-semibold shadow-[0_10px_25px_rgba(255,59,48,0.25)] hover:shadow-[0_15px_30px_rgba(255,59,48,0.35)] transition-all duration-300 transform hover:-translate-y-[2px]"
+            className="inline-flex items-center gap-2 bg-[#C62727] hover:bg-[#A31621] text-white px-8 py-3 rounded-xl text-base font-semibold shadow-[0_10px_25px_rgba(198,39,39,0.25)] hover:shadow-[0_15px_30px_rgba(163,22,33,0.35)] transition-all duration-300 transform hover:-translate-y-[2px]"
           >
             Book a Call
             <ArrowRight className="w-5 h-5" />

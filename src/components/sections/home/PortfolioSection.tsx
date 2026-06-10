@@ -35,13 +35,6 @@ const Counter = ({ target, duration = 1.5, prefix = "", suffix = "" }: CounterPr
   return <span ref={ref}>{prefix}{count}{suffix}</span>;
 };
 
-interface PortfolioItem {
-  title: string;
-  image: string;
-  href: string;
-  aspectClass: string;
-}
-
 const PortfolioSection = () => {
   // Statistics data
   const stats = [
@@ -103,7 +96,7 @@ const PortfolioSection = () => {
               <span className="text-4xl md:text-[52px] font-bold text-[#FF3B30] tracking-tight mb-2">
                 <Counter target={stat.target} prefix={stat.prefix} suffix={stat.suffix} />
               </span>
-              <span className="text-xs md:text-sm font-semibold text-[#818181] leading-relaxed">
+              <span className="text-xs md:text-sm font-semibold text-[#555555] leading-relaxed">
                 {stat.label1}
                 <span className="block">{stat.label2}</span>
               </span>

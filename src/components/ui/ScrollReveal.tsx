@@ -14,7 +14,6 @@ interface ScrollRevealProps {
   blurStrength?: number;
   containerClassName?: string;
   textClassName?: string;
-  rotationEnd?: string;
   wordAnimationEnd?: string;
 }
 
@@ -27,7 +26,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   blurStrength = 6,
   containerClassName = "",
   textClassName = "",
-  rotationEnd = "bottom bottom",
   wordAnimationEnd = "top center"
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
@@ -60,7 +58,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       gsap.fromTo(
         word,
         {
-          opacity: 0,
+          opacity: baseOpacity,
           yPercent: 40,
           rotate: baseRotation,
           filter: enableBlur ? `blur(${blurStrength}px)` : "none",
@@ -85,7 +83,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, [scrollContainerRef, enableBlur, baseRotation, blurStrength, wordAnimationEnd]);
+  }, [scrollContainerRef, enableBlur, baseOpacity, baseRotation, blurStrength, wordAnimationEnd]);
 
   return (
     <h2 ref={containerRef} className={`my-5 ${containerClassName}`}>

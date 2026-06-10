@@ -244,13 +244,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
   const toggleMenu = useCallback(() => setOpen(prev => !prev), []);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact-section");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   // Define proper CSS properties type
   interface CustomCSSProperties extends React.CSSProperties {
     '--sm-accent'?: string;
