@@ -2,13 +2,7 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugins
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function ServicesSection() {
     interface ClientLogo {

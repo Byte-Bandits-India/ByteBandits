@@ -3,8 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { StaggeredMenu } from "./StaggeredMenu";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+
+const StaggeredMenu = dynamic(() => import("./StaggeredMenu").then((mod) => mod.StaggeredMenu), {
+  ssr: false,
+});
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
