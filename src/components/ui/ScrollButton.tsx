@@ -1,50 +1,36 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
-import Lenis from "@studio-freight/lenis";
+
+interface GlobalWithLenis extends Window {
+    lenis?: {
+        scrollTo: (target: number | string | HTMLElement) => void;
+    };
+}
 
 const ScrollButton = () => {
     const [visible, setVisible] = useState(false);
-    const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        //  Initialize Lenis with correct options for latest version
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            wheelMultiplier: 1,
-            touchMultiplier: 1.5,
-            lerp: 0.1,
-        });
-
-        lenisRef.current = lenis;
-
         //  Scroll listener
         const handleScroll = () => {
             const scrollY = window.scrollY || window.pageYOffset;
             setVisible(scrollY > 300);
         };
 
-        window.addEventListener("scroll", handleScroll);
-
-        //  Animation frame loop
-        const raf = (time: number) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
-            lenis.destroy();
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
     //  Smooth scroll to top
     const scrollToTop = () => {
-        if (lenisRef.current) {
-            lenisRef.current.scrollTo(0);
+        const globalWindow = window as unknown as GlobalWithLenis;
+        if (globalWindow.lenis) {
+            globalWindow.lenis.scrollTo(0);
         } else {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }

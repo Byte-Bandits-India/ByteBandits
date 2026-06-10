@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 
@@ -9,11 +9,6 @@ export default function BlogContentPage() {
   const rightSidebarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const ctaSectionRef = useRef<HTMLDivElement>(null);
-
-  const [isPinned, setIsPinned] = useState(false);
-  const [leftSidebarStyle, setLeftSidebarStyle] = useState({});
-  const [rightSidebarStyle, setRightSidebarStyle] = useState({});
-  const [shouldShowSidebars, setShouldShowSidebars] = useState(true);
 
   const { scrollYProgress } = useScroll({
     target: contentRef,
@@ -31,70 +26,6 @@ export default function BlogContentPage() {
     const el = document.getElementById(`section-${index}`);
     el?.scrollIntoView({ behavior: "smooth" });
   };
-
-  // Pin effect using useEffect and scroll event - CORRECTED VERSION
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!contentRef.current || !containerRef.current || !leftSidebarRef.current || !rightSidebarRef.current) return;
-
-      const contentRect = contentRef.current.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const viewportHeight = window.innerHeight;
-
-      // Calculate when to start and stop pinning
-      const contentStart = contentRect.top + scrollTop;
-
-      // Check if CTA section is in view
-      let ctaSectionInView = false;
-      if (ctaSectionRef.current) {
-        const ctaRect = ctaSectionRef.current.getBoundingClientRect();
-        ctaSectionInView = ctaRect.top < viewportHeight * 0.8; // CTA section is 80% in view
-      }
-
-      // Start pinning when content reaches 100px from top
-      // Stop pinning when CTA section comes into view
-      const shouldPin = scrollTop >= contentStart - 100 && !ctaSectionInView;
-
-      setIsPinned(shouldPin);
-      setShouldShowSidebars(true);
-
-      if (shouldPin) {
-        // Calculate the exact position to maintain when pinned
-        const leftRect = leftSidebarRef.current.getBoundingClientRect();
-        const rightRect = rightSidebarRef.current.getBoundingClientRect();
-
-        setLeftSidebarStyle({
-          position: 'fixed',
-          left: `${leftRect.left}px`,
-          top: '100px',
-          width: `${leftRect.width}px`,
-          zIndex: 40
-        });
-
-        setRightSidebarStyle({
-          position: 'fixed',
-          right: `${window.innerWidth - rightRect.right}px`,
-          top: '100px',
-          width: `${rightRect.width}px`,
-          zIndex: 40
-        });
-      } else {
-        // When not pinned, reset to natural flow (no styles)
-        // This allows the sidebars to stay at their natural position at the bottom of main content
-        setLeftSidebarStyle({});
-        setRightSidebarStyle({});
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
 
   // You'll need to define these arrays with proper types
   const sections: string[] = [
@@ -213,11 +144,9 @@ export default function BlogContentPage() {
           <div className="lg:col-span-2 order-1 lg:order-1 flex justify-start lg:block">
             <motion.div
               ref={leftSidebarRef}
-              className={`bg-white py-6 lg:p-4 w-full max-w-[300px] ${isPinned ? "lg:fixed" : "lg:sticky lg:top-14"
-                }`}
-              style={isPinned ? leftSidebarStyle : {}}
+              className="bg-white py-6 lg:p-4 w-full max-w-[300px] lg:sticky lg:top-[100px] z-40"
               animate={{
-                opacity: shouldShowSidebars ? 1 : 1,
+                opacity: 1,
                 y: 0,
               }}
               transition={{
@@ -310,11 +239,9 @@ export default function BlogContentPage() {
           <div className="lg:col-span-2 order-3 lg:order-3">
             <motion.div
               ref={rightSidebarRef}
-              className={`space-y-8 ${isPinned ? 'lg:fixed' : 'lg:sticky lg:top-14'
-                }`}
-              style={isPinned ? rightSidebarStyle : {}}
+              className="space-y-8 bg-white py-6 lg:sticky lg:top-[100px] z-40"
               animate={{
-                opacity: shouldShowSidebars ? 1 : 1,
+                opacity: 1,
                 y: 0
               }}
               transition={{

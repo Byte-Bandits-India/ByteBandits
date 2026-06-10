@@ -51,11 +51,11 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       scrollContainerRef && scrollContainerRef.current
         ? scrollContainerRef.current
         : window;
-
     const words = el.querySelectorAll<HTMLElement>(".word");
+    const animations: gsap.core.Tween[] = [];
 
     words.forEach((word, i) => {
-      gsap.fromTo(
+      const anim = gsap.fromTo(
         word,
         {
           opacity: baseOpacity,
@@ -78,10 +78,16 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           },
         }
       );
+      animations.push(anim);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      animations.forEach((anim) => {
+        if (anim.scrollTrigger) {
+          anim.scrollTrigger.kill();
+        }
+        anim.kill();
+      });
     };
   }, [scrollContainerRef, enableBlur, baseOpacity, baseRotation, blurStrength, wordAnimationEnd]);
 

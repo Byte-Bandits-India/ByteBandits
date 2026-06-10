@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Anton } from "next/font/google";
+import { Inter, Anton, Outfit } from "next/font/google";
 import "./globals.css";
 import HeaderWrapper from "@/components/common/HeaderWrapper"; // Client wrapper for Header + loader
 import Footer from "@/components/layout/Footer";
@@ -8,6 +8,7 @@ import LenisScroll from "@/components/ui/LenisScroll";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const anton = Anton({ variable: "--font-anton", subsets: ["latin"], weight: "400" });
+const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bytebandits.dedyn.io"),
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${anton.variable}`}>
+    <html lang="en" className={`${inter.variable} ${anton.variable} ${outfit.variable}`}>
       <body className="font-sans fade-in bg-white">
        
         <HeaderWrapper>

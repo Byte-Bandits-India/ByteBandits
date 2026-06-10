@@ -4,7 +4,7 @@
 
 
 .inter,.year{
-  font-family: 'Outfit',sans-serif;
+  font-family: var(--font-outfit), sans-serif;
  
 }
 
@@ -21,19 +21,19 @@ html {
 
 .details{
 color: #555555;
-font-family: 'Outfit',sans-serif;
+font-family: var(--font-outfit), sans-serif;
 font-weight: 600;
 
 }
 .foot{
-  font-family: 'Outfit',sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 600;
   color:#E0E0E0
 }
 .about{
   
   color: #555555;
-  font-family:'Outfit',sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   font-weight: 200;
 }
 

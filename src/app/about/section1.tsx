@@ -42,7 +42,7 @@ export default function AboutSection() {
             preload="metadata"
             className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
           >
-            <source src="/Videos/hi.mp4" type="video/mp4" />
+            <source src="/Videos/hi.webm" type="video/webm" />
             <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A" label="No captions" />
           </video>
         )}
