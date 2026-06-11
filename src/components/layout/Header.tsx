@@ -9,16 +9,10 @@ import { usePathname } from "next/navigation";
 const StaggeredMenu = dynamic(() => import("./StaggeredMenu").then((mod) => mod.StaggeredMenu), {
   ssr: false,
 });
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Menu,
-  X,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const Header = () => {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [staggeredOpen, setStaggeredOpen] = useState(false);
 
   const menuItems = [
@@ -34,17 +28,12 @@ export const Header = () => {
     { label: "GitHub", link: "https://github.com" },
   ];
 
-  // Close mobile menu when page changes
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
-
   // Lock body, html, and Lenis scroll when mobile menu is open
   useEffect(() => {
     const globalWindow = typeof window !== "undefined" ? (window as unknown as { lenis?: { stop: () => void; start: () => void } }) : null;
     const lenis = globalWindow?.lenis;
 
-    if (mobileMenuOpen || staggeredOpen) {
+    if (staggeredOpen) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       if (lenis && typeof lenis.stop === "function") {
@@ -64,7 +53,7 @@ export const Header = () => {
         lenis.start();
       }
     };
-  }, [mobileMenuOpen, staggeredOpen]);
+  }, [staggeredOpen]);
 
   const isActive = (path: string) => pathname === path;
 
@@ -78,7 +67,6 @@ export const Header = () => {
           {/* LOGO */}
           <Link 
             href="/" 
-            onClick={() => setMobileMenuOpen(false)}
             className="relative flex items-center gap-3 shrink-0 z-50 group"
           >
             <Image
@@ -154,98 +142,8 @@ export const Header = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          {/* Mobile Menu Trigger */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#333333] hover:text-[#A31621] transition-colors duration-200 focus:outline-none z-50"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
       </div>
-
-      {/* MOBILE DRAWER */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
-            />
-
-            {/* Drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed right-0 top-0 bottom-0 w-full bg-white shadow-2xl z-40 p-6 pt-24 flex flex-col justify-between overflow-y-auto lg:hidden"
-            >
-              <div className="flex flex-col gap-6">
-                
-                {/* About us */}
-                <Link
-                  href="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-lg font-semibold border-b border-gray-100 pb-3 ${
-                    isActive("/about") ? "text-[#A31621]" : "text-[#333333]"
-                  }`}
-                >
-                  About us
-                </Link>
-
-                {/* Consulting Link */}
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-lg font-semibold border-b border-gray-100 pb-3 ${
-                    isActive("/contact") ? "text-[#A31621]" : "text-[#333333]"
-                  }`}
-                >
-                  Consulting
-                </Link>
-
-                {/* Services Link */}
-                <Link
-                  href="/service"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-lg font-semibold border-b border-gray-100 pb-3 ${
-                    isActive("/service") ? "text-[#A31621]" : "text-[#333333]"
-                  }`}
-                >
-                  Services
-                </Link>
-
-                {/* Our Portfolio */}
-                {/* <Link
-                  href="/service"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-semibold border-b border-gray-100 pb-3 text-[#333333]"
-                >
-                  Our Portfolio
-                </Link> */}
-              </div>
-
-              {/* Mobile CTA */}
-              <div className="mt-8 pt-6 border-t border-gray-100">
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 bg-[#A31621] hover:bg-[#861219] text-white py-3.5 rounded-full text-base font-semibold shadow-md transition-all duration-300 w-full"
-                >
-                  Get Started
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
       </header>
 
       {/* Mobile/Tablet Menu */}
