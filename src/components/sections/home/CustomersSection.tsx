@@ -195,7 +195,6 @@ const CustomersSection = () => {
                     fill
                     sizes="(max-width: 768px) 100vw, 35vw"
                     className="object-cover"
-                    priority
                   />
                 </div>
               </div>

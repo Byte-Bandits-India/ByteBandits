@@ -52,11 +52,11 @@
   }
   
   svg text {
-    animation: stroke 5s infinite alternate;
+    animation: stroke 1.2s ease-in-out forwards;
     stroke-width: 2;
     stroke: #353639;
     font-size: 200px;
-    fill: #353639; /* Optional: base fill */
+    fill: transparent;
   }
   .fade-in {
     opacity: 0;

@@ -95,7 +95,6 @@ export default function ServicesSection() {
                                                     height={30}
                                                     width={135}
                                                     className="h-14 md:h-16 w-auto grayscale opacity-90 transition hover:grayscale-0 hover:opacity-100"
-                                                    priority={index < 6}
                                                 />
                                             </div>
                                         ))}
