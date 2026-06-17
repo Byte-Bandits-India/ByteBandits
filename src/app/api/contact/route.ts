@@ -133,10 +133,11 @@ export async function POST(req: Request): Promise<Response> {
       if (!backendRes.ok || !backendData.success) {
         throw new Error(backendData.error || "Failed to store contact in backend database");
       }
-    } catch (backendErr: any) {
-      console.error("Backend DB Save Error:", backendErr);
+    } catch (backendErr) {
+      const error = backendErr instanceof Error ? backendErr : new Error(String(backendErr));
+      console.error("Backend DB Save Error:", error);
       return Response.json(
-        { success: false, error: backendErr.message || "Failed to save message in database" },
+        { success: false, error: error.message || "Failed to save message in database" },
         { status: 500 }
       );
     }
