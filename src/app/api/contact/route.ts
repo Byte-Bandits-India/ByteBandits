@@ -10,6 +10,7 @@ export async function POST(req: Request): Promise<Response> {
       website?: string;
       message: string;
       source?: string;
+      consent?: boolean;
     };
 
     const { name, email, phone, number, website, message, source } = body;
@@ -111,14 +112,43 @@ export async function POST(req: Request): Promise<Response> {
       transporter.sendMail(userMailOptions),
     ]);
 
+    // Send data to the Express backend database
+    const backendUrl = `${process.env.BACKEND_API_URL || "http://localhost:4000/api"}/contacts`;
+    try {
+      const backendRes = await fetch(backendUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: finalPhone === "Not provided" ? "" : finalPhone,
+          website: finalWebsite === "Not provided" ? "" : finalWebsite,
+          message,
+          consent: body.consent ?? true,
+          source: finalSource === "Not specified" ? "Others" : finalSource,
+        }),
+      });
+
+      const backendData = await backendRes.json();
+      if (!backendRes.ok || !backendData.success) {
+        throw new Error(backendData.error || "Failed to store contact in backend database");
+      }
+    } catch (backendErr: any) {
+      console.error("Backend DB Save Error:", backendErr);
+      return Response.json(
+        { success: false, error: backendErr.message || "Failed to save message in database" },
+        { status: 500 }
+      );
+    }
+
     return Response.json(
-      { success: true, message: "Emails sent successfully to owner and user" },
+      { success: true, message: "Emails sent and data stored successfully" },
       { status: 200 }
     );
   } catch (error) {
     console.error("Nodemailer error:", error);
     return Response.json(
-      { success: false, error: "Failed to send emails" },
+      { success: false, error: "Failed to send emails or process request" },
       { status: 500 }
     );
   }
