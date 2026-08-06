@@ -77,4 +77,7 @@ jobs:
 
             pm2 save
 
+            echo "Restarting Caddy web server to refresh SSL certificate..."
+            sudo systemctl restart caddy || sudo systemctl reload caddy || true
+
             echo "Deployment complete"
