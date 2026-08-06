@@ -77,13 +77,7 @@ jobs:
 
             pm2 save
 
-            echo "Diagnosing web server on port 80/443..."
-            sudo ss -tulpn | grep -E ':80|:443' || true
-            ps aux | grep -E 'caddy|nginx' | grep -v grep || true
-            if command -v caddy &> /dev/null; then
-              echo "Caddy binary found: $(which caddy)"
-              sudo caddy reload || true
-            fi
-            sudo systemctl restart caddy || sudo systemctl reload caddy || true
+            echo "Reloading Nginx..."
+            sudo systemctl reload nginx || sudo systemctl restart nginx || true
 
             echo "Deployment complete"
