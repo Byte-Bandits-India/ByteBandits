@@ -131,7 +131,7 @@ export default function Footer() {
               className="mx-auto"
             />
             <div className="text-center mx-auto">
-              <h1 className="text-white text-[16px]">support@bytebandits.in</h1>
+              <a href="mailto:support@thebytebandits.com" className="text-white text-[16px] hover:underline">support@thebytebandits.com</a>
               <p className="text-[10px]">Drop Us a Line</p>
             </div>
           </div>
@@ -283,7 +283,7 @@ export default function Footer() {
               className="mr-4"
             />
             <div className="lg:text-center lg:ml-4">
-              <h1 className="text-white text-[12px] lg:text-[16px]">support@bytebandits.in</h1>
+              <a href="mailto:support@thebytebandits.com" className="text-white text-[12px] lg:text-[16px] hover:underline">support@thebytebandits.com</a>
               <p className="text-[10px]">Drop Us a Line</p>
             </div>
           </div>
