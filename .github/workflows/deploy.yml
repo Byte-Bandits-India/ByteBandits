@@ -82,7 +82,7 @@ jobs:
             $DOCKER_CMD load < /home/ec2-user/bytebandits.tar.gz
             rm -f /home/ec2-user/bytebandits.tar.gz
 
-            echo "Detecting environment file..."
+            echo "Checking for manually created environment file on server..."
             ENV_FLAG=""
             if [ -f /home/ec2-user/.env.local ]; then
               echo "Using /home/ec2-user/.env.local"
@@ -90,8 +90,14 @@ jobs:
             elif [ -f /home/ec2-user/.env ]; then
               echo "Using /home/ec2-user/.env"
               ENV_FLAG="--env-file /home/ec2-user/.env"
+            elif [ -f /home/ec2-user/byteBandits/.env.local ]; then
+              echo "Using /home/ec2-user/byteBandits/.env.local"
+              ENV_FLAG="--env-file /home/ec2-user/byteBandits/.env.local"
+            elif [ -f /home/ec2-user/byteBandits/.env ]; then
+              echo "Using /home/ec2-user/byteBandits/.env"
+              ENV_FLAG="--env-file /home/ec2-user/byteBandits/.env"
             else
-              echo "WARNING: No .env.local or .env found in /home/ec2-user"
+              echo "INFO: No manual .env file found on host; starting container with default settings."
             fi
 
             echo "Stopping legacy PM2 process if active..."

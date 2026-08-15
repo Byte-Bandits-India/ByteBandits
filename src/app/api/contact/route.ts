@@ -32,23 +32,28 @@ export async function POST(req: Request): Promise<Response> {
     const finalSource = sanitizeInput(rawSource) || "Not specified";
     const message = sanitizeInput(rawMessage);
 
+    // Helper to sanitize env values (strips accidental inline comments like '# ...' or whitespace)
+    const cleanEnv = (val?: string) => (val ? val.split("#")[0].trim().replace(/^["']|["']$/g, "") : "");
+
     // Configure Nodemailer transporter using SMTP details from env variables
-    const smtpHost = process.env.SMTP_HOST || "smtpout.secureserver.net";
-    const smtpPort = parseInt(process.env.SMTP_PORT || "465");
-    const smtpSecure = process.env.SMTP_SECURE === "true" || smtpPort === 465;
+    const smtpHost = cleanEnv(process.env.SMTP_HOST) || "smtpout.secureserver.net";
+    const smtpPort = parseInt(cleanEnv(process.env.SMTP_PORT) || "465", 10);
+    const smtpSecure = cleanEnv(process.env.SMTP_SECURE) === "true" || smtpPort === 465;
+    const smtpUser = cleanEnv(process.env.SMTP_USER);
+    const smtpPass = cleanEnv(process.env.SMTP_PASS);
 
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
       secure: smtpSecure,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: smtpUser,
+        pass: smtpPass,
       },
     });
 
-    const senderEmail = process.env.SMTP_FROM || process.env.SMTP_USER || "support@thebytebandits.com";
-    const ownerEmail = process.env.OWNER_EMAIL || "support@thebytebandits.com";
+    const senderEmail = cleanEnv(process.env.SMTP_FROM) || smtpUser || "support@thebytebandits.com";
+    const ownerEmail = cleanEnv(process.env.OWNER_EMAIL) || "support@thebytebandits.com";
 
     // 1. Email to the Owner (Lead Notification)
     const ownerMailOptions = {
@@ -104,7 +109,7 @@ export async function POST(req: Request): Promise<Response> {
     ]);
 
     // Send data to the Express backend database
-    const backendUrl = `${process.env.BACKEND_API_URL || "http://localhost:4000/api"}/contacts`;
+    const backendUrl = `${cleanEnv(process.env.BACKEND_API_URL) || "http://localhost:4000/api"}/contacts`;
     try {
       const backendRes = await fetch(backendUrl, {
         method: "POST",
