@@ -99,11 +99,6 @@ export default function Footer() {
                 {"\n"}Sangillyandapuram,
                 {"\n"}Tiruchirappalli-620001.
               </p>
-              <h3 className="text-[12px] font-semibold mb-1 mt-4">Bangalore Branch</h3>
-              <p className="text-[12px] whitespace-pre-line">
-                Silicon Town, Rayasandra,
-                {"\n"}Bengaluru, Karnataka 560100
-              </p>
             </div>
           </div>
         </div>
@@ -225,12 +220,6 @@ export default function Footer() {
                   <h3 className="font-semibold xl:text-[18px] mb-2">Trichy Branch</h3>
                   <p className="whitespace-pre-line xl:text-[16px]">
                     Bhima Nagar,{"\n"}Sangillyandapuram,{"\n"}Tiruchirappalli-620001.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold xl:text-[18px] mb-2">Bangalore Branch</h3>
-                  <p className="whitespace-pre-line xl:text-[16px]">
-                    Silicon Town, Rayasandra,{"\n"}Bengaluru, Karnataka 560100
                   </p>
                 </div>
               </div>
