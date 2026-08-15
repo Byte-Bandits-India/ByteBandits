@@ -108,8 +108,10 @@ export async function POST(req: Request): Promise<Response> {
       transporter.sendMail(userMailOptions),
     ]);
 
-    // Send data to the Express backend database
-    const backendUrl = `${cleanEnv(process.env.BACKEND_API_URL) || "http://localhost:4000/api"}/contacts`;
+    // Send data to the Express backend database (if configured)
+    const rawBackendUrl = cleanEnv(process.env.BACKEND_API_URL) || "http://localhost:4000/api";
+    const backendUrl = `${rawBackendUrl.replace(/\/$/, "")}/contacts`;
+    
     try {
       const backendRes = await fetch(backendUrl, {
         method: "POST",
@@ -125,21 +127,23 @@ export async function POST(req: Request): Promise<Response> {
         }),
       });
 
-      const backendData = await backendRes.json();
-      if (!backendRes.ok || !backendData.success) {
-        throw new Error(backendData.error || "Failed to store contact in backend database");
+      const responseText = await backendRes.text();
+      let backendData: Record<string, unknown> | null = null;
+      try {
+        backendData = JSON.parse(responseText) as Record<string, unknown>;
+      } catch {
+        backendData = null;
+      }
+
+      if (!backendRes.ok || (backendData && backendData.success === false)) {
+        console.warn("Backend DB Save Warning:", backendData?.error || `HTTP ${backendRes.status}`);
       }
     } catch (backendErr) {
-      const error = backendErr instanceof Error ? backendErr : new Error(String(backendErr));
-      console.error("Backend DB Save Error:", error);
-      return Response.json(
-        { success: false, error: error.message || "Failed to save message in database" },
-        { status: 500 }
-      );
+      console.warn("Backend DB Connection Notice (email sent successfully):", backendErr instanceof Error ? backendErr.message : backendErr);
     }
 
     return Response.json(
-      { success: true, message: "Emails sent and data stored successfully" },
+      { success: true, message: "Emails sent and inquiry processed successfully" },
       { status: 200 }
     );
   } catch (error: unknown) {

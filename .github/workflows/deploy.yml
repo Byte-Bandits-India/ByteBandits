@@ -112,6 +112,7 @@ jobs:
             $DOCKER_CMD run -d \
               --name bytebandits \
               --restart always \
+              --add-host=host.docker.internal:host-gateway \
               -p 127.0.0.1:3000:3000 \
               $ENV_FLAG \
               bytebandits:latest

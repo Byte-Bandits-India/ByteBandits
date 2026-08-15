@@ -55,6 +55,7 @@ docker-run:
 	docker run -d \
 		--name $(APP_NAME) \
 		-p $(PORT):3000 \
+		--add-host=host.docker.internal:host-gateway \
 		$$( [ -f $(ENV_FILE) ] && echo "--env-file $(ENV_FILE)" || ( [ -f .env ] && echo "--env-file .env" ) ) \
 		$(IMAGE_NAME)
 	@echo "Container $(APP_NAME) is running at http://localhost:$(PORT)"
