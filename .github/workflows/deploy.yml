@@ -1,4 +1,4 @@
-name: Deploy Next.js to Server
+name: Deploy Dockerized Next.js to Server
 
 on:
   push:
@@ -7,11 +7,48 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - name: Deploy to Server via SSH
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: bytebandits:latest
+          outputs: type=docker,dest=/tmp/bytebandits.tar
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Compress Docker Image
+        run: |
+          gzip -f /tmp/bytebandits.tar
+          mv /tmp/bytebandits.tar.gz ./bytebandits.tar.gz
+          ls -lh ./bytebandits.tar.gz
+
+      - name: Copy Docker Image to Server via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 3.110.62.200
+          username: ec2-user
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          source: "bytebandits.tar.gz"
+          target: "/home/ec2-user"
+
+      - name: Deploy Docker Container via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: 3.110.62.200
@@ -19,65 +56,64 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
-          command_timeout: 20m
+          command_timeout: 10m
           script: |
             set -e
 
-            # Enable Swap space if it doesn't exist to prevent OOM freezes
-            if [ $(free -m | awk '/^Swap:/{print $2}') -eq 0 ]; then
-              echo "No active Swap detected. Checking for /swapfile..."
-              if [ ! -f /swapfile ]; then
-                echo "Creating 2G Swap file..."
-                sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
-                sudo chmod 600 /swapfile
-                sudo mkswap /swapfile
-              fi
-              echo "Activating Swap file..."
-              sudo swapon /swapfile
+            # Ensure Docker is installed
+            if ! command -v docker &> /dev/null; then
+              echo "Docker not found. Installing Docker..."
+              sudo yum update -y && sudo yum install -y docker || sudo apt-get update -y && sudo apt-get install -y docker.io
+              sudo systemctl enable --now docker
+              sudo usermod -aG docker ec2-user 2>/dev/null || true
             fi
 
-            git config --global --add safe.directory /home/ec2-user/byteBandits
+            # Ensure Docker daemon is running
+            sudo systemctl start docker || sudo service docker start || true
 
-            cd /home/ec2-user/byteBandits
-
-            # Check if .git directory exists, if not clone the repo
-            if [ ! -d .git ]; then
-              echo "Git repository not found. Cloning repository..."
-              cd /home/ec2-user
-              rm -rf byteBandits
-              git clone https://github.com/Byte-Bandits-India/ByteBandits.git byteBandits
-              cd byteBandits
-            fi
-
-            echo "Pulling latest code..."
-            git reset --hard HEAD
-            git clean -fd
-            git pull origin main
-
-
-            # Copy environment variables from host home directory if present
-            if [ -f /home/ec2-user/.env.local ]; then
-              echo "Copying environment variables from /home/ec2-user/.env.local..."
-              cp /home/ec2-user/.env.local .env.local
+            # Determine docker command prefix (sudo if needed)
+            if docker ps >/dev/null 2>&1; then
+              DOCKER_CMD="docker"
             else
-              echo "WARNING: /home/ec2-user/.env.local not found. Mail may not work without SMTP variables configured."
+              DOCKER_CMD="sudo docker"
             fi
 
-            echo "Installing dependencies..."
-            npm ci --legacy-peer-deps --prefer-offline --no-audit --no-fund
+            echo "Loading Docker image..."
+            $DOCKER_CMD load < /home/ec2-user/bytebandits.tar.gz
+            rm -f /home/ec2-user/bytebandits.tar.gz
 
-            echo "Building project..."
-            NODE_OPTIONS="--max-old-space-size=1024" npm run build
+            echo "Detecting environment file..."
+            ENV_FLAG=""
+            if [ -f /home/ec2-user/.env.local ]; then
+              echo "Using /home/ec2-user/.env.local"
+              ENV_FLAG="--env-file /home/ec2-user/.env.local"
+            elif [ -f /home/ec2-user/.env ]; then
+              echo "Using /home/ec2-user/.env"
+              ENV_FLAG="--env-file /home/ec2-user/.env"
+            else
+              echo "WARNING: No .env.local or .env found in /home/ec2-user"
+            fi
 
-            echo "Fixing permissions..."
-            chmod -R 755 .next public
+            echo "Stopping legacy PM2 process if active..."
+            pm2 delete byteBandits 2>/dev/null || true
+            pm2 save 2>/dev/null || true
 
-            echo "Restarting app..."
-            pm2 restart byteBandits || pm2 start npm --name "byteBandits" -- start
+            echo "Stopping existing Docker container..."
+            $DOCKER_CMD stop bytebandits 2>/dev/null || true
+            $DOCKER_CMD rm bytebandits 2>/dev/null || true
 
-            pm2 save
+            echo "Starting new Docker container..."
+            $DOCKER_CMD run -d \
+              --name bytebandits \
+              --restart always \
+              -p 127.0.0.1:3000:3000 \
+              $ENV_FLAG \
+              bytebandits:latest
+
+            echo "Cleaning up dangling images..."
+            $DOCKER_CMD image prune -f
 
             echo "Reloading Nginx..."
             sudo systemctl reload nginx || sudo systemctl restart nginx || true
 
-            echo "Deployment complete"
+            echo "Deployment complete! Application is running in Docker."
